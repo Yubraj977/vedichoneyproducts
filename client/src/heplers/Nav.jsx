@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Nav() {
+function  Nav() {
   return (
-    <div>Nav</div>
+    <div className='font-64'>Nav</div>
   )
 }
 
-export default Nav
+export default  Nav
