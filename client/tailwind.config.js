@@ -17,6 +17,7 @@ export default {
       },
       spacing:{
         side:'140px',
+        mb_side:'20px',
         top:'20px'
       }
     },
