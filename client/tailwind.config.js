@@ -13,6 +13,10 @@ export default {
         primary: "#fff",
         secondary: "#FD624B",
         tertiary: "#30312F",
+      },
+      spacing:{
+        side:'100px',
+        top:'20px'
       }
     },
   },
