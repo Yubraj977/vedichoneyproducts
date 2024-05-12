@@ -15,7 +15,7 @@ export default {
         tertiary: "#30312F",
       },
       spacing:{
-        side:'20px',
+        side:'140px',
         top:'20px'
       }
     },
