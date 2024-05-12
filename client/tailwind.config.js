@@ -9,6 +9,7 @@ export default {
       fontFamily:{
         64:['Sixtyfour'],
         mont:["Montserrat"],
+        inter:['Inter']
       },
       colors: {
         primary: "#fff",
