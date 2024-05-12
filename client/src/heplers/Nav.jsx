@@ -8,7 +8,7 @@ function  Nav() {
     <div className=''>
       <div className="upper-nav px-side py-top flex justify-between items-center">
         <div className="upper-nav-left">
-          <h1 className="text-2xl font-bold text-slate-700">e-Shop<span className="text-secondary">.</span></h1>
+          <h1 className="text-2xl font-bold text-slate-700">VedicHoney<span className='text-secondary'>Products</span><span className="text-secondary">.</span></h1>
         </div>
         <div className="upper-nav-right flex items-center gap-4  ">
           <div className="searchbox flex justify-center items-center  border-2 overflow-hidden rounded-md">
