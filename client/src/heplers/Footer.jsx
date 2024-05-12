@@ -70,9 +70,10 @@ function Footer() {
           <p>facebook</p>
         </div>
       </div>
-      <div class='border-t-[0.1px] border-opacity-10 w-full flex justify-between opacity-90 py-4'>
-    <p class='text-sm'>Copyright  @2024 E Vedic Honey Product | All rights Reserved</p>
-    <p class='text-sm'>Privacy Policy || Terms & Conditions || Sitemap</p>
+      <div class='border-t-[0.1px] border-opacity-10 w-full flex  flex-col items-center opacity-90 py-4'>
+      <p class='text-sm opacity-60' >Privacy Policy | Terms & Conditions | Sitemap</p>
+    <p class='text-sm opacity-90'>Copyright © 2024 ,Vedic Honey Product | All rights Reserved</p>
+    
 </div>
 
     </div>
