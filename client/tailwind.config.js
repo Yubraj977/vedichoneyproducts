@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily:{
-        64:['Sixtyfour']
+        64:['Sixtyfour'],
+        mont:["Montserrat"],
       },
       colors: {
         primary: "#fff",
