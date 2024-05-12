@@ -5,7 +5,7 @@ import { FaMapLocationDot } from "react-icons/fa6";
 import { FaCcVisa } from "react-icons/fa";
 function Footer() {
   return (
-    <div className='  w-full bg-tertiary flex justify-center items-center gap-4 flex-col text-primary  lg:px-side px-2 text-2xl lg:text-sm'>
+    <div className='  w-full bg-tertiary flex justify-center items-center gap-4 flex-col text-primary  lg:px-side px-2 text-xl lg:text-sm'>
 
       <h1 className='text-2xl font-bold mt-6'>Suscribe To Get Our Updates</h1>
 
