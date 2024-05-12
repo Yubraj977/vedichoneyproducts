@@ -8,6 +8,11 @@ export default {
     extend: {
       fontFamily:{
         64:['Sixtyfour']
+      },
+      colors: {
+        primary: "#fff",
+        secondary: "#FD624B",
+        tertiary: "#30312F",
       }
     },
   },
