@@ -6,7 +6,7 @@ import { IoSearch } from "react-icons/io5";
 function  Nav() {
   return (
     <div className=''>
-      <div className="upper-nav px-[140px] py-side flex justify-between items-center">
+      <div className="upper-nav px-side py-top flex justify-between items-center">
         <div className="upper-nav-left">
           <h1 className="text-2xl font-bold text-slate-700">e-Shop<span className="text-secondary">.</span></h1>
         </div>
