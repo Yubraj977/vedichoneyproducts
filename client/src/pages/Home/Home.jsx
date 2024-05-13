@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
-import One from '../../heplers/swiper/One';
-import Two from '../../heplers/swiper/Two';
-import Three from '../../heplers/swiper/Three';
+
 import Slider from '../../heplers/swiper/slider';
 import honey from '/honey3.png'
 import honey1 from '/honey1.png'
 import honey2 from '/honey2.jpg'
 import CustomSlider from '../../heplers/swiper/CustomCarousel'
+import Faq from './Faq';
 function Home() {
 
   const images = [
@@ -39,7 +38,7 @@ function Home() {
 
   return (
    
-      <div className='px-side mt-top flex items-center border flex-col'>
+      <div className='lg:px-side mt-top flex items-center border flex-col px-2'>
         <div className="slider">
       <CustomSlider>
         {images.map((image, index) => {
@@ -47,7 +46,7 @@ function Home() {
         })}
       </CustomSlider>
       </div>
-      <div className='districts flex bg-white h-screen mt-top justify-between  w-full'>
+      {/* <div className='districts flex  bg-white h-screen mt-top justify-between  w-full flex-wrap'>
         <h1 className='font-bold font-inter transform rotate-3'>Dang</h1>
         <h1 className='font-bold font-inter transform -rotate-3'>Chitwan</h1>
         <h1 className='font-bold font-inter transform rotate-6'>Nepalgunj</h1>
@@ -55,7 +54,10 @@ function Home() {
         <h1 className='font-bold font-inter transform -rotate-3'>Chitwan</h1>
         <h1 className='font-bold font-inter transform rotate-5'>Nepalgunj</h1>
 
-      </div>
+      </div> */}
+        <div >
+          <Faq/>
+        </div>
       </div>
   );
 }

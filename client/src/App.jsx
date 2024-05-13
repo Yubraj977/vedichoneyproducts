@@ -6,6 +6,7 @@ import {createBrowserRouter,Route,createRoutesFromElements, Outlet, RouterProvid
 import Outline from './heplers/Outline'
 import Home from './pages/Home/Home'
 import Products from './pages/Products/Products'
+import Login from './pages/Login/Login'
 function App() {
   const [count, setCount] = useState(0)
   const router=createBrowserRouter(
@@ -13,6 +14,7 @@ function App() {
       <Route path='/' element={<Outline/>}>
         <Route index element={<Home/>}/>
         <Route path='products' element={<Products/>}/>
+        <Route path='login' element={<Login/>}/>
       </Route>
     )
   )
