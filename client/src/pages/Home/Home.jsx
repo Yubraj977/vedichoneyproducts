@@ -9,6 +9,7 @@ import honey5 from '/honey5.png'
 import honey6 from '/honey6.png'
 import honey7 from '/honey7.png'
 import honey8 from '/honey8.png'
+import honey9 from '/honey9.png'
 import CustomSlider from '../../heplers/swiper/CustomCarousel'
 import BecomePartner from './BecomePartner';
 import TopSellingProducts from './TopSellingProducts';
@@ -23,7 +24,7 @@ function Home() {
       imgAlt: "img-1"
     },
     {
-      imgURL:honey5,
+      imgURL:honey9,
       imgAlt: "img-2"
     },
     {
