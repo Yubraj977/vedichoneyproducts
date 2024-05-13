@@ -43,7 +43,7 @@ function Home() {
 
     <div className=' mt-top flex items-center border flex-col'>
       {/* slider */}
-      <div className="slider w-full">
+      <div className="slider px-side w-full">
         <CustomSlider>
           {images.map((image, index) => {
             return <img key={index} src={image.imgURL} alt={image.imgAlt} />;

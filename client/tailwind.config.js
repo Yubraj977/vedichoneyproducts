@@ -15,6 +15,7 @@ export default {
         primary: "#fff",
         secondary: "#FD624B",
         tertiary: "#30312F",
+        secondary_shade: "#ff725c",
       },
       spacing:{
         side:'140px',
