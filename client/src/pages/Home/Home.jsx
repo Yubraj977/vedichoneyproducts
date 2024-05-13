@@ -5,6 +5,10 @@ import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
 import honey from '/honey3.png'
 import honey1 from '/honey1.png'
 import honey2 from '/honey2.jpg'
+import honey5 from '/honey5.png'
+import honey6 from '/honey6.png'
+import honey7 from '/honey7.png'
+import honey8 from '/honey8.png'
 import CustomSlider from '../../heplers/swiper/CustomCarousel'
 import BecomePartner from './BecomePartner';
 import TopSellingProducts from './TopSellingProducts';
@@ -15,22 +19,19 @@ function Home() {
 
   const images = [
     {
-      imgURL:honey4,
+      imgURL:honey8,
       imgAlt: "img-1"
     },
     {
-      imgURL:
-        "https://images.unsplash.com/photo-1613548058193-1cd24c1bebcf?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      imgURL:honey5,
       imgAlt: "img-2"
     },
     {
-      imgURL:
-        "https://plus.unsplash.com/premium_photo-1664273586932-ab870d61f7e9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fHw%3D",
+      imgURL:honey6,
       imgAlt: "img-3"
     },
     {
-      imgURL:
-        "https://images.unsplash.com/photo-1626285094816-39f688104ce0?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      imgURL:honey7,
       imgAlt: "img-4"
     }
   ];

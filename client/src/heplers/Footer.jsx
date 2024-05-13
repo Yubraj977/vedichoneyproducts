@@ -19,9 +19,9 @@ function Footer() {
         {/* Contact Us */}
         <div className='flex flex-col '>
           <h1 className='font-bold mb-4'> Contat Us</h1>
-          <p className='flex gap-1 items-center'>  <span className='mr-4'> <FaPhoneAlt /> </span> +9779809724781</p>
-          <p className='flex gap-1 items-center'> <span className='mr-4'> <MdEmail /></span>maruirramaha@gmail.com</p>
-          <p className='flex gap-1 items-center'> <span className='mr-4'> <FaMapLocationDot /> </span>Tulsipurandsulpiler</p>
+          <p className='flex gap-1 items-center'>  <span className='mr-4'> <FaPhoneAlt /> </span> +977 9857820351</p>
+          <p className='flex gap-1 items-center'> <span className='mr-4'> <MdEmail /></span>vedicbeefarm@gmail.com</p>
+          <p className='flex gap-1 items-center'> <span className='mr-4'> <FaMapLocationDot /> </span>Tulsipur-6 Rajaura Dang</p>
         </div>
 
         {/* Categores */}
