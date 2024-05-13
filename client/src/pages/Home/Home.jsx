@@ -8,7 +8,7 @@ import honey2 from '/honey2.jpg'
 import CustomSlider from '../../heplers/swiper/CustomCarousel'
 import BecomePartner from './BecomePartner';
 import TopSellingProducts from './TopSellingProducts';
-import Testimonials from './Testimonials';
+import Testimonials from './Testimonials/Testimonials';
 import Faq from './Faq';
 function Home() {
 
@@ -59,11 +59,11 @@ function Home() {
         <BecomePartner />
       </div>
       {/* Testimonals */}
-      <div className='w-full'>
+      <div className='w-full lg:px-side'>
         <Testimonials />
       </div>
       {/* faq */}
-      <div  className='w-full'>
+      <div  className='w-full lg:px-side'>
         <Faq />
       </div>
 

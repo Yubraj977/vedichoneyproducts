@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import { useRef } from 'react';
 import { FaPlus, FaMinus } from "react-icons/fa";
+import gsap from 'gsap';
 const honeyFAQ = [
     {
         id: 1,
@@ -29,7 +31,19 @@ const honeyFAQ = [
 ];
 function Faq() {
     const [visibilities, setVisibilities] = useState(Array(honeyFAQ.length).fill(false));
-
+    const faqRef=useRef()
+    useEffect(() => {
+      if(visibilities && faqRef){
+        gsap.from(faqRef.current, {
+            height: 0,
+            duration: 0.8,
+            ease: "circ.out",
+          
+          });
+      }
+     
+    }, [visibilities])
+    
     const toggleVisibility = (index) => {
         const newVisibilities = [...visibilities];
         newVisibilities[index] = !newVisibilities[index];
@@ -39,21 +53,23 @@ function Faq() {
   
 
     return (
-        <div className='w-full flex gap-4 mt-top border'> 
-            <div className="left w-4/12 rounded-md object-cover h-[30rem]">
-                <img src="https://images.unsplash.com/photo-1555035900-54c17f3bc1eb?q=80&w=1325&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className='h-full w-full object-cover' />
+        <div className='w-full flex gap-4 mt-top '> 
+
+            <div className="left w-4/12 rounded-md object-cover h-[30rem] lg:block hidden ">
+                <img src="https://images.unsplash.com/photo-1555035900-54c17f3bc1eb?q=80&w=1325&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className='h-full w-full object-cover rounded-xl' />
             </div>
-            <div className="right w-8/12">
+
+            <div className="right lg:w-8/12 w-full  min-h-[30rem] flex flex-col justify-center ">
                 {honeyFAQ.map((item, index) => (
-                    <div key={item.id} className="item border-2 py-4 px-4 flex rounded-md mt-4  flex-col" >
-                        <div className='flex justify-between'>
-                            <h1>{item.question}</h1>
-                            <div className='border' onClick={() => toggleVisibility(index)}>
+                    <div key={item.id} className=" w-full item     py-4 px-4 flex rounded-md mt-4  flex-col " >
+                        <div className='flex justify-between w-full '>
+                            <h1 className='font-inter font-bold'>{item.question}</h1>
+                            <div className='' onClick={() => toggleVisibility(index)}>
                                 {visibilities[index] ? <FaMinus /> : <FaPlus />}
                             </div>
                         </div>
                         <div>
-                            {visibilities[index] && <p>{item.answer}</p>}
+                            {visibilities[index] && <p className='text-sm font-inter py-4 ' ref={faqRef}>{item.answer}</p>}
                         </div>
                     </div>
                 ))}
