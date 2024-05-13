@@ -1,0 +1,11 @@
+.block-title::after{
+    content: '';
+    width: 50%;
+    height: 5px;
+    background-color: red;
+    position: absolute;
+    top:110%;
+    left: 50%;
+    border-radius: 10px;
+    transform: translateX(-50%);
+}
