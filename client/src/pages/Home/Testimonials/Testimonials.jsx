@@ -150,8 +150,8 @@ function Testimonials() {
 
       <div className="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
         <div>
-          <a title="Buy me a beer" href="https://www.buymeacoffee.com/scottwindon" target="_blank" className="block w-16 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12">
-            <img className="object-cover object-center w-full h-full rounded-full" src="https://i.pinimg.com/originals/60/fd/e8/60fde811b6be57094e0abc69d9c2622a.jpg" />
+          <a title="Message Us in Facebook page" href="https://www.facebook.com/profile.php?id=100072010062535" target="_blank" className="block w-8 h-8 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12">
+            <img className="object-cover object-center w-full h-full rounded-full" src="https://messengernews.fb.com/wp-content/uploads/2021/07/121580929_1042359612888812_1633869688219687211_n-1.png?w=400" />
           </a>
         </div>
       </div>
