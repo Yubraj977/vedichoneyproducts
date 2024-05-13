@@ -6,6 +6,9 @@ import honey from '/honey3.png'
 import honey1 from '/honey1.png'
 import honey2 from '/honey2.jpg'
 import CustomSlider from '../../heplers/swiper/CustomCarousel'
+import BecomePartner from './BecomePartner';
+import TopSellingProducts from './TopSellingProducts';
+import Testimonials from './Testimonials';
 import Faq from './Faq';
 function Home() {
 
@@ -37,28 +40,34 @@ function Home() {
 
 
   return (
-   
-      <div className='lg:px-side mt-top flex items-center border flex-col px-2'>
-        <div className="slider">
-      <CustomSlider>
-        {images.map((image, index) => {
-          return <img key={index} src={image.imgURL} alt={image.imgAlt} />;
-        })}
-      </CustomSlider>
-      </div>
-      {/* <div className='districts flex  bg-white h-screen mt-top justify-between  w-full flex-wrap'>
-        <h1 className='font-bold font-inter transform rotate-3'>Dang</h1>
-        <h1 className='font-bold font-inter transform -rotate-3'>Chitwan</h1>
-        <h1 className='font-bold font-inter transform rotate-6'>Nepalgunj</h1>
-        <h1 className='font-bold font-inter transform -rotate-3'>Dang</h1>
-        <h1 className='font-bold font-inter transform -rotate-3'>Chitwan</h1>
-        <h1 className='font-bold font-inter transform rotate-5'>Nepalgunj</h1>
 
-      </div> */}
-        <div >
-          <Faq/>
-        </div>
+    <div className='lg:px-side mt-top flex items-center border flex-col px-2'>
+      {/* slider */}
+      <div className="slider">
+        <CustomSlider>
+          {images.map((image, index) => {
+            return <img key={index} src={image.imgURL} alt={image.imgAlt} />;
+          })}
+        </CustomSlider>
       </div>
+      {/* Top selling products */}
+      <div>
+        <TopSellingProducts />
+      </div>
+      {/* Become our partner */}
+      <div>
+        <BecomePartner />
+      </div>
+      {/* Testimonals */}
+      <div>
+        <Testimonials />
+      </div>
+      {/* faq */}
+      <div >
+        <Faq />
+      </div>
+
+    </div>
   );
 }
 
