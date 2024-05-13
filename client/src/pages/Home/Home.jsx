@@ -41,9 +41,9 @@ function Home() {
 
   return (
 
-    <div className='lg:px-side mt-top flex items-center border flex-col px-2'>
+    <div className=' mt-top flex items-center border flex-col'>
       {/* slider */}
-      <div className="slider">
+      <div className="slider px-side ">
         <CustomSlider>
           {images.map((image, index) => {
             return <img key={index} src={image.imgURL} alt={image.imgAlt} />;
