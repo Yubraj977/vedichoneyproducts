@@ -92,32 +92,33 @@ function Nav() {
         <div className="navigation flex ">
           <div className={`py-4 px-6 text-primary font-medium relative hover:text-tertiary cursor-pointer pl-0 flex items-center gap-3 my-auto `} onClick={(e) => setmobileVisable(!mobileVisable)} ><GiHamburgerMenu /> <p className=' lg:block hidden'> All Categories</p>
             {mobileVisable ? <div className="for-mobile lg:hidden overflow-hidden z-40 flex flex-col absolute top-full -left-6 bg-secondary   rounded-sm scale-4 " ref={mobileNavRef}>
-              <NavLink className="py-4 px-6 text-primary font-medium    hover:text-tertiary cursor-pointer">Products</NavLink>
-              <NavLink className="py-4 px-6 text-primary font-medium    hover:text-tertiary cursor-pointer">About</NavLink>
-              <NavLink className="py-4 px-6 text-primary font-medium    hover:text-tertiary cursor-pointer">Contact</NavLink>
-              <NavLink className="py-4 px-6 text-primary font-medium    hover:text-tertiary cursor-pointer">Blogs</NavLink>
+              <NavLink className="py-4 px-6 text-primary font-medium    hover:text-tertiary cursor-pointer" to='products'>Products</NavLink>
+              <NavLink className="py-4 px-6 text-primary font-medium    hover:text-tertiary cursor-pointer" to='about'>About</NavLink>
+              <NavLink className="py-4 px-6 text-primary font-medium    hover:text-tertiary cursor-pointer" to='/contact'>Contact</NavLink>
+              <NavLink className="py-4 px-6 text-primary font-medium    hover:text-tertiary cursor-pointer" to='/blog'>Blogs</NavLink>
             </div> : <></>}
           </div>
           <div className={`${nav_item_style} relative `} onMouseEnter={(e) => setvisable(true)} onMouseLeave={(e) => setvisable(false)}>
-            <div className='products-nav flex items-center gap-3 relative '
 
-            > Products <IoIosArrowDown /></div>
+            <NavLink to='/products'>  <div className='products-nav flex items-center gap-3 relative '>
+              Products <IoIosArrowDown /></div></NavLink>
 
             {
               visable ?
                 <div ref={subMenuRef} className=' overflow-hidden products-sub-menu z-10 flex flex-col absolute top-full bg-secondary   rounded-sm scale-4'>
-                  <div className={`${nav_item_style}`}>Honey</div>
-                  <div className={`${nav_item_style}`}>Sampooo</div>
-                  <div className={`${nav_item_style}`}>Hair Oil</div>
+                  <NavLink > <div className={`${nav_item_style}`}>Honey</div></NavLink>
+                  <NavLink>   <div className={`${nav_item_style}`}>Sampooo</div></NavLink>
+                  <NavLink>  <div className={`${nav_item_style}`}>Hair Oil</div></NavLink>
                 </div>
                 :
                 <></>
             }
 
           </div>
-          <div className={`${nav_item_style}`}>Blog</div>
-          <div className={`${nav_item_style}`}>Contact</div>
-          <div className={`${nav_item_style}`}>About</div>
+
+          <NavLink to='/blog'>  <div className={`${nav_item_style}`}>Blog</div></NavLink>
+          <NavLink to='/contact'>  <div className={`${nav_item_style}`}>Contact</div></NavLink>
+          <NavLink to='about'>  <div className={`${nav_item_style}`}>About</div></NavLink>
         </div>
       </div>
     </div>

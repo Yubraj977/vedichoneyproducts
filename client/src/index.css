@@ -22,3 +22,6 @@
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 }
+.active{
+  color: #00fc8274;
+}
