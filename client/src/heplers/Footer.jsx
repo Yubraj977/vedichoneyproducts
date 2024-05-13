@@ -70,9 +70,9 @@ function Footer() {
           <p>facebook</p>
         </div>
       </div>
-      <div class='border-t-[0.1px] border-opacity-10 w-full flex  flex-col items-center opacity-90 py-4'>
-      <p class='text-sm opacity-60' >Privacy Policy | Terms & Conditions | Sitemap</p>
-    <p class='text-sm opacity-90'>Copyright © 2024 ,Vedic Honey Product | All rights Reserved</p>
+      <div className='border-t-[0.1px] border-opacity-10 w-full flex  flex-col items-center opacity-90 py-4'>
+      <p className='text-sm opacity-60' >Privacy Policy | Terms & Conditions | Sitemap</p>
+    <p className='text-sm opacity-90'>Copyright © 2024 ,Vedic Honey Product | All rights Reserved</p>
     
 </div>
 

@@ -1,4 +1,4 @@
-import  { useState } from 'react'
+import  { useState,useEffect } from 'react'
 import { IoCartOutline } from "react-icons/io5";
 import { LuUser2 } from "react-icons/lu";
 import { IoSearch } from "react-icons/io5";
@@ -7,20 +7,27 @@ import { IoIosArrowDown } from "react-icons/io";
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import {useRef} from 'react'
+import useAnimation from './costum-hooks/UseAnimatioin';
 
 function Nav() {
   const [visable,setvisable] = useState(false)
-  
   const subMenuRef = useRef()
+  useEffect(() => {
+    if (visable && subMenuRef.current) {
+      gsap.from(subMenuRef.current, {
+        height: 0,
+        duration: 0.8,
+        ease: "circ.out",
+      
+      });
+    }
+  }, [visable]);
+  
+    
+ 
+  
 
-  console.log(subMenuRef)
-  useGSAP(()=>{
-    gsap.from(subMenuRef.current,{
-      opacity: 0,
-      delay:0.5,
-      duration:1,
-    })
-  })
+
   
   const nav_item_style = "py-4 px-6 text-primary font-medium hidden lg:block  hover:text-tertiary cursor-pointer"
 
@@ -74,7 +81,7 @@ function Nav() {
             
             {
               visable ?
-              <div ref={subMenuRef} className='  products-sub-menu z-10 flex flex-col absolute top-full bg-neutral-400   rounded-sm'>
+              <div ref={subMenuRef} className=' overflow-hidden products-sub-menu z-10 flex flex-col absolute top-full bg-secondary   rounded-sm scale-4'>
               <div className={`${nav_item_style}`}>Honey</div>
               <div className={`${nav_item_style}`}>Sampooo</div>
               <div className={`${nav_item_style}`}>Hair Oil</div>
