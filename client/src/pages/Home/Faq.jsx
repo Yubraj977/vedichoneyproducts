@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { useRef } from 'react';
 import { FaPlus, FaMinus } from "react-icons/fa";
 import gsap from 'gsap';
+import honey3 from '/honey3.png'
 const honeyFAQ = [
     {
         id: 1,
@@ -53,13 +54,13 @@ function Faq() {
   
 
     return (
-        <div className='w-full flex gap-4 mt-top '> 
+        <div className='w-full flex gap-28 my-top '> 
 
-            <div className="left w-4/12 rounded-md object-cover h-[30rem] lg:block hidden ">
-                <img src="https://images.unsplash.com/photo-1555035900-54c17f3bc1eb?q=80&w=1325&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className='h-full w-full object-cover rounded-xl' />
+            <div className="left w-8/12 rounded-md object-contain h-[30rem] lg:block hidden ">
+                <img src={'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} alt="" className='h-full w-full object-cover rounded-xl' />
             </div>
 
-            <div className="right lg:w-8/12 w-full  min-h-[30rem] flex flex-col justify-center ">
+            <div className="right lg:w-full w-full  min-h-[30rem] flex flex-col justify-center ">
                 {honeyFAQ.map((item, index) => (
                     <div key={item.id} className=" w-full item     py-4 px-4 flex rounded-md mt-4  flex-col " >
                         <div className='flex justify-between w-full '>
@@ -74,6 +75,7 @@ function Faq() {
                     </div>
                 ))}
             </div>
+            
         </div>
     );
 }
