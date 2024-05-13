@@ -4,10 +4,26 @@ import { LuUser2 } from "react-icons/lu";
 import { IoSearch } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoIosArrowDown } from "react-icons/io";
+import {useGSAP} from '@gsap/react'
+import gsap from 'gsap'
+import {useRef} from 'react'
 
 function Nav() {
   const [visable,setvisable] = useState(false)
+  
+  const subMenuRef = useRef()
+
+  console.log(subMenuRef)
+  useGSAP(()=>{
+    gsap.from(subMenuRef.current,{
+      opacity: 0,
+      delay:0.5,
+      duration:1,
+    })
+  })
+  
   const nav_item_style = "py-4 px-6 text-primary font-medium hidden lg:block  hover:text-tertiary cursor-pointer"
+
   return (
     <div className=''>
       <div className="upper-nav px-mb_side lg:px-side py-top flex flex-col  lg:flex-row lg:justify-between items-center">
@@ -58,7 +74,7 @@ function Nav() {
             
             {
               visable ?
-              <div className=' products-sub-menu flex flex-col absolute top-full bg-neutral-400   rounded-sm'>
+              <div ref={subMenuRef} className='  products-sub-menu z-10 flex flex-col absolute top-full bg-neutral-400   rounded-sm'>
               <div className={`${nav_item_style}`}>Honey</div>
               <div className={`${nav_item_style}`}>Sampooo</div>
               <div className={`${nav_item_style}`}>Hair Oil</div>
