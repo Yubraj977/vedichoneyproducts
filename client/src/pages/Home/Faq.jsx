@@ -39,7 +39,7 @@ function Faq() {
   
 
     return (
-        <div className='w-full flex gap-4 mt-top'>
+        <div className='w-full flex gap-4 mt-top border'> 
             <div className="left w-4/12 rounded-md object-cover h-[30rem]">
                 <img src="https://images.unsplash.com/photo-1555035900-54c17f3bc1eb?q=80&w=1325&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className='h-full w-full object-cover' />
             </div>

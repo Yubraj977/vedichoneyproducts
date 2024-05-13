@@ -43,7 +43,7 @@ function Home() {
 
     <div className=' mt-top flex items-center border flex-col'>
       {/* slider */}
-      <div className="slider px-side ">
+      <div className="slider w-full">
         <CustomSlider>
           {images.map((image, index) => {
             return <img key={index} src={image.imgURL} alt={image.imgAlt} />;
@@ -51,19 +51,19 @@ function Home() {
         </CustomSlider>
       </div>
       {/* Top selling products */}
-      <div>
+      <div className='w-full'>
         <TopSellingProducts />
       </div>
       {/* Become our partner */}
-      <div>
+      <div className='w-full'>
         <BecomePartner />
       </div>
       {/* Testimonals */}
-      <div>
+      <div className='w-full'>
         <Testimonials />
       </div>
       {/* faq */}
-      <div >
+      <div  className='w-full'>
         <Faq />
       </div>
 
