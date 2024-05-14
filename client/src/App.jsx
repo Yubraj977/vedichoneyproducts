@@ -6,6 +6,7 @@ import {createBrowserRouter,Route,createRoutesFromElements, Outlet, RouterProvid
 import Outline from './heplers/Outline'
 import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
+import Signup from './pages/signup/Signup'
 import Products from './pages/Products/Products'
 import Contact from './pages/contact/Contact'
 import About from './pages/About/About'
@@ -20,6 +21,7 @@ function App() {
         <Route index element={<Home/>}/>
         <Route path='products' element={<Products/>}/>
         <Route path='login' element={<Login/>}/>
+        <Route path='signup' element={<Signup/>}/>
         <Route path='about' element={<About/>}/>
         <Route path='contact' element={<Contact/>}/>
         <Route path='blog' element={<Blog/>}/>
