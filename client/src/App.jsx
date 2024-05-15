@@ -13,6 +13,7 @@ import About from './pages/About/About'
 import Blog from './pages/Blog/Blog'
 import Privacy from './pages/Privacy-policy/Privacy'
 import Return from './pages/return-policy/Return'
+import ProductDetials from './pages/productDetials/ProductDetials'
 function App() {
   const [count, setCount] = useState(0)
   const router=createBrowserRouter(
@@ -20,6 +21,7 @@ function App() {
       <Route path='/' element={<Outline/>}>
         <Route index element={<Home/>}/>
         <Route path='products' element={<Products/>}/>
+        <Route path='product/:id' element={<ProductDetials/>}/>
         <Route path='login' element={<Login/>}/>
         <Route path='signup' element={<Signup/>}/>
         <Route path='about' element={<About/>}/>
@@ -27,6 +29,7 @@ function App() {
         <Route path='blog' element={<Blog/>}/>
         <Route path='privacy' element={<Privacy/>}/>
         <Route path='returnpolicy' element={<Return/>}/>
+        
       </Route>
     )
   )
