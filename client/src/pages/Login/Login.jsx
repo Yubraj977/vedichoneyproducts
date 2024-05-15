@@ -4,21 +4,73 @@ import fbLogo from '/facebook-logo.png'
 import { FiEye } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider } from "firebase/auth";
+
+
+import app from '../../../configs/firebase'
 
 function Login() {
- 
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth(app);
 const navigate=useNavigate()
+// function handleGoogleSignin(){
+//   signInWithPopup(auth, provider)
+//   .then((result) => {
+//     // This gives you a Google Access Token. You can use it to access the Google API.
+//     const credential = GoogleAuthProvider.credentialFromResult(result);
+//     const token = credential.accessToken;
+//     // The signed-in user info.
+//     const user = result.user;
+//     // IdP data available using getAdditionalUserInfo(result)
+//     // ...
+//   }).catch((error) => {
+//     // Handle Errors here.
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     // The email of the user's account used.
+//     const email = error.customData.email;
+//     // The AuthCredential type that was used.
+//     const credential = GoogleAuthProvider.credentialFromError(error);
+//     // ...
+//   });
+// }
+function handleGoogleSignin(){}
+function handleFacebookSignin(){
+  signInWithPopup(auth, provider)
+  .then((result) => {
+    // The signed-in user info.
+    const user = result.user;
+
+    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    const credential = FacebookAuthProvider.credentialFromResult(result);
+    const accessToken = credential.accessToken;
+console.log(credential);
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  })
+  .catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = FacebookAuthProvider.credentialFromError(error);
+
+    // ...
+  });
+}
   return (
     <div className='px-mb_side lg:px-side py-[80px] flex items-center gap-5 w-full font-inter'>
       {/* left side */}
       <div className="left w-full lg:w-1/2">
         <h1 className='font-semibold text-3xl'>Welcome,</h1>
         <p className='font-normal text-lg mt-3'>Log In to start amazing experience with our sotre.</p>
-        <div className="google cursor-pointer mt-8 flex items-center justify-center gap-5 px-10 py-3 border-2 bg-slate-300 rounded-md">
+        <div className="google cursor-pointer mt-8 flex items-center justify-center gap-5 px-10 py-3 border-2 bg-slate-300 rounded-md" onClick={handleGoogleSignin}>
           <img src={googleLogo} alt="" />
           <p className='font-medium'>Log In with Google</p>
         </div>
-        <div className="facebook cursor-pointer mt-5 items-center  justify-center flex gap-4 px-10 py-3 border-2 bg-slate-200 rounded-md">
+        <div className="facebook cursor-pointer mt-5 items-center  justify-center flex gap-4 px-10 py-3 border-2 bg-slate-200 rounded-md" onClick={handleFacebookSignin}>
           <img src={fbLogo} alt="" />
           <p className='font-medium'>Log In with Facebook</p>
         </div>

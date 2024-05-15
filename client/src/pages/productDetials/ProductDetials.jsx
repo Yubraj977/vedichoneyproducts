@@ -21,15 +21,15 @@ function ProductDetials() {
     return (
         <div className=''>
             {product &&
-                <div className="top w-full flex  mt-top gap-16 border-red-600  px-mb_side" >
-                    <div className="left w-1/3 border-green-500 ">
-                        <div className='bg-slate-400'>
-                            <img src={product.image} alt="" className='rounded-lg' />
+                <div className="top w-full flex-col lg:items-start items-center lg:flex-row  flex  mt-top gap-16 border-red-600  px-mb_side" >
+                    <div className="left lg:w-1/3  w-full  ">
+                        <div className=' w-full lg:h-full h-72 '>
+                            <img src={product.image} alt="" className='rounded-lg h-full w-full  object-contain lg:object-cover' />
                         </div>
 
                     </div>
 
-                    <div className="right w-2/3  border-cyan-500">
+                    <div className="  right w-full lg:w-2/3">
                         <h1 className='font-bold font-inter text-lg'>{product.title}</h1>
                         <div className='h-16  flex items-center gap-12 w-full justify-between pr-10 mt-top'>
                             <div className="left flex gap-4">
@@ -53,13 +53,13 @@ function ProductDetials() {
                                     </svg>
                                 </div>
 
-                                <div className='flex'>
+                                <div className='flex '>
                                     <p className='text-sm text-cyan-400'>All Reviews||</p>
                                     <p className='text-sm text-cyan-400'>Answers</p>
                                 </div>
                             </div>
 
-                            <div className="right">
+                            <div className="right hidden lg:block">
                                 <div className='flex gap-14 text-2xl'>
                                     <FaShareAlt />
                                     <AiOutlineLike />
@@ -86,8 +86,8 @@ function ProductDetials() {
 
                         </div>
                         <div className="det mt-top">
-                            <div className="buttons flex justify-between gap-8 ">
-                                <button className='bg-[#2475B0] rounded-sm px-12 py-2 text-white w-full font-semibold'>Buy Now</button>
+                            <div className="buttons flex justify-between gap-2 lg:gap-8 lg:flex-row flex-col">
+                                <button className='bg-[#2475B0] rounded-sm px-12 py-4 text-white w-full font-semibold'>Buy Now</button>
                                 <button className='bg-secondary_shade hover:bg-secondary rounded-sm px-12 py-4 w-full font-semibold' >Add to Cart</button>
                             </div>
                         </div>
