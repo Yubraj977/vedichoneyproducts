@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
 
 
@@ -17,6 +17,9 @@ import Testimonials from './Testimonials/Testimonials';
 import Faq from './Faq';
 import honey4 from '/honey4.png'
 function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+}, []);
 
   const images = [
     {

@@ -6,13 +6,13 @@ import honey3 from '/honey3.png'
 const honeyFAQ = [
     {
         id: 1,
-        question: "Where does your honey come from?",
-        answer: "Our honey is sourced from local beekeepers who maintain ethical and sustainable practices."
+        question: "What Makes Vedic Honey Farm's Honey Unique?",
+        answer: "Our honey is unique due to our commitment to ethical beekeeping practices and sustainable production methods. We prioritize the health and happiness of our bees and ecosystems, resulting in pure, high-quality honey that embodies the essence of nature's bounty."
     },
     {
         id: 2,
-        question: "Is your honey raw or processed?",
-        answer: "We pride ourselves on offering raw honey, which means it is unfiltered and retains all of its natural enzymes and nutrients."
+        question: "Are Your Products Organic?",
+        answer: "Yes, our products are crafted using organic practices, ensuring that they are free from synthetic chemicals, pesticides, and GMOs. We believe in upholding the integrity of nature's gifts while promoting environmental sustainability."
     },
     {
         id: 3,
@@ -21,13 +21,13 @@ const honeyFAQ = [
     },
     {
         id: 4,
-        question: "Are your honey products organic?",
-        answer: "Yes, our honey products are certified organic, ensuring they are free from pesticides and other harmful chemicals."
+        question: "Do You Offer Bulk Or Wholesale Options For Your Honey And Honey-Based Products?",
+        answer: "Yes, we provide bulk and wholesale options for our products to accommodate customers with larger needs. Whether for personal use, commercial purposes, or resale, we offer flexible solutions to meet your requirements."
     },
     {
         id: 5,
-        question: "How can I use your honey in cooking?",
-        answer: "Our honey is incredibly versatile and can be used in a variety of ways, such as sweetening drinks, drizzling over desserts, or as a natural sweetener in recipes."
+        question: "Do You Ship Internationally?",
+        answer: "Yes, we offer international shipping for our products. Please contact us for more information on shipping rates and delivery times to your location."
     }
 ];
 function Faq() {
