@@ -87,8 +87,8 @@ function ProductDetials() {
                         </div>
                         <div className="det mt-top">
                             <div className="buttons flex justify-between gap-8 ">
-                                <button className='bg-[#2475B0] rounded-md px-12 py-2 text-white w-full font-semibold'>Buy Now</button>
-                                <button className='bg-secondary_shade hover:bg-secondary rounded-lg px-12 py-4 w-full font-semibold' >Add to Cart</button>
+                                <button className='bg-[#2475B0] rounded-sm px-12 py-2 text-white w-full font-semibold'>Buy Now</button>
+                                <button className='bg-secondary_shade hover:bg-secondary rounded-sm px-12 py-4 w-full font-semibold' >Add to Cart</button>
                             </div>
                         </div>
 
