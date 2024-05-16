@@ -85,7 +85,7 @@ function About() {
 
       <div className="our_story mt-20">
       <iframe  className=' aspect-video w-full' src="https://www.youtube.com/embed/xOy7cU6kakU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+      
       </div>
 
 

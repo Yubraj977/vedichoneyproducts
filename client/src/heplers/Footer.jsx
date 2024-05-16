@@ -69,7 +69,7 @@ function Footer() {
           <h1 className='font-bold lg:mb-4 mt-6 lg:mt-0'> Follow Us</h1>
           <p>Twitter</p>
           <p>Instagram</p>
-          <p>facebook</p>
+          <a href='https://www.facebook.com/vedicbeefarm' target='_blank'>facebook</a>
         </div>
       </div>
       <div className='border-t-[0.1px] border-opacity-10 w-full flex  flex-col items-center opacity-90 py-4'>

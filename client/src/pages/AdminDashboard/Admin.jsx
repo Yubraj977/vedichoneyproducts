@@ -25,11 +25,11 @@ function Admin() {
 
   }, [location.search])
   return (
-    <div className='flex px-6'>
+    <div className='flex gap-4 px-2'>
       <div className="left w-1/6">
         <Left />
       </div>
-      <div className="right">
+      <div className="right w-full">
         {tab == "main" && <Maindash />}
         {tab == "product" && <Dashproduct />}
         {tab == "invenotry" && <DashInventery />}
