@@ -1,5 +1,9 @@
 import React from 'react'
 import { useEffect } from 'react';
+import madhu from '/chars/madhu.jpg'
+import lal from '/chars/lal.jpg'
+import mahesh from '/chars/mahesh.jpg'
+import bimala from '/chars/bimala.jpg'
 function About() {
 
   // useEffect(() => {
@@ -71,16 +75,17 @@ function About() {
 
 
 
-      <div className="three mt-top ">
+      {/* <div className="three mt-top ">
         <div className='h-32 lg:h-80 w-full'>
           <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80" alt="" className='h-full w-full object-cover' />
         </div>
 
-      </div>
+      </div> */}
 
 
-      <div className="our_story">
-        <h1>Something gonna come here</h1>
+      <div className="our_story mt-20">
+      <iframe  className=' aspect-video w-full' src="https://www.youtube.com/embed/xOy7cU6kakU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
       </div>
 
 
@@ -100,87 +105,81 @@ function About() {
         <div className='flex flex-wrap  lg:gap-5 justify-center mt-top '>
 
 
-          <div className='lg:w-1/5 w-1/2 text-center flex flex-col items-center  '>
-            <div className=' w-20 h-20  rounded-full'>
-              <img src="https://scontent.fktm14-1.fna.fbcdn.net/v/t1.6435-9/120959576_228214105387950_1549228730601569508_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHEr6mMLXIBTWjBjcQO1FKerRpiU_cS1CmtGmJT9xLUKT4pHFpYkZnxeNnUmuQ_BLweuFPNtTYTN1jwWjta3oYi&_nc_ohc=gD2148fuBBsQ7kNvgFDL5fu&_nc_ht=scontent.fktm14-1.fna&oh=00_AYAH42MLL7w_0Uk4Wrp5Lzo_r5Bnm5jlLIe-Sk5T8OnQoA&oe=666C7F50" alt="" className='h-full w-full object-cover rounded-full' />
-            </div>
-            <h1 className='text-md font-semibold font-inter w-full'>Madhu sudhan Kc</h1>
-            <p className='text-sm font-inter'>Managing Director</p>
-          </div>
+          <a className='lg:w-1/5 w-1/2 text-center flex flex-col items-center  ' href='https://www.facebook.com/oshodharad' target='_blank'>
+
+            
+              <div className=' w-20 h-20  rounded-full'>
+                <img src={madhu} alt="" className='h-full w-full object-cover rounded-full' />
+              </div>
+              <h1 className='text-md font-semibold font-inter w-full'>Madhu sudhan Kc</h1>
+              <p className='text-sm font-inter'>Managing Director</p>
+              <p className='text-sm font-inter'>dangmadhukc@gmail.com</p>
+              <p className='text-sm'>+977 9857820351 </p>
+           
+
+          </a>
 
 
-
-          <div className='lg:w-1/5 w-1/2 text-center flex flex-col items-center '>
+          <a className='lg:w-1/5 w-1/2 text-center flex flex-col items-center ' href='https://www.facebook.com/profile.php?id=100028150696285' target='_blank'>
             <div className='w-20 h-20 rounded-full'>
-              <img src="https://vedichoneyproducts.com/wp-content/uploads/2024/03/WhatsApp-Image-2024-03-09-at-20.39.56.jpeg" alt="" className='h-full w-full object-cover rounded-full' />
+              <img src={lal} alt="" className='h-full w-full object-cover rounded-full ' />
             </div>
-            <h1 className='text-md font-semibold font-inter'>One night</h1>
-            <p className='text-sm font-inter'>Director of the managment</p>
-          </div>
+            <h1 className='text-md font-semibold font-inter'>Lal bahadur Kc</h1>
+            <p className='text-sm font-inter'>Proprietor</p>
+            <p className='text-sm font-inter'>clb@gmail.com</p>
+            <p className='text-sm font-inter'>9857823608</p>
+          </a>
 
-          <div className='lg:w-1/5 w-1/2 text-center flex flex-col items-center'>
+          <a className='lg:w-1/5 w-1/2 text-center flex flex-col items-center' target='_blank' href='https://www.facebook.com/profile.php?id=100072554800285'>
             <div className='w-20 h-20 rounded-full'>
               <img src="https://scontent.fktm14-1.fna.fbcdn.net/v/t39.30808-6/312922543_207157561712736_3836336145576420280_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHsBrodXYVvl3ZFDsiIYmzOKoMIwlBOGXUqgwjCUE4ZdXwMwAYLM6OZWhncOcbdlBHRNjhqx9kT-56biKDLk6-e&_nc_ohc=PruAAI-vn1oQ7kNvgEH1CYq&_nc_ht=scontent.fktm14-1.fna&oh=00_AYC3icOhzjysgwLFvfXfOxkGF4NI6-Q6ZBNufTaxD79AWg&oe=664AD9DB" alt="" className='h-full w-full object-cover rounded-full' />
             </div>
             <h1 className='text-md font-semibold font-inter'>Parash Khadka</h1>
             <p className='text-sm font-inter'>Production Officer</p>
-          </div>
+            <p className='text-sm font-inter'>khadkaparas292@gmail.com</p>
+            <p className='text-sm font-inter'>9849707008</p>
+          </a>
 
           <div className='lg:w-1/5 w-1/2 text-center flex flex-col items-center'>
             <div className='w-20 h-20 rounded-full'>
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80" alt="" className='h-full w-full object-cover rounded-full' />
+              <img src={mahesh} alt="" className='h-full w-full object-cover rounded-full' />
             </div>
-            <h1 className='text-md font-semibold font-inter'>One night</h1>
-            <p className='text-sm font-inter'>Director of the managment</p>
+            <h1 className='text-md font-semibold font-inter'>Mahesh Raj</h1>
+            <p className='text-sm font-inter'>Marketing Officer</p>
+            <p className='text-sm font-inter'>pantamahesh77@gmail.com</p>
+            <p className='text-sm font-inter'>9851094689 </p>
           </div>
 
-          <div className='lg:w-1/5 w-1/2 text-center flex flex-col items-center'>
+          <a className='lg:w-1/5 w-1/2 text-center flex flex-col items-center' href='' target='_blank'>
             <div className='w-20 h-20 rounded-full'>
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80" alt="" className='h-full w-full object-cover rounded-full' />
+              <img src={bimala} alt="" className='h-full w-full object-cover rounded-full' />
             </div>
-            <h1 className='text-md font-semibold font-inter'>One night</h1>
-            <p className='text-sm font-inter'>Director of the managment</p>
-          </div>
+            <h1 className='text-md font-semibold font-inter'> Bimala K.C</h1>
+            <p className='text-sm font-inter'>Head of Administration</p>
+            <p className='text-sm font-inter'>bimalakc01@gmail.com</p>
+            <p className='text-sm font-inter'>9847832759 </p>
+          </a>
 
-          <div className='lg:w-1/5 w-1/2 text-center flex flex-col items-center'>
+          <a className='lg:w-1/5 w-1/2 text-center flex flex-col items-center' href='https://www.facebook.com/sudha.kc.14' target='_blank'>
             <div className='w-20 h-20 rounded-full'>
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80" alt="" className='h-full w-full object-cover rounded-full' />
+              <img src="https://scontent.fktm14-1.fna.fbcdn.net/v/t1.6435-9/127640784_2824836397787613_6800120438261095822_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHnkCGttS-L6NFswA9fXcKHcVu0Rwa5wttxW7RHBrnC20IhvC_izS48ZsImJ1Ip0SaEAC5ERllwDTbQRT7BIYhd&_nc_ohc=rut3JdhQHcIQ7kNvgFE1ube&_nc_ht=scontent.fktm14-1.fna&oh=00_AYC4R1R4GBSESxP3wKLip6HxTX3xY7Dla80Hg-MvRqY4aw&oe=666DC8E1" alt="" className='h-full w-full object-cover rounded-full' />
             </div>
-            <h1 className='text-md font-semibold font-inter'>Madhu</h1>
-            <p className='text-sm font-inter'>Director of the managment</p>
-          </div>
+            <h1 className='text-md font-semibold font-inter'>Bimala oli</h1>
+            {/* <p className='text-sm font-inter'>Director of the managment</p> */}
+          </a>
 
-          <div className='lg:w-1/5 w-1/2 text-center flex flex-col items-center'>
+          <a className='lg:w-1/5 w-1/2 text-center flex flex-col items-center' href='https://www.facebook.com/giriarjun88' target='_blank'>
             <div className='w-20 h-20 rounded-full'>
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80" alt="" className='h-full w-full object-cover rounded-full' />
+              <img src='https://scontent.fktm14-1.fna.fbcdn.net/v/t39.30808-6/431485731_8084195871596085_2321266587404723104_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHTLU5HgfY9xkQS0hE4dHG3kPTMNw1XNpuQ9Mw3DVc2myP6Eo-8Gf3vxxIKhBuz4QtoYdX-ZemGb0fChCVcCYJ4&_nc_ohc=JpEpQJ0wCNQQ7kNvgF8qO--&_nc_ht=scontent.fktm14-1.fna&oh=00_AYBZXqxfQ4VFrq1xWK7v1J2NfwONrGMtKnXm3crVI6c3qA&oe=664C0F5E' alt="" className='h-full w-full object-cover rounded-full' />
             </div>
-            <h1 className='text-md font-semibold font-inter'>One night</h1>
-            <p className='text-sm font-inter'>Director of the managment</p>
-          </div>
+            <h1 className='text-md font-semibold font-inter'>Arjun Giri</h1>
+            <p className='text-sm font-inter'>Marketing Director</p>
+            <p className='text-sm font-inter'>giriarjun88@gmail.com </p>
+            <p className='text-sm font-inter'>9851274890  </p>
+          </a>
 
-          <div className='lg:w-1/5 w-1/2 text-center flex flex-col items-center'>
-            <div className='w-20 h-20 rounded-full'>
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80" alt="" className='h-full w-full object-cover rounded-full' />
-            </div>
-            <h1 className='text-md font-semibold font-inter'>One night</h1>
-            <p className='text-sm font-inter'>Director of the managment</p>
-          </div>
-
-          <div className='lg:w-1/5 w-1/2 text-center flex flex-col items-center'>
-            <div className='w-20 h-20 rounded-full'>
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80" alt="" className='h-full w-full object-cover rounded-full' />
-            </div>
-            <h1 className='text-md font-semibold font-inter'>Mr. Mohit</h1>
-            <p className='text-sm font-inter'>Developer</p>
-          </div>
-
-          <div className='lg:w-1/5 w-1/2 text-center flex flex-col items-center'>
-            <div className='w-20 h-20 rounded-full'>
-              <img src="https://media.licdn.com/dms/image/D5603AQEUbwpG5aHopQ/profile-displayphoto-shrink_800_800/0/1714336068310?e=1721260800&v=beta&t=R76gPoUIUAzQ4qJRnKqoDMDhD_hulNH9hCHtpDb7H8Y" alt="" className='h-full w-full object-cover rounded-full' />
-            </div>
-            <h1 className='text-md font-semibold font-inter'>Yubraj Khatri</h1>
-            <p className='text-sm font-inter'>Developer</p>
-          </div>
+        
+         
 
 
         </div>

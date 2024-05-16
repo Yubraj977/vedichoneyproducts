@@ -14,6 +14,9 @@ import Blog from './pages/Blog/Blog'
 import Privacy from './pages/Privacy-policy/Privacy'
 import Return from './pages/return-policy/Return'
 import ProductDetials from './pages/productDetials/ProductDetials'
+import Cart from './pages/cart/Cart'
+import Checkout from './pages/Checkout/Checkout'
+import Admin from './pages/AdminDashboard/Admin'
 function App() {
   const [count, setCount] = useState(0)
   const router=createBrowserRouter(
@@ -29,6 +32,9 @@ function App() {
         <Route path='blog' element={<Blog/>}/>
         <Route path='privacy' element={<Privacy/>}/>
         <Route path='returnpolicy' element={<Return/>}/>
+        <Route path='cart' element={<Cart/>}/>
+        <Route path='checkout' element={<Checkout/>}/>
+        <Route path='admin' element={<Admin/>}/>
         
       </Route>
     )

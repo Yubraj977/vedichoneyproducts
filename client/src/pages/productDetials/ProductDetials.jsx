@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { FaMinus } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import { FaShareAlt } from "react-icons/fa";
 import { AiOutlineLike } from "react-icons/ai";
+import { useNavigate } from 'react-router-dom';
 function ProductDetials() {
+    const navigate = useNavigate()
     const { id } = useParams();
     const [product, setproduct] = useState(null)
     console.log(product);
@@ -86,9 +88,15 @@ function ProductDetials() {
 
                         </div>
                         <div className="det mt-top">
-                            <div className="buttons flex justify-between gap-2 lg:gap-8 lg:flex-row flex-col">
-                                <button className='bg-[#2475B0] rounded-sm px-12 py-4 text-white w-full font-semibold'>Buy Now</button>
-                                <button className='bg-secondary_shade hover:bg-secondary rounded-sm px-12 py-4 w-full font-semibold' >Add to Cart</button>
+                            <div className="buttons flex justify-between gap-2 lg:gap-8 lg:flex-row flex-col  w-full">
+                                <Link to={'/checkout'} className='border-2  w-full'>
+                                    <button className='bg-[#2475B0] rounded-sm border py-4 text-white w-full font-semibold' >Buy Now</button>
+                                </Link>
+
+                                <Link to={'/cart'} className='w-full'>
+                                    <button className='bg-secondary_shade hover:bg-secondary rounded-sm py-4 font-semibold w-full'  >Add to Cart</button>
+                                </Link>
+
                             </div>
                         </div>
 
