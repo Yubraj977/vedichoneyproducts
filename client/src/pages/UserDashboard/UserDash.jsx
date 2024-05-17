@@ -9,6 +9,8 @@ import Myorders from './pages/Myorders';
 import Myreturns from './pages/Myreturns';
 import PaymentOptions from './pages/PaymentOptions';
 import MyWatchList from './pages/MyWatchList';
+import ProfileEdit from './pages/ProfileEdit';
+import Changepassword from './pages/Changepassword';
 function UserDash() {
     const [tab, settab] = useState()
     const location = useLocation();
@@ -36,6 +38,8 @@ function UserDash() {
        {tab == "myreturns" && < Myreturns/>}
        {tab == "mycancelations" && < MyCancelation/>}
        {tab == "mywatchlist" && < MyWatchList/>}
+       {tab == "profileedit" && < ProfileEdit/>}
+       {tab == "changepassword" && < Changepassword/>}
      
       </div>
     </div>

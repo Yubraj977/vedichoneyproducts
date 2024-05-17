@@ -20,7 +20,7 @@ function Blog() {
                
                 <h4 className="text-xl text-gray-900 font-medium leading-8 mb-2 ">How to analyze every House of the honey bee?</h4>
                 <p className="text-gray-500 leading-6 mb-2">Our comprehensive guide will equip you with the tools and insights needed to..</p>
-                <a href="javascript:;" className="cursor-pointer text-lg text-indigo-600 font-semibold">Read more..</a>
+                <a href="javascript:;" className="cursor-pointer text-lg text-secondary font-semibold">Read more..</a>
               </div>
             </div>
 
@@ -35,7 +35,7 @@ function Blog() {
                
                 <h4 className="text-xl text-gray-900 font-medium leading-8 mb-2 ">How to analyze every House of the honey bee?</h4>
                 <p className="text-gray-500 leading-6 mb-2">Our comprehensive guide will equip you with the tools and insights needed to..</p>
-                <a href="javascript:;" className="cursor-pointer text-lg text-indigo-600 font-semibold">Read more..</a>
+                <a href="javascript:;" className="cursor-pointer text-lg text-secondary font-semibold">Read more..</a>
               </div>
             </div>
 
@@ -48,7 +48,7 @@ function Blog() {
                
                 <h4 className="text-xl text-gray-900 font-medium leading-8 mb-2 ">How to analyze every House of the honey bee?</h4>
                 <p className="text-gray-500 leading-6 mb-2">Our comprehensive guide will equip you with the tools and insights needed to..</p>
-                <a href="javascript:;" className="cursor-pointer text-lg text-indigo-600 font-semibold">Read more..</a>
+                <a href="javascript:;" className="cursor-pointer text-lg text-secondary font-semibold">Read more..</a>
               </div>
             </div>
 
@@ -61,7 +61,7 @@ function Blog() {
                
                 <h4 className="text-xl text-gray-900 font-medium leading-8 mb-2 ">How to analyze every House of the honey bee?</h4>
                 <p className="text-gray-500 leading-6 mb-2">Our comprehensive guide will equip you with the tools and insights needed to..</p>
-                <a href="javascript:;" className="cursor-pointer text-lg text-indigo-600 font-semibold">Read more..</a>
+                <a href="javascript:;" className="cursor-pointer text-lg text-secondary font-semibold">Read more..</a>
               </div>
             </div>
           
