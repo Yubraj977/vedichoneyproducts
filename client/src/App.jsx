@@ -17,6 +17,7 @@ import ProductDetials from './pages/productDetials/ProductDetials'
 import Cart from './pages/cart/Cart'
 import Checkout from './pages/Checkout/Checkout'
 import Admin from './pages/AdminDashboard/Admin'
+import UserDash from './pages/UserDashboard/UserDash'
 function App() {
   const [count, setCount] = useState(0)
   const router=createBrowserRouter(
@@ -35,6 +36,10 @@ function App() {
         <Route path='cart' element={<Cart/>}/>
         <Route path='checkout' element={<Checkout/>}/>
         <Route path='admin' element={<Admin/>}/>
+        <Route path='dashboard' element={<UserDash
+        
+        />}/>
+        
         
       </Route>
     )

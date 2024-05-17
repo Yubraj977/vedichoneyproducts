@@ -2,10 +2,14 @@ import React from 'react'
 import Items from './Items'
 function Cart() {
   return (
-    <div className='px-16 flex justify-between mt-top'>
-      <div className="left w-5/7">
+    <div className='lg:px-16 px-2 flex  justify-between mt-top flex-col lg:flex-row gap-4'>
+      <div className="left w-5/7  h-full" >
       <Items/>
       </div>
+
+
+
+
       <div className="right w-2/7  font-inter ">
         <h1 className='font-semibold text-xl'>Order Summary</h1>
         <div className='mt-top flex justify-between  w-full  gap-20 items-center'>
