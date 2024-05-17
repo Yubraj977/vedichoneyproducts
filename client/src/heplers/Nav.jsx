@@ -8,7 +8,7 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { useRef } from 'react'
 import useAnimation from './costum-hooks/UseAnimatioin';
-import { NavLink } from 'react-router-dom'
+import { NavLink,Link } from 'react-router-dom'
 function Nav() {
   const [visable, setvisable] = useState(false)
   const [mobileVisable, setmobileVisable] = useState(false)
@@ -65,7 +65,7 @@ function Nav() {
           </div>
 
 
-          <div className="cart flex justify-center items-center">
+          <Link to={'/cart'} className="cart flex justify-center items-center">
             <div className="icon p-3">
               <IoCartOutline className="text-3xl font-medium text-slate-600" />
             </div>
@@ -73,7 +73,9 @@ function Nav() {
               <h3 className='text-sm font-normal text-slate-500'>Cart</h3>
               <p><strong className='text-sm text-slate-700'>$ 110,00</strong></p>
             </div>
-          </div>
+          </Link>
+
+
           <NavLink to='/login'>
             <div className="user flex justify-center items-center mr-20 lg:mr-0  ">
               <div className="user-icon p-3">

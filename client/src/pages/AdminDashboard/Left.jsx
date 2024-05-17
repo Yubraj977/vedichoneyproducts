@@ -30,7 +30,7 @@ function Left() {
 
 
             <div className=''>
-                <h1>Logo</h1>
+                
                 <div className='mt-10 gap-2 flex flex-col'>
 
                     <Link to={'/admin?tab=main'}> <div className={`leftSide ${leftStyle} ${tab == 'main' ? tabActive : ''}`}> <MdDashboard /> Dashoard</div></Link>
@@ -39,6 +39,8 @@ function Left() {
                     <Link to={'/admin?tab=costumer'}>   <div className={`leftSide ${leftStyle} ${tab == 'costumer' ? tabActive : ''}`}><FaUser />  Costumer</div></Link>
                     <Link to={'/admin?tab=review'}>   <div className={`leftSide ${leftStyle} ${tab == 'review' ? tabActive : ''}`}> <MdRateReview />Review </div></Link>
                     <Link to={'/admin?tab=payments'}>  <div className={`leftSide ${leftStyle} ${tab == 'payments' ? tabActive : ''}`}> <MdPayments />Payments</div></Link>
+                    <Link to={'/admin?tab=articles'}>  <div className={`leftSide ${leftStyle} ${tab == 'articles' ? tabActive : ''}`}> <MdPayments />articles</div></Link>
+                    <Link to={'/admin?tab=write'}>  <div className={`leftSide ${leftStyle} ${tab == 'write' ? tabActive : ''}`}> <MdPayments />write</div></Link>
 
                 </div>
             </div>

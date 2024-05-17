@@ -129,7 +129,7 @@ function Maindash() {
 
 
   return (
-    <div className='flex h-screen w-full mt-16 gap-2'>
+    <div className='flex h-screen w-full  gap-2 mt-10'>
       {/* Top Left Three sections */}
       <div className='left w-3/4 h-full  flex flex-col gap-10'>
 
@@ -440,10 +440,10 @@ function Maindash() {
           <h1>Reviews</h1>
           <div className='flex flex-col gap-2  mt-top'>
             <div className='flex justify-between'><p className='text-[0.8rem] font-inter font-semibold'>5 Star </p>   <ProgressBar width='180px'completed={90} bgColor='#10A881' height='14px' animateOnRender='true' borderRadius='20px' /></div>
-            <div className='flex justify-between'><p className='text-[0.8rem] font-inter font-semibold'>5 Star </p>   <ProgressBar width='180px'completed={90} bgColor='#10A881' height='14px' animateOnRender='true' borderRadius='20px' /></div>
-            <div className='flex justify-between'><p className='text-[0.8rem] font-inter font-semibold'>5 Star </p>   <ProgressBar width='180px'completed={90} bgColor='#10A881' height='14px' animateOnRender='true' borderRadius='20px' /></div>
-            <div className='flex justify-between'><p className='text-[0.8rem] font-inter font-semibold'>5 Star </p>   <ProgressBar width='180px'completed={90} bgColor='#10A881' height='14px' animateOnRender='true' borderRadius='20px' /></div>
-            <div className='flex justify-between'><p className='text-[0.8rem] font-inter font-semibold'>5 Star </p>   <ProgressBar width='180px'completed={90} bgColor='#10A881' height='14px' animateOnRender='true' borderRadius='20px' /></div>
+            <div className='flex justify-between'><p className='text-[0.8rem] font-inter font-semibold'>5 Star </p>   <ProgressBar width='180px'completed={85} bgColor='#10A881' height='14px' animateOnRender='true' borderRadius='20px' /></div>
+            <div className='flex justify-between'><p className='text-[0.8rem] font-inter font-semibold'>5 Star </p>   <ProgressBar width='180px'completed={80} bgColor='#10A881' height='14px' animateOnRender='true' borderRadius='20px' /></div>
+            <div className='flex justify-between'><p className='text-[0.8rem] font-inter font-semibold'>5 Star </p>   <ProgressBar width='180px'completed={60} bgColor='#10A881' height='14px' animateOnRender='true' borderRadius='20px' /></div>
+            <div className='flex justify-between'><p className='text-[0.8rem] font-inter font-semibold'>5 Star </p>   <ProgressBar width='180px'completed={40} bgColor='#10A881' height='14px' animateOnRender='true' borderRadius='20px' /></div>
            
           </div>
           <p className='font-inter text-sm font-semibold mt-4'>Total 4000 Review</p>
