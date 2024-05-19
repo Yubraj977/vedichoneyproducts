@@ -1,11 +1,13 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from .models import User
+import uuid
 
 class UserRegisterationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type':'password'}, write_only=True)
     class Meta:
         model = User
-        fields = ['id','username','first_name','last_name','password','password2']
+        fields = ['id','email','name','password','password2']
         extra_kwargs = {
             'password':{'write_only':True,},
         }
@@ -23,12 +25,23 @@ class UserRegisterationSerializer(serializers.ModelSerializer):
         return User.objects.create_user(**validated_data)
 
 
-class UserLoginSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(max_length=255)
+class UserRegisterationGoogleSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField()
     class Meta:
         model = User
-        fields = ['username','password']
+        fields = ['id','email','name','profile_url']
 
+    def create(self, validated_data:dict):
+        password = str(uuid.uuid4())
+        print(password)
+        validated_data.setdefault('password',password)
+        return User.objects.create_user(**validated_data)
+
+class UserLoginSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField()
+    class Meta:
+        model = User
+        fields = ['email','password']
 
 class UserPasswordChangeSerializer(serializers.Serializer):
     password1 = serializers.CharField(max_length=255)
@@ -48,7 +61,7 @@ class UserPasswordChangeSerializer(serializers.Serializer):
         user.save()
         return attrs
     
-    
+
 class DashboardSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
