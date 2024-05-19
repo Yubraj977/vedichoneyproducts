@@ -33,25 +33,25 @@ function Signup() {
               focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
               border-gray-300 rounded-md"/>
                         </div>
-                        <div class="relative">
-                            <p class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
+                        <div className="relative">
+                            <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
               absolute">Password</p>
                             <input placeholder="Password" type="password" class="border placeholder-gray-400 focus:outline-none
               focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
               border-gray-300 rounded-md"/>
                         </div>
-                        <div class="relative">
+                        <div className="relative">
                             <a class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-secondary_shade
               rounded-lg transition duration-200 hover:bg-secondary ease ">Submit</a>
                         </div>
-                        <p className='mt-2'>Don't have an account?  <span className='text-secondary underline cursor-pointer' onClick={()=>navigate('/login')}>Login</span> Now.</p>
+                        <p className='mt-2'>Don't have an account?  <span className='text-secondary underline cursor-pointer' onClick={() => navigate('/login')}>Login</span> Now.</p>
                     </div>
                 </div>
 
             </div>
             <div className=' hidden lg:block w-1/2 h-[33rem]'>
                 <img src="https://images.unsplash.com/photo-1622448559300-6df8495a1574?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className='w-full h-full object-cover' alt="" />
-                </div>
+            </div>
         </div>
     )
 }
