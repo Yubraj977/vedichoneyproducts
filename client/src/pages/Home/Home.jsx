@@ -2,9 +2,9 @@ import React, { useState,useEffect } from 'react';
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
 
 
-import honey from '/honey3.png'
-import honey1 from '/honey1.png'
-import honey2 from '/honey2.jpg'
+import honey3 from '/honey3.jpeg'
+import honey1 from '/honey1.jpeg'
+import honey2 from '/honey2.jpeg'
 import honey5 from '/honey5.png'
 import honey6 from '/honey6.png'
 import honey7 from '/honey7.png'
@@ -23,19 +23,19 @@ function Home() {
 
   const images = [
     {
-      imgURL:honey8,
+      imgURL:honey2,
       imgAlt: "img-1"
     },
     {
-      imgURL:honey9,
+      imgURL:honey3,
       imgAlt: "img-2"
     },
     {
-      imgURL:honey6,
+      imgURL:honey1,
       imgAlt: "img-3"
     },
     {
-      imgURL:honey7,
+      imgURL:honey8,
       imgAlt: "img-4"
     }
   ];
