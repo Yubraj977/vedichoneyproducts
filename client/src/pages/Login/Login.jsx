@@ -23,11 +23,9 @@ function handleGoogleSignin(){
     const token = credential.accessToken;
     const user = result.user;
     const authenticGoogleUser={
-      username:user.displayName,
+      name:user.displayName,
        email:user.email,
-       photoUrl:user.photoURL,
-       emailVerified:user.emailVerified
-
+       profile_url:user.photoURL,
     }
 
     setgoogleUser({...authenticGoogleUser})
