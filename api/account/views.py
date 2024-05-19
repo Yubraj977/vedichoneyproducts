@@ -10,6 +10,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
 from .renderers import UserRenderer
 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
     return {
@@ -17,13 +19,29 @@ def get_tokens_for_user(user):
         'access': str(refresh.access_token),
     }
 
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        refresh = super().get_token(user)
+
+        # Add custom claims
+        refresh['email'] = user.email
+        refresh['profile_url'] = user.profile_url
+
+        return {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        }
+    
+
 class UserRegisterationAPIView(APIView):
     renderer_classes = [UserRenderer]
     def post(self,request,format=None):
         serializer = UserRegisterationSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             user = serializer.save()
-            tokens = get_tokens_for_user(user)
+            # tokens = get_tokens_for_user(user)
+            tokens = CustomTokenObtainPairSerializer.get_token(user)
             return Response({'tokens':tokens,'message':'User created.'},status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
@@ -36,14 +54,15 @@ class UserRegisterationGoogleAPIView(APIView):
             user = User.objects.filter(email=serializer.validated_data.get('email')).first()
             print(user)
             if user is not None:
-                tokens = get_tokens_for_user(user)
+                # tokens = get_tokens_for_user(user)
+                tokens = CustomTokenObtainPairSerializer.get_token(user)
                 return Response({'tokens':tokens,'message':'logged in.'},status=status.HTTP_201_CREATED)
             else:
                 user = serializer.save()
-                tokens = get_tokens_for_user(user)
+                # tokens = get_tokens_for_user(user)
+                tokens = CustomTokenObtainPairSerializer.get_token(user)
                 return Response({'tokens':tokens,'message':'User created.'},status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-
 
 class UserLoginAPIView(APIView):
     renderer_classes = [UserRenderer]
@@ -52,7 +71,8 @@ class UserLoginAPIView(APIView):
         if serializer.is_valid(raise_exception=True):
             user = authenticate(**serializer.data)
             if user is not None:
-                tokens= get_tokens_for_user(user)
+                # tokens= get_tokens_for_user(user)
+                tokens = CustomTokenObtainPairSerializer.get_token(user)
                 return Response({'tokens':tokens,'message':'usre logged in.'},status=status.HTTP_200_OK)
             return Response({"errors":{"email":"user with this email not exist."}},status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
