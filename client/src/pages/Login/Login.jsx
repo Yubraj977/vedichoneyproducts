@@ -5,8 +5,6 @@ import { FiEye } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider } from "firebase/auth";
-
-
 import app from '../../../configs/firebase'
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider=new FacebookAuthProvider();
@@ -23,11 +21,9 @@ function handleGoogleSignin(){
     const token = credential.accessToken;
     const user = result.user;
     const authenticGoogleUser={
-      username:user.displayName,
+      name:user.displayName,
        email:user.email,
-       photoUrl:user.photoURL,
-       emailVerified:user.emailVerified
-
+       profile_url:user.photoURL,
     }
 
     setgoogleUser({...authenticGoogleUser})
@@ -74,9 +70,10 @@ console.log(credential);
         </div>
         <p className='text-center mt-8 text-xl font-medium '>----or----</p>
         <form className='mt-8 flex flex-col '>
-          
-          <input type="text" placeholder='Username' className='text-lg px-5 py-3 outline-none border-2  rounded-md' />
+        
+        <input type="text" placeholder='Email' className='text-lg px-5 py-3 outline-none border-2  rounded-md' />
           <div className='flex w-full relative mt-3'>
+          
             <input type="password" placeholder='Password' className='text-lg px-5 py-3 outline-none border-2 w-full rounded-md' />
             < FiEye className='absolute top-0 right-[20px] text-gray-500 text-lg h-full ' />
           </div>
