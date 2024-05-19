@@ -7,7 +7,7 @@ class UserRegisterationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type':'password'}, write_only=True)
     class Meta:
         model = User
-        fields = ['id','email','name','password','password2']
+        fields = ['id','email','name','password','password2','phone_number','profile_url','profile_img','is_staff']
         extra_kwargs = {
             'password':{'write_only':True,},
         }
@@ -29,7 +29,7 @@ class UserRegisterationGoogleSerializer(serializers.ModelSerializer):
     email = serializers.EmailField()
     class Meta:
         model = User
-        fields = ['id','email','name','profile_url']
+        fields =  ['id','email','name','phone_number','profile_url','profile_img','is_staff']
 
     def create(self, validated_data:dict):
         password = str(uuid.uuid4())
@@ -41,7 +41,10 @@ class UserLoginSerializer(serializers.ModelSerializer):
     email = serializers.EmailField()
     class Meta:
         model = User
-        fields = ['email','password']
+        fields = ['id','email','password','name','phone_number','profile_url','profile_img','is_staff']
+        extra_kwargs = {
+            'password':{'write_only':True,},
+        }
 
 class UserPasswordChangeSerializer(serializers.Serializer):
     password1 = serializers.CharField(max_length=255)
@@ -61,8 +64,3 @@ class UserPasswordChangeSerializer(serializers.Serializer):
         user.save()
         return attrs
     
-
-class DashboardSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=User
-        fields = ['id','username','first_name','last_name']
