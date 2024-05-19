@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from account.models import User
 from vedichoneyproducts import settings
-from .serializers import DashboardSerializer, UserLoginSerializer, UserPasswordChangeSerializer, UserRegisterationGoogleSerializer, UserRegisterationSerializer
+from .serializers import UserLoginSerializer, UserPasswordChangeSerializer, UserRegisterationGoogleSerializer, UserRegisterationSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
