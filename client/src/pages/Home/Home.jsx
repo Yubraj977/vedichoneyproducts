@@ -38,18 +38,7 @@ function Home() {
       imgURL:honey4,
       imgAlt: "img-4"
     },
-    {
-      imgURL:slider1,
-      imgAlt: "img-5"
-    },
-    {
-      imgURL:slider2,
-      imgAlt: "img-6"
-    },
-    {
-      imgURL:slider3,
-      imgAlt: "img-7"
-    }
+   
   ];
 
 

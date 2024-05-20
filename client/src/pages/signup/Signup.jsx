@@ -5,29 +5,45 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } fr
 import app from '../../../configs/firebase';
 import { useForm } from 'react-hook-form';
 import { Oval } from 'react-loader-spinner';
+import toast, { Toaster } from 'react-hot-toast';
 
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 const auth = getAuth(app);
 
 function Signup() {
-    const { register, handleSubmit, formState: { errors, isSubmitting }, watch } = useForm();
+    const navigate = useNavigate();
+    const { register, handleSubmit,  formState: { errors, isSubmitting }, watch } = useForm();
+    console.log(isSubmitting);
+    console.log(errors);
     const password = useRef({});
     password.current = watch('password', '');
-
+    const notify = (value) => toast.error(`Error:${value}`);
     const onSubmit = async (data) => {
-        const res=await fetch('http://localhost:8000/api/account/register/' ,{
-                method:"POST",
-                headers:{
-                    'Content-Type':"application/json"
-                },
-                body:JSON.stringify(data)
+        const res = await fetch('http://127.0.0.1:8000/api/account/register/', {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify(data)
         })
+        const backend = await res.json()
         console.log(res);
+        if (!res.ok) {
+            // setError('backend_error', {
+            //     type: 'validate',
+            //     message: backend.errors.email[0]
+            // })
+
+
+            notify(backend.errors.email[0])
+        }
+
+        console.log(backend);
     }
 
-    const navigate = useNavigate();
 
+   
     function handleGoogleSignUp() {
         signInWithPopup(auth, googleProvider)
             .then((result) => {
@@ -65,11 +81,14 @@ function Signup() {
                         <h1 className='font-inter flex gap-2 py-2 px-4 rounded-lg border-2 border-neutral-800 items-center opacity-90 hover:bg-slate-200 hover:opacity-100 text-sm font-semibold justify-center' onClick={handleGoogleSignUp}> <FaGoogle /> SignUp with Google</h1>
                         <h1 className='font-inter flex gap-2 py-2 px-4 rounded-lg border-2 border-neutral-800 items-center opacity-90 hover:bg-slate-200 hover:opacity-100 text-sm font-semibold justify-center'> <FaFacebookF /> SignUp with Facebook</h1>
                     </div>
+
+                    <Toaster />
                     <form className='w-full' onSubmit={handleSubmit(onSubmit)}>
                         <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
                             {/* Full Name */}
                             <div className="relative">
                                 <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">Full Name</p>
+
                                 <input
                                     placeholder="John"
                                     type="text"
@@ -99,7 +118,7 @@ function Signup() {
                                         }
                                     })}
                                 />
-                               {errors.email && <div className='text-red-500'> {errors.email.message} </div>}
+                                {errors.email && <div className='text-red-500'> {errors.email.message} </div>}
                             </div>
                             {/* Password */}
                             <div className="relative">
@@ -151,6 +170,8 @@ function Signup() {
                                         />
                                     ) : 'Submit'}
                                 </button>
+                                {/* {backend_error&&<p>{backend_error.message}</p>} */}
+                                <h1>heeeh</h1>
                             </div>
                             <p className='mt-2'>Don't have an account?  <span className='text-secondary underline cursor-pointer' onClick={() => navigate('/login')}>Login</span> Now.</p>
                         </div>
@@ -160,6 +181,7 @@ function Signup() {
             <div className=' hidden lg:block w-1/2 h-[33rem]'>
                 <img src="https://images.unsplash.com/photo-1622448559300-6df8495a1574?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className='w-full h-full object-cover' alt="" />
             </div>
+
         </div>
     );
 }

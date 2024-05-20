@@ -1,8 +1,15 @@
 import React from 'react'
+import toast, { Toaster } from 'react-hot-toast';
+
+const notify = () => toast('Here is your toast.');
 
 function DashPayments() {
   return (
-    <div>DashPayments</div>
+    <div>
+      <button onClick={notify}>Make me a toast</button>
+      <Toaster />
+      hello
+    </div>
   )
 }
 
