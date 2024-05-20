@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { CiLogout } from "react-icons/ci";
-
-
+import { useDispatch,useSelector } from 'react-redux';
+import { signOutSucess } from '../../../configs/redux/user/userSlice';
 function LeftPannel() {
+    const dispatch=useDispatch()
     const [tab, settab] = useState()
     const location = useLocation();
     useEffect(() => {
@@ -19,6 +20,9 @@ function LeftPannel() {
     }, [location.search])
 
     const tabActive = ' text-secondary '
+    async function handleUserLogOut(){
+            dispatch(signOutSucess())
+    }
     return (
         <div className=' flex flex-col h-screen  mt-top relative'>
             <h1 className='text-lg font-inter'>Manage Account</h1>
@@ -33,7 +37,7 @@ function LeftPannel() {
                 <Link to={'/dashboard?tab=mycancelations'}> <div className={` ${tab == 'mycancelations' ? tabActive : ''} text-sm font-inter font-semibold ml-4`}> My cancelations</div></Link>
             </div>
             <Link to={'/dashboard?tab=mywatchlist'}> <div className={` ${tab == 'mywatchlist' ? tabActive : ''} text-lg font-inter font-semibold mt-8  ml-6`}>  My WatchList</div></Link>
-            <div className='absolute bottom-10 flex items-center gap-2 font-bold rounded-md ml-6 cursor-pointer'>  Logout <CiLogout /> </div>
+            <div className='absolute bottom-10 flex items-center gap-2 font-bold rounded-md ml-6 cursor-pointer' onClick={handleUserLogOut}>  Logout <CiLogout /> </div>
         </div>
     )
 }

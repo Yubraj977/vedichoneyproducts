@@ -3,7 +3,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { FaCcVisa } from "react-icons/fa";
-import { NavLink } from 'react-router-dom';
+import { NavLink,Link } from 'react-router-dom';
 function Footer() {
   return (
     <div className='  w-full bg-tertiary flex justify-center  items-center gap-4 flex-col text-primary  lg:px-side px-4   text-xl lg:text-sm'>
@@ -67,7 +67,7 @@ function Footer() {
             <p>dealer</p>
           </div>
           <h1 className='font-bold lg:mb-4 mt-6 lg:mt-0'> Follow Us</h1>
-          <p>Twitter</p>
+          <Link to={'/dashboard'}> Twitter</Link>
           <p>Instagram</p>
           <a href='https://www.facebook.com/vedicbeefarm' target='_blank'>facebook</a>
         </div>

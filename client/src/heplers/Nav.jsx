@@ -9,12 +9,17 @@ import gsap from 'gsap'
 import { useRef } from 'react'
 import useAnimation from './costum-hooks/UseAnimatioin';
 import { NavLink,Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+
+
 function Nav() {
   const [visable, setvisable] = useState(false)
   const [mobileVisable, setmobileVisable] = useState(false)
   const subMenuRef = useRef()
   const mobileNavRef = useRef()
-  console.log(mobileNavRef, mobileVisable);
+  const user=useSelector((state)=>state.user.currentUser)
+  console.log(user);
+
   useEffect(() => {
     if (visable && subMenuRef.current) {
       gsap.from(subMenuRef.current, {
@@ -75,18 +80,36 @@ function Nav() {
             </div>
           </Link>
 
-
-          <NavLink to='/login'>
+        {user?
+        <NavLink to='/dashboard'>
             <div className="user flex justify-center items-center mr-20 lg:mr-0  ">
               <div className="user-icon p-3">
-                <LuUser2 className='text-3xl font-medium text-slate-600' />
+               <div className='h-10 w-10'>
+                  <img src={user.profile_url} alt="" className='h-full w-full object-cover rounded-full'/>
+               </div>
+
               </div>
               <div className="user-detail">
-                <h3 className='text-sm font-normal text-slate-500'>User</h3>
+                <h3 className='text-sm font-normal text-slate-500'>{user.name}</h3>
                 <p><strong className='text-sm text-slate-700'>Account</strong></p>
               </div>
             </div>
           </NavLink>
+          
+          :
+          <NavLink to='/login'>
+          <div className="user flex justify-center items-center mr-20 lg:mr-0  ">
+            <div className="user-icon p-3">
+              <LuUser2 className='text-3xl font-medium text-slate-600' />
+            </div>
+            <div className="user-detail">
+              <h3 className='text-sm font-normal text-slate-500'>User</h3>
+              <p><strong className='text-sm text-slate-700'>Account</strong></p>
+            </div>
+          </div>
+        </NavLink>
+          }
+          
         </div>
       </div>
 

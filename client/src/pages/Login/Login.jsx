@@ -2,57 +2,82 @@ import honey from '/honey3.png'
 import googleLogo from '/google-logo.png'
 import fbLogo from '/facebook-logo.png'
 import { FiEye } from "react-icons/fi";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import { getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider } from "firebase/auth";
 import app from '../../../configs/firebase'
+
+
+import { useSelector,useDispatch } from 'react-redux';
+import { signInStart,signInSucess,signInFaliure } from '../../../configs/redux/user/userSlice';
+import {getToken,setToken,removeToken} from '../../heplers/utils/HelperFun'
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider=new FacebookAuthProvider();
   const auth = getAuth(app);
 function Login() {
-  const [googleUser,setgoogleUser]=useState({})
-  console.log(googleUser);
+  const dispatch=useDispatch()
+  // const [googleUser,setgoogleUser]=useState({})
+  // console.log(googleUser);
+ 
   
 const navigate=useNavigate()
-function handleGoogleSignin(){
-  signInWithPopup(auth, googleProvider)
-  .then((result) => {
-    const credential = GoogleAuthProvider.credentialFromResult(result);
+ async function handleGoogleSignin(){
+ const result=await signInWithPopup(auth, googleProvider)
+ 
+    const credential =await GoogleAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;
     const user = result.user;
     const authenticGoogleUser={
       name:user.displayName,
        email:user.email,
-       profile_url:user.photoURL,
-    }
-
-    setgoogleUser({...authenticGoogleUser})
-  }).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-  });
+       profile_url:user.photoURL,}
+       console.log(authenticGoogleUser);
+       
+      dispatch(signInStart())
+       try {
+        const res = await fetch('api/account/register/google/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body:JSON.stringify(authenticGoogleUser)
+        });
+        const data=await res.json();
+       
+        if(!res.ok){
+          dispatch(signInFaliure(res.message))
+        }
+        dispatch(signInSucess({currentUser:data.data,accessToken:data.tokens.access}))
+        setToken(data.tokens.access)
+        console.log(data);
+        <Navigate to={'/products'}/>
+        
+  
+       } catch (error) {
+        dispatch(signInFaliure(error.message))
+       }
+     
+    
+ 
 }
 
 function handleFacebookSignin(){
-  signInWithPopup(auth, facebookProvider)
-  .then((result) => {
-    const user = result.user;
-    const credential = FacebookAuthProvider.credentialFromResult(result);
-    const accessToken = credential.accessToken;
-console.log(credential);
+//   signInWithPopup(auth, facebookProvider)
+//   .then((result) => {
+//     const user = result.user;
+//     const credential = FacebookAuthProvider.credentialFromResult(result);
+//     const accessToken = credential.accessToken;
+// console.log(credential);
    
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    const email = error.customData.email;
-    const credential = FacebookAuthProvider.credentialFromError(error);
-  });
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     const email = error.customData.email;
+//     const credential = FacebookAuthProvider.credentialFromError(error);
+//   });
+console.log(getToken());
+
 }
   return (
     <div className='px-mb_side lg:px-side py-[80px] flex items-center gap-5 w-full font-inter'>

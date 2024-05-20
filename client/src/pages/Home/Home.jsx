@@ -7,6 +7,9 @@ import honey1 from '/honey1.jpeg'
 import honey2 from '/honey2.jpeg'
 import honey4 from '/honey4.jpeg'
 import honey8 from '/honey8.png'
+import slider1 from '/slider1.jpeg'
+import slider2 from '/slider2.jpeg'
+import slider3 from '/slider3.jpeg'
 
 import CustomSlider from '../../heplers/swiper/CustomCarousel'
 import BecomePartner from './BecomePartner';
@@ -34,6 +37,18 @@ function Home() {
     {
       imgURL:honey4,
       imgAlt: "img-4"
+    },
+    {
+      imgURL:slider1,
+      imgAlt: "img-5"
+    },
+    {
+      imgURL:slider2,
+      imgAlt: "img-6"
+    },
+    {
+      imgURL:slider3,
+      imgAlt: "img-7"
     }
   ];
 
