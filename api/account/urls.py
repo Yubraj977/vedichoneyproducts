@@ -6,6 +6,8 @@ urlpatterns = [
     path("register/google/", views.UserRegisterationGoogleAPIView.as_view(), name="register_with_google"),
     path("login/", views.UserLoginAPIView.as_view(), name="login"),
     path("change-password/", views.UserPasswordChange.as_view(), name="change_password"),
+    path("send-password-reset-email/", views.UserPasswordRestEmailView.as_view(), name="send_password_reset_email"),
+    path("reset-password/<uid>/<token>/", views.UserPasswordResetView.as_view(), name="password_reset"),
     
 
     # test
