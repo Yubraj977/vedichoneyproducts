@@ -12,7 +12,6 @@ class AuthorizationMiddleware:
 
     def process_view(self, request, view_func, view_args, view_kwargs):
         view_name = '.'.join((view_func.__module__, view_func.__name__))
-        print(view_name)
         if view_name in EXCLUDE_FROM_MIDDLEWARE:
             return None
     

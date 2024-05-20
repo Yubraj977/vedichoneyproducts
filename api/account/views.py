@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from account.models import User
 from vedichoneyproducts import settings
-from .serializers import UserLoginSerializer, UserPasswordChangeSerializer, UserRegisterationGoogleSerializer, UserRegisterationSerializer
+from .serializers import UserLoginSerializer, UserPasswordChangeSerializer, UserPasswordResetEmailSerializer, UserPasswordResetSerializer, UserRegisterationGoogleSerializer, UserRegisterationSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
@@ -21,9 +21,7 @@ def set_jwt_cookie(response:Response,tokens):
         httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
         samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE']
     )
-
     return response
-
 
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
@@ -45,8 +43,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         }
-    
-
 
 # API VIews
 class UserRegisterationAPIView(APIView):
@@ -98,7 +94,7 @@ class UserLoginAPIView(APIView):
                 response.data = {'tokens':tokens,'data':serializer.data,'message':'usre logged in.'}
                 response.status_code = status.HTTP_200_OK
                 return response
-            return Response({"errors":{"email":"user with this email not exist."}},status=status.HTTP_400_BAD_REQUEST)
+            return Response({"errors": "user credientials does not match."},status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
 
@@ -112,10 +108,32 @@ class UserPasswordChange(APIView):
   
 
 #password reset
+class UserPasswordRestEmailView(APIView): #password reset email send view
+    renderer_classes = [UserRenderer]
+    def post(self,request, format=True):
+        serializer = UserPasswordResetEmailSerializer(data= request.data)
+        if serializer.is_valid(raise_exception=True):
+            res = {
+                'success':True,
+                'message':'Password reset email sent to your email address. Check it out.'
+            }
+            return Response(res, status=status.HTTP_200_OK)
+        
 
+class UserPasswordResetView(APIView):
+    renderer_classes = [UserRenderer]
+    def post(self, request, uid, token, format=True):
+        serializer = UserPasswordResetSerializer(data=request.data, context= {'uid':uid,'token':token})
+        if serializer.is_valid(raise_exception=True):
+            res = {
+                "success": True,
+                "message": "Password changed successfully."
+            }     
+            return Response(res, status=status.HTTP_200_OK)
 
 # test
 class TestAPI(APIView):
+    renderer_classes =[UserRenderer]
     permission_classes = [IsAuthenticated]
     def get(self,request):
         return Response({'success':True})
