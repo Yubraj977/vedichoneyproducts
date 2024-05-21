@@ -47,6 +47,22 @@ login required
     }
 </code></pre>
 
+## Blog
+### 1. GET: api/blogs/<br>
+Returns all blogs available in the database
+
+### 3. POST: api/blogs/ <br>
+<pre><code>
+    {
+        "title": "Test blog 7",
+        "slug": "Test-blog-7",
+        "thumbnail_url": "#",
+        "content": "test blog 7",
+        "status": "private"
+    }
+</code></pre>
+
+
 
 ## Test
 ### 1. GET: api/account/test/
