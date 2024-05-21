@@ -13,7 +13,7 @@ class Blog(models.Model):
     thumbnail_url = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     content = models.TextField()
-    status = models.CharField(max_length=255,choices=BLOG_STATUS)
+    status = models.CharField(max_length=255,choices=BLOG_STATUS, default="published")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
