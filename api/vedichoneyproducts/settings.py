@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     "corsheaders",
-    'account'
+    'account',
+    'blog'
 ]
 
 MIDDLEWARE = [
@@ -145,7 +146,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_RENDERER_CLASSES':('rest_framework.renderers.JSONRenderer',),
-    # 'EXCEPTION_HANDLER': 'account.custome_exception_handler.custome_exception_handler'
+    'EXCEPTION_HANDLER': 'account.custome_exception_handler.custom_exception_handler'
 }
 
 

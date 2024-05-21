@@ -14,6 +14,7 @@ class UserRegisterationSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'password':{'write_only':True,},
         }
+    
 
     def validate(self, attrs):
         password= attrs.get('password')
@@ -26,7 +27,8 @@ class UserRegisterationSerializer(serializers.ModelSerializer):
     def create(self, validated_data:dict):
         validated_data.pop('password2')
         return User.objects.create_user(**validated_data)
-
+    
+    
 class UserRegisterationGoogleSerializer(serializers.ModelSerializer):
     email = serializers.EmailField()
     class Meta:

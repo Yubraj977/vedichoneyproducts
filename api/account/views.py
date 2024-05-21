@@ -46,7 +46,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 # API VIews
 class UserRegisterationAPIView(APIView):
-    renderer_classes = [UserRenderer]
+    # renderer_classes = [UserRenderer]
     def post(self,request,format=None):
         serializer = UserRegisterationSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -59,7 +59,7 @@ class UserRegisterationAPIView(APIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class UserRegisterationGoogleAPIView(APIView):
-    renderer_classes = [UserRenderer]
+    # renderer_classes = [UserRenderer]
     def post(self, request, format=None):
         serializer = UserRegisterationGoogleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -81,7 +81,7 @@ class UserRegisterationGoogleAPIView(APIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class UserLoginAPIView(APIView):
-    renderer_classes = [UserRenderer]
+    # renderer_classes = [UserRenderer]
     def post(self, request, format=None):
         serializer = UserLoginSerializer(data = request.data)
         if serializer.is_valid(raise_exception=True):
@@ -100,7 +100,7 @@ class UserLoginAPIView(APIView):
 
 class UserPasswordChange(APIView):
     permission_classes = [IsAuthenticated]
-    renderer_classes = [UserRenderer]
+    # renderer_classes = [UserRenderer]
     def post(self,request, format=True):
         serializer = UserPasswordChangeSerializer(data=request.data,context={'user':request.user})
         if serializer.is_valid(raise_exception=True):
@@ -109,7 +109,7 @@ class UserPasswordChange(APIView):
 
 #password reset
 class UserPasswordRestEmailView(APIView): #password reset email send view
-    renderer_classes = [UserRenderer]
+    # renderer_classes = [UserRenderer]
     def post(self,request, format=True):
         serializer = UserPasswordResetEmailSerializer(data= request.data)
         if serializer.is_valid(raise_exception=True):
@@ -121,7 +121,7 @@ class UserPasswordRestEmailView(APIView): #password reset email send view
         
 
 class UserPasswordResetView(APIView):
-    renderer_classes = [UserRenderer]
+    # renderer_classes = [UserRenderer]
     def post(self, request, uid, token, format=True):
         serializer = UserPasswordResetSerializer(data=request.data, context= {'uid':uid,'token':token})
         if serializer.is_valid(raise_exception=True):
@@ -133,7 +133,7 @@ class UserPasswordResetView(APIView):
 
 # test
 class TestAPI(APIView):
-    renderer_classes =[UserRenderer]
+    # renderer_classes =[UserRenderer]
     permission_classes = [IsAuthenticated]
     def get(self,request):
         return Response({'success':True})
