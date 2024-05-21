@@ -51,7 +51,7 @@ login required
 ### 1. GET: api/blogs/<br>
 Returns all blogs available in the database
 
-### 3. POST: api/blogs/ <br>
+### 2. POST: api/blogs/ <br>
 <pre><code>
     {
         "title": "Test blog 7",
@@ -62,6 +62,30 @@ Returns all blogs available in the database
     }
 </code></pre>
 
+### 3. GET: api/blogs/id/ <br>
+Returns data of blog having id = id
+
+### 4. PUT: api/blogs/id <br>
+<pre><code>
+    {
+        "title": "Test blog 7",
+        "slug": "Test-blog-7",
+        "thumbnail_url": "#",
+        "content": "test blog 7",
+        "status": "published"
+    }
+</code></pre>
+
+### 4. PATCH: api/blogs/id <br>
+<pre><code>
+    {
+        "content": "test blog 7",
+        "status": "private"
+    }
+</code></pre>
+
+### 4. DELETE: api/blogs/id <br>
+Deletes the blog at id.
 
 
 ## Test
