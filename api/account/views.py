@@ -91,6 +91,7 @@ class UserLoginAPIView(APIView):
             if user is not None:
                 tokens = CustomTokenObtainPairSerializer.get_token(user)
                 response = set_jwt_cookie(Response(),tokens)
+                serializer = UserLoginSerializer(user)
                 response.data = {'tokens':tokens,'data':serializer.data,'message':'usre logged in.'}
                 response.status_code = status.HTTP_200_OK
                 return response
