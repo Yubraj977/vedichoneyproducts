@@ -72,20 +72,20 @@ function Login() {
   }
 
   function handleFacebookSignin() {
-    //   signInWithPopup(auth, facebookProvider)
-    //   .then((result) => {
-    //     const user = result.user;
-    //     const credential = FacebookAuthProvider.credentialFromResult(result);
-    //     const accessToken = credential.accessToken;
-    // console.log(credential);
+      signInWithPopup(auth, facebookProvider)
+      .then((result) => {
+        const user = result.user;
+        const credential = FacebookAuthProvider.credentialFromResult(result);
+        const accessToken = credential.accessToken;
+    console.log(credential);
 
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     const email = error.customData.email;
-    //     const credential = FacebookAuthProvider.credentialFromError(error);
-    //   });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = FacebookAuthProvider.credentialFromError(error);
+      });
     console.log('ok');
    
   }
