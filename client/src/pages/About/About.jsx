@@ -19,17 +19,17 @@ function About() {
         </div>
         <div className="right w-full lg:w-1/2    relative h-[39rem] ">
           <div className=' lg:h-52 h-64  w-40 lg:w-32 absolute left-[5%] lg:left-[15%] top-[0%] lg:top-[20%]'>
-            <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className='h-full w-full object-cover rounded-lg' />
+            <img src="https://images.unsplash.com/photo-1633434644309-cc8d4f0c207d?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className='h-full w-full object-cover rounded-lg' />
           </div>
 
           <div className=' lg:h-52 h-64  w-40 lg:w-32 absolute left-[5%] lg:left-[15%] lg:top-[55%] top-[45%]'>
-            <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className='h-full w-full object-cover rounded-lg' />
+            <img src={madhu} alt="" className='h-full w-full object-cover rounded-lg' />
           </div>
           <div className=' lg:h-52 h-64  w-40 lg:w-32 absolute left-[55%] lg:left-[45%] top-[10%]'>
-            <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className='h-full w-full object-cover rounded-lg' />
+            <img src={lal} alt="" className='h-full w-full object-cover rounded-lg' />
           </div>
           <div className=' lg:h-52 h-64  w-40 lg:w-32 absolute left-[55%] lg:left-[45%] top-[55%] lg:top-[50%]'>
-            <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className='h-full w-full object-cover rounded-lg' />
+            <img src="https://plus.unsplash.com/premium_photo-1661859445943-0d14d6faf230?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className='h-full w-full object-cover rounded-lg' />
           </div>
           <div className='lg:h-52 h-64  w-40 lg:w-32 absolute right-0 top-32 hidden lg:block'>
             <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className='h-full w-full object-cover rounded-lg' />

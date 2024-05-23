@@ -81,7 +81,7 @@ function Nav() {
           </Link>
 
         {user?
-        <NavLink to='/dashboard'>
+        <NavLink to='/dashboard?tab=myprofile'>
             <div className="user flex justify-center items-center mr-20 lg:mr-0  ">
               <div className="user-icon p-3">
                <div className='h-10 w-10'>

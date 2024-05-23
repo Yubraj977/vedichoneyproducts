@@ -15,8 +15,8 @@ useEffect(() => {
   return (
     <div>
       <div className=' w-full  border-red-700 px-mb_side  border-2 flex flex-wrap '>
-        {products.map((item)=>(
-           <ProductCard item={item}/>
+        {products.map((item,i)=>(
+           <ProductCard item={item} key={i}/>
         ))}
      
       </div>

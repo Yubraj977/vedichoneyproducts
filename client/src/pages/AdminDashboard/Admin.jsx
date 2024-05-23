@@ -10,6 +10,7 @@ import DashReview from './pages/DashReview';
 import DashInventery from './pages/DashInventery';
 import Articlelist from './pages/Article/Articlelist';
 import CreateArticle from './pages/Article/CreateArticle';
+import EditArticle from './pages/Article/EditArticle';
 
 function Admin() {
   const [tab, settab] = useState()
@@ -39,6 +40,7 @@ function Admin() {
         {tab == "payments" && <DashPayments />}
         {tab == "articles" && <Articlelist />}
         {tab == "write" && <CreateArticle />}
+        {tab == "editarticle" && <EditArticle />}
       </div>
     </div>
   )

@@ -13,14 +13,18 @@ const auth = getAuth(app);
 
 function Signup() {
     const navigate = useNavigate();
-    const { register, handleSubmit,  formState: { errors, isSubmitting }, watch } = useForm();
+    const { register, handleSubmit, formState: { errors, isSubmitting }, watch } = useForm();
     console.log(isSubmitting);
     console.log(errors);
     const password = useRef({});
     password.current = watch('password', '');
     const notify = (value) => toast.error(`Error:${value}`);
+    const signUpSucess = (value) => toast.success(`Sucess: ${value}`);
+
+
     const onSubmit = async (data) => {
-        const res = await fetch('http://127.0.0.1:8000/api/account/register/', {
+        console.log(data);
+        const res = await fetch('api/account/register/', {
             method: "POST",
             headers: {
                 'Content-Type': "application/json"
@@ -29,21 +33,25 @@ function Signup() {
         })
         const backend = await res.json()
         console.log(res);
+        console.log(backend);
         if (!res.ok) {
-            // setError('backend_error', {
-            //     type: 'validate',
-            //     message: backend.errors.email[0]
-            // })
-
-
             notify(backend.errors.email[0])
         }
+        console.log('singup sucess');
+        if (res.ok) {
+            signUpSucess('Sign Up Sucess Please Login to continue')
+            setTimeout(() => {
+                navigate('/login')
+            }, 2000);
+        }
 
-        console.log(backend);
+
+
+
     }
 
 
-   
+
     function handleGoogleSignUp() {
         signInWithPopup(auth, googleProvider)
             .then((result) => {
