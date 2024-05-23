@@ -1,22 +1,29 @@
-from django.http import HttpResponse
-
-EXCLUDE_FROM_MIDDLEWARE = [ 'account.views.UserRegisterationAPIView',
-                             'account.views.UserLoginAPIView',
-                             'account.views.UserRegisterationGoogleAPIView',
-                             ]
-
-
 class AuthorizationMiddleware:
     def __init__(self, get_response=None):
         self.get_response = get_response
 
-    def process_view(self, request, view_func, view_args, view_kwargs):
-        view_name = '.'.join((view_func.__module__, view_func.__name__))
-        if view_name in EXCLUDE_FROM_MIDDLEWARE:
-            return None
-    
     def __call__(self, request):
+        view_func = self.get_view_func(request)
+
+        if view_func and hasattr(view_func, 'view_class') and  getattr(view_func.view_class,'skip_auth_middleware', False):
+            return self.get_response(request)
+
         token = request.COOKIES.get('access_token')
+        if token is None or token == "":
+            return self.get_response(request)
         if token:
-            request.META['HTTP_AUTHORIZATION'] = f'Bearer {token}'
+                request.META['HTTP_AUTHORIZATION'] = f'Bearer {token}'
         return self.get_response(request)
+    
+
+    def get_view_func(self, request):
+        """
+        Resolve the view function from the request.
+        This requires accessing the URL resolver, which isn't straightforward.
+        """
+        from django.urls import resolve
+        try:
+            match = resolve(request.path_info)
+            return match.func
+        except Exception:
+            return None
