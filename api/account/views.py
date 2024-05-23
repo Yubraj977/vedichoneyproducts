@@ -9,6 +9,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from .renderers import UserRenderer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.tokens import AccessToken
+from rest_framework_simplejwt.exceptions import InvalidToken,TokenError
 
 
 # helper funcs
@@ -47,6 +49,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 # API VIews
 class UserRegisterationAPIView(APIView):
     # renderer_classes = [UserRenderer]
+    skip_auth_middleware = True
     def post(self,request,format=None):
         serializer = UserRegisterationSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -60,6 +63,7 @@ class UserRegisterationAPIView(APIView):
 
 class UserRegisterationGoogleAPIView(APIView):
     # renderer_classes = [UserRenderer]
+    skip_auth_middleware = True
     def post(self, request, format=None):
         serializer = UserRegisterationGoogleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -82,6 +86,7 @@ class UserRegisterationGoogleAPIView(APIView):
 
 class UserLoginAPIView(APIView):
     # renderer_classes = [UserRenderer]
+    skip_auth_middleware = True
     def post(self, request, format=None):
         serializer = UserLoginSerializer(data = request.data)
         if serializer.is_valid(raise_exception=True):
@@ -99,6 +104,16 @@ class UserLoginAPIView(APIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
 
+class UserLogOutAPIView(APIView):
+    skip_auth_middleware = True
+    def get(self, request, format=None):
+        response = Response()
+        response.delete_cookie('access_token', path='/')
+        response.data = {'success':True,'message':'logged out successfully'}
+        response.status_code = status.HTTP_200_OK
+        return response
+
+
 class UserPasswordChange(APIView):
     permission_classes = [IsAuthenticated]
     # renderer_classes = [UserRenderer]
@@ -111,6 +126,7 @@ class UserPasswordChange(APIView):
 #password reset
 class UserPasswordRestEmailView(APIView): #password reset email send view
     # renderer_classes = [UserRenderer]
+    skip_auth_middleware = True
     def post(self,request, format=True):
         serializer = UserPasswordResetEmailSerializer(data= request.data)
         if serializer.is_valid(raise_exception=True):
@@ -123,6 +139,7 @@ class UserPasswordRestEmailView(APIView): #password reset email send view
 
 class UserPasswordResetView(APIView):
     # renderer_classes = [UserRenderer]
+    skip_auth_middleware = True
     def post(self, request, uid, token, format=True):
         serializer = UserPasswordResetSerializer(data=request.data, context= {'uid':uid,'token':token})
         if serializer.is_valid(raise_exception=True):
@@ -131,6 +148,22 @@ class UserPasswordResetView(APIView):
                 "message": "Password changed successfully."
             }     
             return Response(res, status=status.HTTP_200_OK)
+        
+
+class VerifyAccessToken(APIView):
+    skip_auth_middleware = True
+    def get(self, request, format=None):
+        token = request.COOKIES.get('access_token')
+
+        if token is None:
+            return Response({'success':False,'status_code':status.HTTP_401_UNAUTHORIZED,'message':'Token is not set or empty.','token':token}, status=status.HTTP_401_UNAUTHORIZED)
+
+        try:
+                AccessToken(token)
+                return Response({'success':True,'status_code':status.HTTP_200_OK,'message':'Valid token.','token':token}, status=status.HTTP_200_OK)
+        
+        except (InvalidToken, TokenError):
+                return Response({'success':False,'status_code':status.HTTP_401_UNAUTHORIZED,'message':'Invalid token. request for new token/log in again','token':token}, status=status.HTTP_401_UNAUTHORIZED)     
 
 # test
 class TestAPI(APIView):
