@@ -55,8 +55,8 @@ login required. Changes the user password and returns a message
 </code></pre>
 
 ### 5. POST: api/account/send-password-reset-email/ <br>
-Checks does user exist with given email or not. If exists, sends a password reset mail with url for forntend. else, gives a errors saying "user not found"
-end-point for front-end: http://localhost:5173/account/rest-password/{uid}/{pw_reset_token}
+Checks does user exist with given email or not. If exists, sends a password reset mail with url for forntend. else, gives a errors saying "user not found" <br>
+end-point for front-end: http://localhost:5173/account/rest-password/{uid}/{pw_reset_token} <br>
 the expiry time of the link is about 15minutes.
 <pre><code>
     {
@@ -77,21 +77,21 @@ resets the password of the user if the token is valid else throws a error.
 
 
 ### 5. GET: api/account/verify-token/ <br>
-Verifies the token is valid/invalid or not set. Returns success with either true or false with token and a message.
-If valid -> success : True
-else -> success : False
+Verifies the token is valid/invalid or not set. Returns success with either true or false with token and a message.<br>
+If valid -> success : True<br>
+else -> success : False<br>
 
 ## Blog
 ### 1. GET: api/blogs/<br>
 Returns all blogs available in the database
 
 ### 2. POST: api/blogs/ <br>
-Creates new blog. Authentication is required and the user should be admin user i.e is_staff = ture. Returns the data of the blog with status and message
-title = necessary
-url_slug = optional (default is set to title removing spaces with '-')
-thumbnail_url = necessary
-content = necessary
-status = optional (default is set to published, available values are private and published)
+Creates new blog. Authentication is required and the user should be admin user i.e is_staff = ture. Returns the data of the blog with status and message<br>
+title = necessary<br>
+url_slug = optional (default is set to title removing spaces with '-')<br>
+thumbnail_url = necessary<br>
+content = necessary<br>
+status = optional (default is set to published, available values are private and published)<br>
 <pre><code>
     {
         "title": "Test blog 7",
@@ -105,13 +105,13 @@ status = optional (default is set to published, available values are private and
 Returns data of blog having id = id
 
 ### 4. PUT: api/blogs/id <br>
-Complete update of a blog having id=id. Returns the data of that blog with status and message
-title = necessary
-url_slug = optional (default is set to title removing spaces with '-')
-thumbnail_url = necessary
-content = necessary
-status = optional (default is set to published, available values are private and published)
-
+Complete update of a blog having id=id. Returns the data of that blog with status and message<br>
+title = necessary<br>
+url_slug = optional (default is set to title removing spaces with '-')<br>
+thumbnail_url = necessary<br>
+content = necessary<br>
+status = optional (default is set to published, available values are private and published)<br>
+<br>
 Note: You need to provide all of the above (necessary) detail to successfully hit PUT requests i.e complete update 
 <pre><code>
     {
@@ -123,9 +123,9 @@ Note: You need to provide all of the above (necessary) detail to successfully hi
 </code></pre>
 
 ### 4. PATCH: api/blogs/id <br>
-Partial update of a blog having id=id. Returns the data of that blog with status and message
-
-Note: You do not have to send all data. Just send those data which you want to update and see the magic.
+Partial update of a blog having id=id. Returns the data of that blog with status and message<br>
+<br>
+Note: You do not have to send all data. Just send those data which you want to update and see the magic.<br>
 Recommanded to use this instead the PUT request.
 
 <pre><code>
@@ -144,9 +144,9 @@ Deletes the blog at id. Returns a status set to false with a message
 Returns all categories available in the database
 
 ### 2. POST: api/products/ <br>
-Creates new category. Authentication is required and the user should be admin user i.e is_staff = ture. Returns the data of the category with status and message
-name = necessary
-url_slug = optional (default is set to title removing spaces with '-')
+Creates new category. Authentication is required and the user should be admin user i.e is_staff = ture. Returns the data of the category with status and message<br>
+name = necessary<br>
+url_slug = optional (default is set to title removing spaces with '-')<br>
 status = optional (default is set to active and available values are active and inactive)
 <pre><code>
     {
@@ -158,13 +158,13 @@ status = optional (default is set to active and available values are active and 
 Returns data of category having id = id
 
 ### 4. PUT: api/categories/id <br>
-Complete update of a category having id=id. Returns the data of that category with status and message.
-Authentication is required and the user should be admin user i.e is_staff = ture.
-
-name = necessary
-url_slug = optional (default is set to title removing spaces with '-')
-status = optional (default is set to active and available values are active and inactive)
-
+Complete update of a category having id=id. Returns the data of that category with status and message.<br>
+Authentication is required and the user should be admin user i.e is_staff = ture.<br>
+<br>
+name = necessary<br>
+url_slug = optional (default is set to title removing spaces with '-')<br>
+status = optional (default is set to active and available values are active and inactive)<br>
+<br>
 Note: You need to provide all of the above (necessary) detail to successfully hit PUT requests i.e complete update 
 <pre><code>
     {
@@ -173,10 +173,10 @@ Note: You need to provide all of the above (necessary) detail to successfully hi
 </code></pre>
 
 ### 4. PATCH: api/categories/id <br>
-Partial update of a category having id=id. Returns the data of that category with status and message.
-Authentication is required and the user should be admin user i.e is_staff = ture.
-
-Note: You do not have to send all data. Just send those data which you want to update and see the magic.
+Partial update of a category having id=id. Returns the data of that category with status and message.<br>
+Authentication is required and the user should be admin user i.e is_staff = ture.<br>
+<br>
+Note: You do not have to send all data. Just send those data which you want to update and see the magic.<br>
 Recommanded to use this instead the PUT request.
 
 <pre><code>
@@ -186,8 +186,8 @@ Recommanded to use this instead the PUT request.
 </code></pre>
 
 ### 4. DELETE: api/categories/id <br>
-Deletes the category at id. Returns a status set to false with a message
-Authentication is required and the user should be admin user i.e is_staff = ture.
+Deletes the category at id. Returns a status set to false with a message<br>
+Authentication is required and the user should be admin user i.e is_staff = ture.<br>
 
 
 ## Product
@@ -195,13 +195,13 @@ Authentication is required and the user should be admin user i.e is_staff = ture
 Returns all products available in the database
 
 ### 2. POST: api/products/ <br>
-Creates new product. Authentication is required and the user should be admin user i.e is_staff = ture. Returns the data of the product with status and message
-name = necessary
-url_slug = optional (default is set to title removing spaces with '-')
-thumbnail_url = necessary
-description = necessary
-category = optional (default is set to 1 (i.e Uncategorised))
-stock_quantity= necessary
+Creates new product. Authentication is required and the user should be admin user i.e is_staff = ture. Returns the data of the product with status and message<br>
+name = necessary<br>
+url_slug = optional (default is set to title removing spaces with '-')<br>
+thumbnail_url = necessary<br>
+description = necessary<br>
+category = optional (default is set to 1 (i.e Uncategorised))<br>
+stock_quantity= necessary<br>
 status = optional (default is set to active, available valus are active and inactive)
 <pre><code>
     {
@@ -217,17 +217,17 @@ status = optional (default is set to active, available valus are active and inac
 Returns data of product having id = id
 
 ### 4. PUT: api/products/id <br>
-Complete update of a product having id=id. Returns the data of that product with status and message.
-Authentication is required and the user should be admin user i.e is_staff = ture.
-
-name = necessary
-url_slug = optional (default is set to title removing spaces with '-')
-thumbnail_url = necessary
-description = necessary
-category = optional (default is set to 1 (i.e Uncategorised))
-stock_quantity= necessary
-status = optional (default is set to active, available values are active and inactive)
-
+Complete update of a product having id=id. Returns the data of that product with status and message.<br>
+Authentication is required and the user should be admin user i.e is_staff = ture.<br>
+<br>
+name = necessary<br>
+url_slug = optional (default is set to title removing spaces with '-')<br>
+thumbnail_url = necessary<br>
+description = necessary<br>
+category = optional (default is set to 1 (i.e Uncategorised))<br>
+stock_quantity= necessary<br>
+status = optional (default is set to active, available values are active and inactive)<br>
+<br>
 Note: You need to provide all of the above (necessary) detail to successfully hit PUT requests i.e complete update 
 <pre><code>
     {
@@ -240,11 +240,11 @@ Note: You need to provide all of the above (necessary) detail to successfully hi
 </code></pre>
 
 ### 4. PATCH: api/products/id <br>
-Partial update of a product having id=id. Returns the data of that product log with status and message.
-Authentication is required and the user should be admin user i.e is_staff = ture.
-
-Note: You do not have to send all data. Just send those data which you want to update and see the magic.
-Recommanded to use this instead the PUT request.
+Partial update of a product having id=id. Returns the data of that product log with status and message.<br>
+Authentication is required and the user should be admin user i.e is_staff = ture.<br>
+<br>
+Note: You do not have to send all data. Just send those data which you want to update and see the magic.<br>
+Recommanded to use this instead the PUT request.<br>
 
 <pre><code>
     {
@@ -253,8 +253,8 @@ Recommanded to use this instead the PUT request.
 </code></pre>
 
 ### 4. DELETE: api/products/id <br>
-Deletes the product at id. Returns a status set to false with a message
-Authentication is required and the user should be admin user i.e is_staff = ture.
+Deletes the product at id. Returns a status set to false with a message<br>
+Authentication is required and the user should be admin user i.e is_staff = ture.<br>
 
 
 
