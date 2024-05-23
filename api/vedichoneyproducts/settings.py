@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     "corsheaders",
     'account',
-    'blog'
+    'blog',
+    'product',
 ]
 
 MIDDLEWARE = [
@@ -125,6 +126,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+PASSWORD_RESET_TIMEOUT = 900
+
 # MEDIA Conf
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
@@ -152,7 +156,7 @@ REST_FRAMEWORK = {
 
 #JWT Conf
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     'AUTH_COOKIE': 'access_token',
     'AUTH_COOKIE_DOMAIN': None,
