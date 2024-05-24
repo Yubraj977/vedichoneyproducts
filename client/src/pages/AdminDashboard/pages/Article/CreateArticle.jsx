@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function CreateArticle() {
   const [file, setFile] = useState(null);
@@ -19,6 +20,8 @@ export default function CreateArticle() {
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
+  const [validationError,setvalidationError]=useState()
+
 
   const navigate = useNavigate();
 console.log(formData);
@@ -60,8 +63,9 @@ console.log(formData);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('handle submit clicked');
     try {
-      const res = await fetch('/api/post/create', {
+      const res = await fetch('/api/blogs/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,14 +73,20 @@ console.log(formData);
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+      console.log(res);
+      console.log(data);
       if (!res.ok) {
+        console.log();
+        if(data.errors[0].code.includes('token')){
+          setvalidationError('User Validation fails please do check again')
+        }
         setPublishError(data.message);
         return;
       }
 
       if (res.ok) {
         setPublishError(null);
-        navigate(`/post/${data.slug}`);
+        navigate(`/blog`);
       }
     } catch (error) {
       setPublishError('Something went wrong');
@@ -100,16 +110,7 @@ console.log(formData);
             }
             
           />
-          <Select
-            onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
-            }
-          >
-            <option value='uncategorized'>Select a category</option>
-            <option value='javascript'>Published</option>
-            <option value='reactjs'>Unpublished</option>
-
-          </Select>
+       
         </div>
         <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
           <FileInput

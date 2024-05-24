@@ -121,6 +121,7 @@ function Nav() {
               <NavLink className="py-4 px-6 text-primary font-medium    hover:text-tertiary cursor-pointer" to='about'>About</NavLink>
               <NavLink className="py-4 px-6 text-primary font-medium    hover:text-tertiary cursor-pointer" to='/contact'>Contact</NavLink>
               <NavLink className="py-4 px-6 text-primary font-medium    hover:text-tertiary cursor-pointer" to='/blog'>Blogs</NavLink>
+              <NavLink className="py-4 px-6 text-primary font-medium    hover:text-tertiary cursor-pointer" to='/learn'>Learn</NavLink>
             </div> : <></>}
           </div>
           <div className={`${nav_item_style} relative `} onMouseEnter={(e) => setvisable(true)} onMouseLeave={(e) => setvisable(false)}>
@@ -144,6 +145,7 @@ function Nav() {
           <NavLink to='/blog'>  <div className={`${nav_item_style}`}>Blog</div></NavLink>
           <NavLink to='/contact'>  <div className={`${nav_item_style}`}>Contact</div></NavLink>
           <NavLink to='about'>  <div className={`${nav_item_style}`}>About</div></NavLink>
+          <NavLink to='/learn'>  <div className={`${nav_item_style}`}>Learn</div></NavLink>
         </div>
       </div>
     </div>

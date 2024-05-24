@@ -13,6 +13,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function EditArticle() {
   const location = useLocation();
@@ -27,8 +28,9 @@ export default function EditArticle() {
   const tab = searchParams.get('tab');
   const id = searchParams.get('id');
 console.log(id);
+console.log(formData);
  
-
+const editSucess = (value) => toast.success(`Sucess:${value}`);
 
   useEffect(() => {
     try {
@@ -93,7 +95,7 @@ console.log(id);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(``, {
+      const res = await fetch(`api/blogs/${id}/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -108,7 +110,11 @@ console.log(id);
 
       if (res.ok) {
         setPublishError(null);
-        navigate(`/post/${data.slug}`);
+        editSucess('Post Updated Sucessfully')
+        setInterval(() => {
+          
+        }, interval);
+        // navigate(`/admin?tab=articles`);
       }
     } catch (error) {
       setPublishError('Something went wrong');
@@ -117,6 +123,7 @@ console.log(id);
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
       <h1 className='text-center text-3xl my-7 font-semibold'>Update post</h1>
+      <Toaster />
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
           <TextInput
@@ -130,17 +137,7 @@ console.log(id);
             }
             value={formData.title}
           />
-          <Select
-            onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
-            }
-            value={formData.category}
-          >
-            <option value='uncategorized'>Select a category</option>
-            <option value='javascript'>JavaScript</option>
-            <option value='reactjs'>React.js</option>
-            <option value='nextjs'>Next.js</option>
-          </Select>
+        
         </div>
         <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
           <FileInput
@@ -190,7 +187,7 @@ console.log(id);
           Update post
         </Button>
         {publishError && (
-          <Alert className='mt-5' color='failure'>
+          <Alert className='mt-5 text-red-500 font-inter' color='failure' >
             {publishError}
           </Alert>
         )}

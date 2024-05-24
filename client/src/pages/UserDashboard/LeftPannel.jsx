@@ -21,6 +21,10 @@ function LeftPannel() {
 
     const tabActive = ' text-secondary '
     async function handleUserLogOut(){
+        const res=await fetch(`api/account/logout/`)
+        const data=await res.json()
+        console.log(data);
+
             dispatch(signOutSucess())
     }
     return (

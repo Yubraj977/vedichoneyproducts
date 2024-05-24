@@ -30,6 +30,7 @@ const userSlice = createSlice({
             state.currentUser=null,
             state.error=null,
             state.error=false
+            state.token=null
         }
     }
 })

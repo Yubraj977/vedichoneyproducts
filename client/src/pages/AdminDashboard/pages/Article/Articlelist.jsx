@@ -8,6 +8,9 @@ function Articlelist() {
     const [blog, setBlog] = useState([]);
     const [blogErr, setblogErr] = useState()
     const [openModal, setOpenModal] = useState(false);
+    const [postIdToDelete, setpostIdToDelete] = useState()
+    const [blogDeleteError,setblogDeleteError]=useState()
+    console.log(postIdToDelete);
     console.log(openModal);
     useEffect(() => {
         fetch('api/blogs/')
@@ -19,8 +22,21 @@ function Articlelist() {
             });
     }, []);
 
+    console.log(blog);
 
-
+async function handlePostDelete(){
+    const res=await fetch(`api/blogs/${postIdToDelete}/`,{
+        method:"DELETE"
+    })
+    const data=await res.json()
+    console.log(res);
+    console.log(data);
+    if(!res.ok){
+        setblogDeleteError(data.message)
+    }
+    setBlog(  blog.filter((eachblog)=>eachblog.id!==postIdToDelete))
+    setOpenModal(false)
+}
 
     return (
         <div className="container mx-auto p-4 rounded-lg ">
@@ -33,7 +49,7 @@ function Articlelist() {
                             Are you sure you want to delete this Artcile
                         </h3>
                         <div className="flex justify-center gap-4">
-                            <button className='bg-secondary py-2 px-4 rounded-lg text-white font-inter' onClick={() => setOpenModal(false)}>
+                            <button className='bg-secondary py-2 px-4 rounded-lg text-white font-inter' onClick={handlePostDelete}>
                                 {"Yes, I'm sure"}
                             </button>
                             <button className='bg-gray-400 py-2 px-4 rounded-md text-white  font-inter' onClick={() => setOpenModal(false)}>
@@ -57,7 +73,7 @@ function Articlelist() {
                     </tr>
                 </thead>
                 <tbody>
-                    {blog && blog.map((eachblog) => (
+                    {blog.length>0 ? blog.map((eachblog) => (
                         <tr className="text-center font-inter" key={eachblog.id}>
                             <td className="px-4 py-2 border">{eachblog.id}</td>
                             <td className="px-4 py-2 border">{eachblog.title}</td>
@@ -74,15 +90,20 @@ function Articlelist() {
                                 <button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded" onClick={(e) => navigate(`/admin?tab=editarticle&&id=${eachblog.id}`)}>Edit</button>
                             </td>
                             <td className="px-4 py-2 border">
-                                <button className="bg-secondary_shade hover:bg-secondary text-white px-2 py-1 rounded" onClick={() => setOpenModal(true)}>Delete</button>
+                                <button className="bg-secondary_shade hover:bg-secondary text-white px-2 py-1 rounded"
+                                    onClick={(e)=>{
+                                        setOpenModal(true)
+                                        setpostIdToDelete(eachblog.id)
+                                    }}
+                                >Delete</button>
                             </td>
                         </tr>
-                    ))}
+                )):<p className='absolute text-xl text-secondary font-bold'>Session Expired please  <span className='text-cyan-600 cursor-pointer underline ' onClick={()=>navigate('/login')}> login</span> again to  continue</p>}
 
 
                 </tbody>
             </table>
-            
+
         </div>
     )
 }
