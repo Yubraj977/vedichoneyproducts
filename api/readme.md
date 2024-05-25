@@ -35,6 +35,10 @@ Log in a user on the basis of email and password. Returns tokens and data with a
     }
 </code></pre>
 
+### 3. GET: api/account/logout/ <br>
+Log outs the user.
+
+
 ### 3. POST: api/account/register/google/ <br>
 Registeringa user with google authentication. Returns tokens and data with a message.
 <pre><code>
@@ -143,7 +147,7 @@ Deletes the blog at id. Returns a status set to false with a message
 ### 1. GET: api/categories/<br>
 Returns all categories available in the database
 
-### 2. POST: api/products/ <br>
+### 2. POST: api/categories/ <br>
 Creates new category. Authentication is required and the user should be admin user i.e is_staff = ture. Returns the data of the category with status and message<br>
 name = necessary<br>
 url_slug = optional (default is set to title removing spaces with '-')<br>
@@ -256,6 +260,57 @@ Recommanded to use this instead the PUT request.<br>
 Deletes the product at id. Returns a status set to false with a message<br>
 Authentication is required and the user should be admin user i.e is_staff = ture.<br>
 
+## Cart
+### 1. GET: api/core/user/carts/ <br>
+Returns all cart items of current logged in user
+
+### 2. POST: api/core/user/carts/ <br>
+Creates new cart item.  Returns the data of the product with status and message<br>
+product = necessary (product id)<br>
+quantity = necessary (no. of item of product to purchase) <br>
+user = not required to give (server identifies which user is trying to add new cart item and sets it.)
+created_at = not required (automatically added to the data)
+updated_at = not required (automatically added to the data)
+<pre><code>
+    {
+        "product": 1,
+        "quantity": 4,
+    }
+</code></pre>
+
+### 3. GET: api/core/user/carts/id/ <br>
+Returns data of cart having id = id
+
+### 4. PUT: api/core/user/carts/id <br>
+Complete update of a cart item having id=id. Returns the data of that cart item with status and message.<br>
+product = necessary (product id)<br>
+quantity = necessary (no. of item of product to purchase) <br>
+user = not required to give (server identifies which user is trying to add new cart item and sets it.)<br>
+created_at = not required (automatically added to the data)<br>
+updated_at = not required (automatically added to the data)<br>
+<br>
+Note: You need to provide all of the above (necessary) detail to successfully hit PUT requests i.e complete update 
+<pre><code>
+    {
+        "product": 2,
+        "quantity": 1
+    }
+</code></pre>
+
+### 4. PATCH: api/core/user/carts/id <br>
+Partial update of a cart item having id=id. Returns the data of the cart item with status and message.<br>
+<br>
+Note: You do not have to send all data. Just send those data which you want to update and see the magic.<br>
+Recommanded to use this instead the PUT request.<br>
+
+<pre><code>
+    {
+        "quantity": 2
+    }
+</code></pre>
+
+### 4. DELETE: api/products/id <br>
+Deletes the cart item at id. Returns a status set to false with a message<br><br>
 
 
 ## Test
