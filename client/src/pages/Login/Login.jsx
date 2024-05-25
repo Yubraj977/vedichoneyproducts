@@ -3,10 +3,10 @@ import googleLogo from '/google-logo.png'
 import fbLogo from '/facebook-logo.png'
 import { FiEye } from "react-icons/fi";
 import { useNavigate, Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import app from '../../../configs/firebase'
-
+import Cookies from 'js-cookie';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { signInStart, signInSucess, signInFaliure } from '../../../configs/redux/user/userSlice';
@@ -16,15 +16,33 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
+import cookie from 'js-cookie'
 const auth = getAuth(app);
 function Login() {
   const dispatch = useDispatch()
-  // const [googleUser,setgoogleUser]=useState({})
-  // console.log(googleUser);
-
-
   const navigate = useNavigate()
+  const [email, setemail] = useState()
+  const [password, setpassword] = useState('')
+  const [accessToken, setAccessToken] = useState(null);
+  console.log(accessToken);
+  useEffect(() => {
+    const fetchToken = () => {
+        const value = Cookies.get('sessionid');
+        if (value) {
+            setToken(value);
+            console.log("Access Token:", value);
+        } else {
+            console.log("Access token not found");
+        }
+    };
+
+    fetchToken();
+}, []);
+  
   const notify = (value) => toast.success(`Sucess:${value}`);
+  const loginError = (value) => toast.error(`Error:${value}`);
+
+
   async function handleGoogleSignin() {
     const result = await signInWithPopup(auth, googleProvider)
 
@@ -48,6 +66,9 @@ function Login() {
         body: JSON.stringify(authenticGoogleUser)
       });
       const data = await res.json();
+      console.log(res);
+      console.log(data);
+
 
       if (!res.ok) {
         dispatch(signInFaliure(res.message))
@@ -58,9 +79,9 @@ function Login() {
       setTimeout(() => {
         navigate('/products');
       }, 1000);
-      
+
       notify('Login sucess');
-     
+
 
 
     } catch (error) {
@@ -72,12 +93,12 @@ function Login() {
   }
 
   function handleFacebookSignin() {
-      signInWithPopup(auth, facebookProvider)
+    signInWithPopup(auth, facebookProvider)
       .then((result) => {
         const user = result.user;
         const credential = FacebookAuthProvider.credentialFromResult(result);
         const accessToken = credential.accessToken;
-    console.log(credential);
+        console.log(credential);
 
       })
       .catch((error) => {
@@ -87,15 +108,45 @@ function Login() {
         const credential = FacebookAuthProvider.credentialFromError(error);
       });
     console.log('ok');
-   
+
+  }
+
+
+  async function handleLoginSubmit(e) {
+    e.preventDefault();
+
+    try {
+      const res = await fetch('api/account/login/', {
+        method: "post",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      })
+      const data = await res.json();
+      console.log(res);
+      console.log(data);
+      if (!res.ok) {
+        dispatch(signInFaliure(res.message))
+        loginError(data.errors.detail)
+      }
+
+      dispatch(signInSucess({ currentUser: data.data, accessToken: data.tokens.access }))
+      notify('Sign in sucess')
+      navigate('/products')
+
+    } catch (error) {
+      dispatch(signInFaliure(error.message))
+    }
+
   }
   return (
     <div className='px-mb_side lg:px-side py-[80px] flex items-center gap-5 w-full font-inter'>
       {/* left side */}
       <div className="left w-full lg:w-1/2">
         <h1 className='font-semibold text-3xl'>Welcome,</h1>
-        <Toaster/>     
-           <p className='font-normal text-lg mt-3'>Log In to start amazing experience with our sotre.</p>
+        <Toaster />
+        <p className='font-normal text-lg mt-3'>Log In to start amazing experience with our sotre.</p>
         <div className="google cursor-pointer mt-8 flex items-center justify-center gap-5 px-10 py-3 border-2 bg-slate-300 rounded-md" onClick={handleGoogleSignin}>
           <img src={googleLogo} alt="" />
           <p className='font-medium'>Log In with Google</p>
@@ -105,12 +156,12 @@ function Login() {
           <p className='font-medium'>Log In with Facebook</p>
         </div>
         <p className='text-center mt-8 text-xl font-medium '>----or----</p>
-        <form className='mt-8 flex flex-col '>
+        <form className='mt-8 flex flex-col ' onSubmit={handleLoginSubmit}>
 
-          <input type="text" placeholder='Email' className='text-lg px-5 py-3 outline-none border-2  rounded-md' />
+          <input type="text" placeholder='Email' className='text-lg px-5 py-3 outline-none border-2  rounded-md' onChange={(e) => setemail(e.target.value)} />
           <div className='flex w-full relative mt-3'>
 
-            <input type="password" placeholder='Password' className='text-lg px-5 py-3 outline-none border-2 w-full rounded-md' />
+            <input type="text" placeholder='password' className='text-lg px-5 py-3 outline-none border-2 w-full rounded-md' onChange={(e) => setpassword(e.target.value)} />
             < FiEye className='absolute top-0 right-[20px] text-gray-500 text-lg h-full ' />
           </div>
           <div className='flex justify-between items-center mt-3'>

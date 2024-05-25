@@ -3,13 +3,15 @@ import Left from './Left'
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Maindash from './pages/Maindash'
-import Dashproduct from './pages/Dashproduct';
+import Dashproduct from './pages/Products/Dashproduct';
 import DashCostumer from './pages/DashCostumer';
 import DashPayments from './pages/DashPayments';
 import DashReview from './pages/DashReview';
 import DashInventery from './pages/DashInventery';
 import Articlelist from './pages/Article/Articlelist';
 import CreateArticle from './pages/Article/CreateArticle';
+import EditArticle from './pages/Article/EditArticle';
+import AdminCreateProducts from './pages/Products/AdminCreateProducts';
 
 function Admin() {
   const [tab, settab] = useState()
@@ -33,12 +35,14 @@ function Admin() {
       <div className="right w-full ">
         {tab == "main" && <Maindash />}
         {tab == "product" && <Dashproduct />}
+        {tab == "addproduct" && <AdminCreateProducts />}
         {tab == "invenotry" && <DashInventery />}
         {tab == "costumer" && <DashCostumer />}
         {tab == "review" && <DashReview />}
         {tab == "payments" && <DashPayments />}
         {tab == "articles" && <Articlelist />}
         {tab == "write" && <CreateArticle />}
+        {tab == "editarticle" && <EditArticle />}
       </div>
     </div>
   )

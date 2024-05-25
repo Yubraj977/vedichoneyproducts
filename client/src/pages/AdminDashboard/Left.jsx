@@ -34,6 +34,7 @@ function Left() {
                 <div className='mt-10 gap-2 flex flex-col'>
 
                     <Link to={'/admin?tab=main'}> <div className={`leftSide ${leftStyle} ${tab == 'main' ? tabActive : ''}`}> <MdDashboard /> Dashoard</div></Link>
+                    <Link to={'/admin?tab=addproduct'}>    <div className={`leftSide ${leftStyle} ${tab == 'addproduct' ? tabActive : ''}`}> <RiProductHuntFill />Add Products</div></Link>
                     <Link to={'/admin?tab=product'}>    <div className={`leftSide ${leftStyle} ${tab == 'product' ? tabActive : ''}`}> <RiProductHuntFill />Product</div></Link>
                     <Link to={'/admin?tab=invenotry'}>    <div className={`leftSide ${leftStyle} ${tab == 'invenotry' ? tabActive : ''}`}>  <MdInventory /> Inventery</div></Link>
                     <Link to={'/admin?tab=costumer'}>   <div className={`leftSide ${leftStyle} ${tab == 'costumer' ? tabActive : ''}`}><FaUser />  Costumer</div></Link>

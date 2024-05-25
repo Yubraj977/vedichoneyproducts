@@ -8,23 +8,54 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import app from '../../../../../configs/firebase';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
-export default function CreateArticle() {
+export default function EditArticle() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
-  const [validationError,setvalidationError]=useState()
-
-
-  const navigate = useNavigate();
+  const { postId } = useParams();
+  const searchParams = new URLSearchParams(location.search);
+  const tab = searchParams.get('tab');
+  const id = searchParams.get('id');
+console.log(id);
 console.log(formData);
+ 
+const editSucess = (value) => toast.success(`Sucess:${value}`);
+
+  useEffect(() => {
+    try {
+      const fetchPost = async () => {
+        const res = await fetch(`http://localhost:8000/api/blogs/${id}`);
+        const data = await res.json();
+        if (!res.ok) {
+          console.log(data.message);
+          setPublishError(data.message);
+          return;
+        }
+        if (res.ok) {
+          setPublishError(null);
+          setFormData(data);
+          setFormData(data.data)
+        }
+        console.log(data);
+      };
+
+      fetchPost();
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, [postId]);
+
   const handleUpdloadImage = async () => {
     try {
       if (!file) {
@@ -63,30 +94,27 @@ console.log(formData);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('handle submit clicked');
     try {
-      const res = await fetch('/api/blogs/', {
-        method: 'POST',
+      const res = await fetch(`api/blogs/${id}/`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(res);
-      console.log(data);
       if (!res.ok) {
-        console.log();
-        if(data.errors[0].code.includes('token')){
-          setvalidationError('User Validation fails please do check again')
-        }
         setPublishError(data.message);
         return;
       }
 
       if (res.ok) {
         setPublishError(null);
-        navigate(`/blog`);
+        editSucess('Post Updated Sucessfully')
+        setInterval(() => {
+          
+        }, interval);
+        // navigate(`/admin?tab=articles`);
       }
     } catch (error) {
       setPublishError('Something went wrong');
@@ -94,23 +122,22 @@ console.log(formData);
   };
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
-      <h1 className='text-center text-3xl my-7 font-semibold'>Create a post</h1>
+      <h1 className='text-center text-3xl my-7 font-semibold'>Update post</h1>
+      <Toaster />
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-        <div className=' border  py-3 flex flex-col gap-4 sm:flex-row justify-between'>
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
           <TextInput
             type='text'
-            
             placeholder='Title'
             required
             id='title'
-            
-            className='flex-1 h-3 '
+            className='flex-1'
             onChange={(e) =>
               setFormData({ ...formData, title: e.target.value })
             }
-            
+            value={formData.title}
           />
-       
+        
         </div>
         <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
           <FileInput
@@ -126,7 +153,6 @@ console.log(formData);
             onClick={handleUpdloadImage}
             disabled={imageUploadProgress}
           >
-              
             {imageUploadProgress ? (
               <div className='w-16 h-16'>
                 <CircularProgressbar
@@ -149,6 +175,7 @@ console.log(formData);
         )}
         <ReactQuill
           theme='snow'
+          value={formData.content}
           placeholder='Write something...'
           className='h-72 mb-12'
           required
@@ -156,11 +183,11 @@ console.log(formData);
             setFormData({ ...formData, content: value });
           }}
         />
-        <Button type='submit' gradientDuoTone='purpleToPink' className='border text-black bg-secondary_shade hover:bg-secondary'>
-          Publish
+        <Button type='submit' gradientDuoTone='purpleToPink' className='bg-secondary text-black'>
+          Update post
         </Button>
         {publishError && (
-          <Alert className='mt-5 text-red-600' color='failure' >
+          <Alert className='mt-5 text-red-500 font-inter' color='failure' >
             {publishError}
           </Alert>
         )}
