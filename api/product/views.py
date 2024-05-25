@@ -1,3 +1,4 @@
+import os
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
@@ -100,6 +101,12 @@ class ProductDetailAPI(APIView):
         
         serializer = ProductSerializer(product,request.data)
         if serializer.is_valid(raise_exception=True):
+            thumbnail_url = serializer.validated_data.get('thumbnail_url')
+            if thumbnail_url is not None:
+                try:
+                    os.remove(product.thumbnail_url.path)
+                except:
+                    pass
             serializer.save()
             return Response({'success':True,'message':'product is updated.','data':serializer.data},status=status.HTTP_200_OK)
         
@@ -109,9 +116,15 @@ class ProductDetailAPI(APIView):
             product = Product.objects.get(pk=pk)
         except Product.DoesNotExist as exp:
             return Response({'success':False,'message':'Requested resource does not found.'},status=status.HTTP_204_NO_CONTENT)
-        
+
         serializer = ProductSerializer(product,request.data,partial=True)
         if serializer.is_valid(raise_exception=True):
+            thumbnail_url = serializer.validated_data.get('thumbnail_url')
+            if thumbnail_url is not None:
+                try:
+                    os.remove(product.thumbnail_url.path)
+                except:
+                    pass
             serializer.save()
             return Response({'success':True,'message':'product is updated.','data':serializer.data},status=status.HTTP_200_OK)
         
@@ -121,6 +134,12 @@ class ProductDetailAPI(APIView):
             product = Product.objects.get(pk=pk)
         except Product.DoesNotExist as exp:
             return Response({'success':False,'message':'Requested resource does not found.'},status=status.HTTP_204_NO_CONTENT)
+
+        try:
+            os.remove(product.thumbnail_url.path)
+        except:
+            pass
+        
         product.delete()
         return Response({'success':True,'message':'product deleted successfully.'},status=status.HTTP_200_OK)
 

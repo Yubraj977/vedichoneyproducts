@@ -24,6 +24,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
+    thumbnail_url = models.ImageField(upload_to="products/images/", null=True,blank=True)
     url_slug = models.SlugField(null=True,blank=True, unique=True)
     category = models.ForeignKey(Category, on_delete=models.SET_DEFAULT, default=1)
     description = models.TextField()

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+import os
 from rest_framework.views import APIView
 from blog.models import Blog
 from blog.serializers import BlogSerializer
@@ -40,6 +40,12 @@ class BlogDetailAPI(APIView):
         
         serializer = BlogSerializer(blog,request.data)
         if serializer.is_valid(raise_exception=True):
+            thumbnail_url = serializer.validated_data.get('thumbnail_url')
+            if thumbnail_url is not None:
+                try:
+                    os.remove(blog.thumbnail_url.path)
+                except:
+                    pass
             serializer.save()
             return Response({'success':True,'message':'blog is updated.','data':serializer.data},status=status.HTTP_200_OK)
         
@@ -52,6 +58,12 @@ class BlogDetailAPI(APIView):
         
         serializer = BlogSerializer(blog,request.data,partial=True)
         if serializer.is_valid(raise_exception=True):
+            thumbnail_url = serializer.validated_data.get('thumbnail_url')
+            if thumbnail_url is not None:
+                try:
+                    os.remove(blog.thumbnail_url.path)
+                except:
+                    pass
             serializer.save()
             return Response({'success':True,'message':'blog is updated.','data':serializer.data},status=status.HTTP_200_OK)
         
@@ -61,5 +73,11 @@ class BlogDetailAPI(APIView):
             blog = Blog.objects.get(pk=pk)
         except Blog.DoesNotExist as exp:
             return Response({'success':False,'message':'Requested resource does not found.'},status=status.HTTP_204_NO_CONTENT)
+        
+        try:
+            os.remove(blog.thumbnail_url.path)
+        except:
+            pass
+
         blog.delete()
         return Response({'success':True,'message':'blog deleted successfully.'},status=status.HTTP_200_OK)

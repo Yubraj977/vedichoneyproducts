@@ -20,7 +20,7 @@ def custom_exception_handler(exc, context):
     if response is not None:
         # Update the custom response with data from the default response
         custom_response['status_code'] = response.status_code
-    
+
         if isinstance(exc, NotFound):
             custom_response['message'] = 'Resource not found'
             custom_response['errors'] = response.data
