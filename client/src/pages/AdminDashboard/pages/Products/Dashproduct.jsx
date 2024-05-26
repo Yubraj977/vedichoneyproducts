@@ -13,10 +13,10 @@ function Dashproduct() {
     console.log(postIdToDelete);
     console.log(openModal);
     useEffect(() => {
-        fetch('api/blogs/')
+        fetch('api/products/')
             .then((res) => res.json())
             .then((data) => {
-                setBlog(data);
+                setBlog(data.data);
             }).catch((err) => {
                 setblogErr(err)
             });
@@ -63,10 +63,11 @@ async function handlePostDelete(){
             <table className="min-w-full bg-white border border-gray-200 rounded-md">
                 <thead className='bg-slate-300 '>
                     <tr>
-                        <th className="px-4 py-2 border font-inter">S.N</th>
-                        <th className="px-4 py-2 border font-inter">Article Titile</th>
+                        <th className="px-4 py-2 border font-inter">Product Id</th>
+                        <th className="px-4 py-2 border font-inter">Product Name</th>
                         <th className="px-4 py-2 border font-inter">IMAGE</th>
-                        <th className="px-4 py-2 border font-inter">Status</th>
+                        <th className="px-4 py-2 border font-inter">Price</th>
+                        <th className="px-4 py-2 border font-inter">Stock Quantity</th>
 
                         <th className="px-4 py-2 border font-inter" >EDIT</th>
                         <th className="px-4 py-2 border font-inter" >DELETE</th>
@@ -76,7 +77,7 @@ async function handlePostDelete(){
                     {blog.length>0 ? blog.map((eachblog) => (
                         <tr className="text-center font-inter" key={eachblog.id}>
                             <td className="px-4 py-2 border">{eachblog.id}</td>
-                            <td className="px-4 py-2 border">{eachblog.title}</td>
+                            <td className="px-4 py-2 border">{eachblog.name}</td>
                             <td className="px-4  border flex justify-center">
                                 <div className='h-14 w-10 py-1' >
 
@@ -84,7 +85,8 @@ async function handlePostDelete(){
                                     <img src={eachblog.thumbnail_url} className="max-w-full h-full object-cover" />
                                 </div>
                             </td>
-                            <td className="px-4 py-2 border"> {eachblog.status} </td>
+                            <td className="px-4 py-2 border"> {eachblog.price} </td>
+                            <td className="px-4 py-2 border"> {eachblog.stock_quantity} </td>
 
                             <td className="px-4 py-2 border">
                                 <button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded" onClick={(e) => navigate(`/admin?tab=editarticle&&id=${eachblog.id}`)}>Edit</button>

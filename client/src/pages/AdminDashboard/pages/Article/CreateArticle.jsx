@@ -94,17 +94,16 @@ console.log(formData);
   };
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
-      <h1 className='text-center text-3xl my-7 font-semibold'>Create a post</h1>
+      <h1 className='text-center text-3xl my-7 font-semibold '>Create a post</h1>
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-        <div className=' border  py-3 flex flex-col gap-4 sm:flex-row justify-between'>
-          <TextInput
+        <div className=' border-l-2  py-3 flex flex-col gap-4 sm:flex-row justify-between'>
+          <input
             type='text'
             
             placeholder='Title'
             required
             id='title'
-            
-            className='flex-1 h-3 '
+            className="w-full outline-none border-none focus:ring-0 focus:border-none placeholder:text-black font-bold"
             onChange={(e) =>
               setFormData({ ...formData, title: e.target.value })
             }
@@ -112,19 +111,18 @@ console.log(formData);
           />
        
         </div>
-        <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
+        <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3 text-black'>
           <FileInput
             type='file'
             accept='image/*'
             onChange={(e) => setFile(e.target.files[0])}
+            className='text-black'
           />
-          <Button
-            type='button'
-            gradientDuoTone='purpleToBlue'
-            size='sm'
-            outline
+          <button
+          
             onClick={handleUpdloadImage}
             disabled={imageUploadProgress}
+            className='text-white bg-secondary rounded-lg px-4'
           >
               
             {imageUploadProgress ? (
@@ -137,7 +135,7 @@ console.log(formData);
             ) : (
               'Upload Image'
             )}
-          </Button>
+          </button>
         </div>
         {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
         {formData.thumbnail_url && (

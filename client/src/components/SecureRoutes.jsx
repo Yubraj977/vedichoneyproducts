@@ -7,12 +7,14 @@ function SecureRoutes() {
   const dispatch = useDispatch();
   const [isValidateUser, setIsValidateUser] = useState(null); // null indicates loading
   const user = useSelector((state) => state.user.currentUser);
+  console.log(`The is valid User: ${isValidateUser}`);
 console.log(user);
   useEffect(() => {
     const verifyToken = async () => {
       try {
-        const response = await fetch('api/account/verify-token/');
+        const response = await fetch('/api/account/verify-token/');
         const data = await response.json();
+        console.log(data);
         console.log(`Token verification response: ${data.success}`);
         if (data.success) {
           setIsValidateUser(true);
@@ -30,9 +32,6 @@ console.log(user);
     verifyToken();
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log(`isValidateUser state: ${isValidateUser}`);
-  }, [isValidateUser]);
 
 
 

@@ -116,11 +116,13 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://146.190.112.144/api/account/login/', {
+      const res = await fetch('/api/account/login/', {
         method: "post",
+        credentials:'include',
         headers: {
           'Content-Type': 'application/json'
         },
+       
         body: JSON.stringify({ email, password })
       })
       const data = await res.json();

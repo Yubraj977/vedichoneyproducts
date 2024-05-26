@@ -11,7 +11,7 @@ import DashInventery from './pages/DashInventery';
 import Articlelist from './pages/Article/Articlelist';
 import CreateArticle from './pages/Article/CreateArticle';
 import EditArticle from './pages/Article/EditArticle';
-import AdminCreateProducts from './pages/Products/AdminCreateProducts';
+import AdminCreateProducts from './pages/Products/AdminCreateProducts'
 
 function Admin() {
   const [tab, settab] = useState()

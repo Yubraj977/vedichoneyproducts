@@ -9,11 +9,18 @@ function ProductDetials() {
     const navigate = useNavigate()
     const { id } = useParams();
     const [product, setproduct] = useState(null)
+    console.log(`MY product ${product}`);
     console.log(product);
     useEffect(() => {
-        fetch(`https://fakestoreapi.com/products/${id}`)
-            .then(res => res.json())
-            .then(json => setproduct(json))
+        async function fetchSoloProduct(){
+        const res=await fetch(`/api/products/1/`)
+        const data=await res.json()
+        console.log(res);
+        console.log(data);
+        setproduct(data.data)
+        }
+        fetchSoloProduct()
+        
     }, [])
 
 
@@ -105,7 +112,7 @@ function ProductDetials() {
                             <h1>Description</h1>
                             <p className='mt-1 border border-gray-300 rounded-lg p-4 bg-gray-100'>{product.description}</p>
                         </div>
-                        <div className="features mt-top">
+                        {/* <div className="features mt-top">
                             <h1 className='text-lg font-semibold font-sans'>Features and detials</h1>
                             <ul class="list-disc pl-6">
                                 <li>High Performance: Indicates the product operates efficiently and effectively under various conditions.</li>
@@ -130,7 +137,7 @@ function ProductDetials() {
                                 <li>Sustainability Features: Incorporates eco-friendly materials or processes to minimize environmental impact.</li>
                             </ul>
 
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             }
