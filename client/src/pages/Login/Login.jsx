@@ -58,7 +58,7 @@ function Login() {
 
     dispatch(signInStart())
     try {
-      const res = await fetch('api/account/register/google/', {
+      const res = await fetch('/api/account/register/google/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await fetch('api/account/login/', {
+      const res = await fetch('http://146.190.112.144/api/account/login/', {
         method: "post",
         headers: {
           'Content-Type': 'application/json'

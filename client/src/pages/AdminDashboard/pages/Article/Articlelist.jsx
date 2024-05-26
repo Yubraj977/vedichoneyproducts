@@ -73,7 +73,7 @@ async function handlePostDelete(){
                     </tr>
                 </thead>
                 <tbody>
-                    {blog.length>0 ? blog.map((eachblog) => (
+                    {blog!==null ? blog.map((eachblog) => (
                         <tr className="text-center font-inter" key={eachblog.id}>
                             <td className="px-4 py-2 border">{eachblog.id}</td>
                             <td className="px-4 py-2 border">{eachblog.title}</td>

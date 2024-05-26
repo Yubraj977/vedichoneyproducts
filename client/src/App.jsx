@@ -19,7 +19,7 @@ import Admin from './pages/AdminDashboard/Admin'
 import UserDash from './pages/UserDashboard/UserDash'
 import SecureRoutes from './components/SecureRoutes'
 import BlogDetials from './pages/Blog/BlogDetials'
-import NoPage from './pages/AdminDashboard/pages/404/NoPage'
+import NoPage from './pages/404/NoPage'
 import Learn from './pages/AdminDashboard/pages/learn/Learn'
 
 function App() {
