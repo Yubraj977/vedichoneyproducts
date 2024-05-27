@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {login} from '../middleware/userfetch'
 const initialState = {
     currentUser: null,
     token:null,

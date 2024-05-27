@@ -89,7 +89,7 @@ async function handlePostDelete(){
                             <td className="px-4 py-2 border"> {eachblog.stock_quantity} </td>
 
                             <td className="px-4 py-2 border">
-                                <button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded" onClick={(e) => navigate(`/admin?tab=editarticle&&id=${eachblog.id}`)}>Edit</button>
+                                <button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded" onClick={(e) => navigate(`/admin?tab=editproduct&&id=${eachblog.id}`)}>Edit</button>
                             </td>
                             <td className="px-4 py-2 border">
                                 <button className="bg-secondary_shade hover:bg-secondary text-white px-2 py-1 rounded"

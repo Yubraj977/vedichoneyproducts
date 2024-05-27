@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-function AdminCreateProducts() {
+function EditProduct() {
   const [image, setimage] = useState(null)
   const [uiImage, setuiImage] = useState(null)
   console.log(image);
@@ -105,4 +105,4 @@ function AdminCreateProducts() {
   )
 }
 
-export default AdminCreateProducts
+export default EditProduct

@@ -13,7 +13,7 @@ function ProductDetials() {
     console.log(product);
     useEffect(() => {
         async function fetchSoloProduct(){
-        const res=await fetch(`/api/products/1/`)
+        const res=await fetch(`/api/products/${id}/`)
         const data=await res.json()
         console.log(res);
         console.log(data);

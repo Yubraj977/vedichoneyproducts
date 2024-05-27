@@ -4,10 +4,8 @@ import { LuUser2 } from "react-icons/lu";
 import { IoSearch } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoIosArrowDown } from "react-icons/io";
-import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { useRef } from 'react'
-import useAnimation from './costum-hooks/UseAnimatioin';
 import { NavLink,Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
@@ -18,7 +16,10 @@ function Nav() {
   const subMenuRef = useRef()
   const mobileNavRef = useRef()
   const user=useSelector((state)=>state.user.currentUser)
+  const cart=useSelector((state)=>state.cart)
+  console.log(cart);
   console.log(user);
+
 
   useEffect(() => {
     if (visable && subMenuRef.current) {
@@ -71,12 +72,16 @@ function Nav() {
 
 
           <Link to={'/cart'} className="cart flex justify-center items-center">
-            <div className="icon p-3">
+            <div className="icon p-3 relative">
               <IoCartOutline className="text-3xl font-medium text-slate-600" />
+              <span className='absolute top-1 right-1 h-4 w-4 flex  justify-center items-center animate-pulse text-white bg-secondary rounded-full '>{cart.TotalItems==null?0:cart.TotalItems}</span>
             </div>
             <div className="cart-detail">
-              <h3 className='text-sm font-normal text-slate-500'>Cart</h3>
-              <p><strong className='text-sm text-slate-700'>$ 110,00</strong></p>
+              <h3 className='text-sm font-normal text-slate-500 '>
+                cart
+               
+              </h3>
+              <p><strong className='text-sm text-slate-700'> Rs {cart.TotalPrice==null?0:cart.TotalPrice}</strong></p>
             </div>
           </Link>
 

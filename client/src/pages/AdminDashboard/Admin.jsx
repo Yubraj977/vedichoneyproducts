@@ -12,6 +12,7 @@ import Articlelist from './pages/Article/Articlelist';
 import CreateArticle from './pages/Article/CreateArticle';
 import EditArticle from './pages/Article/EditArticle';
 import AdminCreateProducts from './pages/Products/AdminCreateProducts'
+import EditProduct from './pages/Products/EditProduct';
 
 function Admin() {
   const [tab, settab] = useState()
@@ -43,6 +44,7 @@ function Admin() {
         {tab == "articles" && <Articlelist />}
         {tab == "write" && <CreateArticle />}
         {tab == "editarticle" && <EditArticle />}
+        {tab == "editproduct" && <EditProduct />}
       </div>
     </div>
   )
