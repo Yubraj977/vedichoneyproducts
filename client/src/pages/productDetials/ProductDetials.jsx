@@ -111,32 +111,7 @@ function ProductDetials() {
                             <h1>Description</h1>
                             <p className='mt-1 border border-gray-300 rounded-lg p-4 bg-gray-100' dangerouslySetInnerHTML={{ __html: product && product.description }}></p>
                         </div>
-                        {/* <div className="features mt-top">
-                            <h1 className='text-lg font-semibold font-sans'>Features and detials</h1>
-                            <ul class="list-disc pl-6">
-                                <li>High Performance: Indicates the product operates efficiently and effectively under various conditions.</li>
-                                <li>Durability: Highlights the product's ability to withstand wear and tear over an extended period.</li>
-                                <li>Versatility: Emphasizes the product's ability to be used in multiple ways or scenarios.</li>
-                                <li>User-Friendly Interface: Indicates that the product has an intuitive and easy-to-use interface.</li>
-                                <li>Customization Options: Allows users to tailor the product to their specific needs or preferences.</li>
-                                <li>Compatibility: Ensures that the product works seamlessly with other devices or software.</li>
-                                <li>Security Features: Guarantees protection against unauthorized access or cyber threats.</li>
-                                <li>Energy Efficiency: Signifies that the product consumes minimal energy during operation.</li>
-                                <li>Ergonomic Design: Highlights a design that prioritizes user comfort and efficiency.</li>
-                                <li>Scalability: Indicates the product's ability to handle increased workload or user base without compromising performance.</li>
-                                <li>Integration Capabilities: Ability to integrate with other systems or platforms to enhance functionality.</li>
-                                <li>Remote Accessibility: Allows users to access or control the product from a distance.</li>
-                                <li>Multi-platform Support: Supports operation across various operating systems or platforms.</li>
-                                <li>Real-time Updates: Provides users with live or instantaneous updates on relevant information.</li>
-                                <li>Data Analytics: Offers insights and analysis based on the data collected by the product.</li>
-                                <li>Backup and Recovery: Ensures data safety through regular backups and efficient recovery procedures.</li>
-                                <li>Compliance Standards: Meets industry regulations and standards for quality and safety.</li>
-                                <li>Service and Support: Offers comprehensive customer service and technical support options.</li>
-                                <li>Warranty Coverage: Provides assurance with a warranty against defects or malfunctions.</li>
-                                <li>Sustainability Features: Incorporates eco-friendly materials or processes to minimize environmental impact.</li>
-                            </ul>
-
-                        </div> */}
+        
                     </div>
                 </div>
             }

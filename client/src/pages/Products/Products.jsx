@@ -28,8 +28,8 @@ function Products() {
   return (
 
     <div>
-      <div className="first flex justify-between px-20">
-        <div className="left">filter choose buy</div>
+      <div className="first flex justify-between px-20 border bg-slate-200" >
+        <div className="left  font-bold flex justify-center items-center ">Filter Choose Buy</div>
         <div className="right my-4">
           <select className='  border-slate-600 rounded-md focus:outline-none focus:border-slate-600 focus:ring-0' value={sortOption} onChange={handleSortChange}>
             <option value="" disabled>Sort</option>
