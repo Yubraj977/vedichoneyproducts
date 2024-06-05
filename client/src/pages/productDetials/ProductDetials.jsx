@@ -8,16 +8,15 @@ import { useNavigate } from 'react-router-dom';
 function ProductDetials() {
     const navigate = useNavigate()
     const { id } = useParams();
+    console.log(id)
     const [product, setproduct] = useState(null)
     console.log(`MY product ${product}`);
     console.log(product);
     useEffect(() => {
         async function fetchSoloProduct(){
-        const res=await fetch(`/api/products/${id}/`)
+        const res=await fetch(`https://vedicapi.onrender.com/api/product/${id}`)
         const data=await res.json()
-        console.log(res);
-        console.log(data);
-        setproduct(data.data)
+        setproduct(data.product)
         }
         fetchSoloProduct()
         

@@ -13,10 +13,11 @@ function Dashproduct() {
     console.log(postIdToDelete);
     console.log(openModal);
     useEffect(() => {
-        fetch('api/products/')
+        fetch('https://vedicapi.onrender.com/api/product/allproducts')
             .then((res) => res.json())
             .then((data) => {
-                setBlog(data.data);
+                
+                setBlog(data.products);
             }).catch((err) => {
                 setblogErr(err)
             });
@@ -59,7 +60,7 @@ async function handlePostDelete(){
                     </div>
                 </Modal.Body>
             </Modal>
-            <h1 className="text-xl font-bold mb-4"> Manage Your all Blogs</h1>
+            <h1 className="text-xl font-bold mb-4"> Manage Your all Products</h1>
             <table className="min-w-full bg-white border border-gray-200 rounded-md">
                 <thead className='bg-slate-300 '>
                     <tr>
@@ -74,19 +75,19 @@ async function handlePostDelete(){
                     </tr>
                 </thead>
                 <tbody>
-                    {blog.length>0 ? blog.map((eachblog) => (
+                    {blog.length>0 ? blog.map((eachblog,index) => (
                         <tr className="text-center font-inter" key={eachblog.id}>
-                            <td className="px-4 py-2 border">{eachblog.id}</td>
+                            <td className="px-4 py-2 border">{index}</td>
                             <td className="px-4 py-2 border">{eachblog.name}</td>
                             <td className="px-4  border flex justify-center">
                                 <div className='h-14 w-10 py-1' >
 
 
-                                    <img src={eachblog.thumbnail_url} className="max-w-full h-full object-cover" />
+                                    <img src={eachblog.image} className="max-w-full h-full object-cover" />
                                 </div>
                             </td>
                             <td className="px-4 py-2 border"> {eachblog.price} </td>
-                            <td className="px-4 py-2 border"> {eachblog.stock_quantity} </td>
+                            <td className="px-4 py-2 border"> {eachblog.quantity} </td>
 
                             <td className="px-4 py-2 border">
                                 <button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded" onClick={(e) => navigate(`/admin?tab=editproduct&&id=${eachblog.id}`)}>Edit</button>

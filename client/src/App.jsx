@@ -39,8 +39,11 @@ function App() {
         <Route path='privacy' element={<Privacy />} />
         <Route path='returnpolicy' element={<Return />} />
         <Route path='admin' element={<Admin />} />
-        <Route element={<SecureRoutes/>}>
         <Route path='checkout' element={<Checkout />} />
+
+        
+        <Route element={<SecureRoutes/>}>
+       
         <Route path='cart' element={<Cart />} />
           <Route path='dashboard' element={<UserDash />} />
         </Route>

@@ -7,7 +7,7 @@ export default defineConfig({
   server:{
     proxy:{
       '/api':{
-        target:'http://146.190.112.144/',
+        target:'https://vedicapi.onrender.com/',
         changeOrigin:true
       }
     }
