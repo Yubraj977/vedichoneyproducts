@@ -3,15 +3,15 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import toast, { Toaster } from 'react-hot-toast';
 function Dashproduct() {
     const navigate = useNavigate()
     const [blog, setBlog] = useState([]);
-    const [blogErr, setblogErr] = useState()
+  
     const [openModal, setOpenModal] = useState(false);
     const [postIdToDelete, setpostIdToDelete] = useState()
     const [blogDeleteError,setblogDeleteError]=useState()
-    console.log(postIdToDelete);
-    console.log(openModal);
+    
     useEffect(() => {
         fetch('https://vedicapi.onrender.com/api/product/allproducts')
             .then((res) => res.json())
@@ -21,12 +21,13 @@ function Dashproduct() {
             }).catch((err) => {
                 setblogErr(err)
             });
-    }, []);
+    }, [handlePostDelete]);
 
     console.log(blog);
-
+    const productDeleteSucess = (value) => toast.success(`Sucess:${value}`);
+    const productDeleteFaliure = (value) => toast.error(`Error:${value}`);
 async function handlePostDelete(){
-    const res=await fetch(`api/blogs/${postIdToDelete}/`,{
+    const res=await fetch(`https://vedicapi.onrender.com/api/product/delete/${postIdToDelete}`,{
         method:"DELETE"
     })
     const data=await res.json()
@@ -34,13 +35,20 @@ async function handlePostDelete(){
     console.log(data);
     if(!res.ok){
         setblogDeleteError(data.message)
+        productDeleteFaliure(data.message)
     }
-    setBlog(  blog.filter((eachblog)=>eachblog.id!==postIdToDelete))
-    setOpenModal(false)
+  
+   
+    if(res.ok){
+        setpostIdToDelete(null)
+        productDeleteSucess(data.message)
+        setOpenModal(false)
+    }
 }
 
     return (
         <div className="container mx-auto p-4 rounded-lg ">
+          <Toaster />
             <Modal show={openModal} size="sm" onClose={() => setOpenModal(false)} popup className=''>
                 <Modal.Header />
                 <Modal.Body>
@@ -76,7 +84,7 @@ async function handlePostDelete(){
                 </thead>
                 <tbody>
                     {blog.length>0 ? blog.map((eachblog,index) => (
-                        <tr className="text-center font-inter" key={eachblog.id}>
+                        <tr className="text-center font-inter" key={eachblog._id}>
                             <td className="px-4 py-2 border">{index}</td>
                             <td className="px-4 py-2 border">{eachblog.name}</td>
                             <td className="px-4  border flex justify-center">
@@ -90,13 +98,13 @@ async function handlePostDelete(){
                             <td className="px-4 py-2 border"> {eachblog.quantity} </td>
 
                             <td className="px-4 py-2 border">
-                                <button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded" onClick={(e) => navigate(`/admin?tab=editproduct&&id=${eachblog.id}`)}>Edit</button>
+                                <button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded" onClick={(e) => navigate(`/admin?tab=editproduct&&id=${eachblog._id}`)}>Edit</button>
                             </td>
                             <td className="px-4 py-2 border">
                                 <button className="bg-secondary_shade hover:bg-secondary text-white px-2 py-1 rounded"
                                     onClick={(e)=>{
                                         setOpenModal(true)
-                                        setpostIdToDelete(eachblog.id)
+                                        setpostIdToDelete(eachblog._id)
                                     }}
                                 >Delete</button>
                             </td>

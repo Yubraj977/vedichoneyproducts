@@ -29,7 +29,7 @@ function ProductDetials() {
     return (
         <div className=''>
             {product &&
-                <div className="top w-full flex-col lg:items-start items-center lg:flex-row  flex  mt-top gap-16 border-red-600  px-mb_side" >
+                <div className="top w-full flex-col lg:items-start items-center lg:flex-row  flex  mt-top gap-16   px-mb_side" >
                     <div className="left lg:w-1/3  w-full  ">
                         <div className=' w-full lg:h-full h-72 '>
                             <img src={product.image} alt="" className='rounded-lg h-full w-full  object-contain lg:object-cover' />
