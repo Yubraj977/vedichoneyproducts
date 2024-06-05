@@ -109,7 +109,7 @@ function ProductDetials() {
                         <div className="adding"></div>
                         <div className="discription mt-top">
                             <h1>Description</h1>
-                            <p className='mt-1 border border-gray-300 rounded-lg p-4 bg-gray-100'>{product.description}</p>
+                            <p className='mt-1 border border-gray-300 rounded-lg p-4 bg-gray-100' dangerouslySetInnerHTML={{ __html: product && product.description }}></p>
                         </div>
                         {/* <div className="features mt-top">
                             <h1 className='text-lg font-semibold font-sans'>Features and detials</h1>
