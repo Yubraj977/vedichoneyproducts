@@ -17,9 +17,14 @@ import TopSellingProducts from './TopSellingProducts';
 import Testimonials from './Testimonials/Testimonials';
 import Faq from './Faq';
 function Home() {
+
   useEffect(() => {
     window.scrollTo(0, 0); 
 }, []);
+
+
+
+
 
   const images = [
     {

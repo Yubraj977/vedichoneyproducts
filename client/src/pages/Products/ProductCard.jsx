@@ -4,7 +4,7 @@ function ProductCard({item}) {
     const navigate=useNavigate()
     return (
         // 18%
-        <div className=' bg-slate-100 hover:shadow-2xl hover:bg-slate-200 h-100 w-[45%] lg:w-[18%] transition-transform duration-500 ease-in-out m-2 ' onClick={()=>navigate(`/product/${item._id}`)} >
+        <div className=' bg-gray-200 hover:shadow-2xl hover:bg-slate-200 h-100 w-[45%] lg:w-[18%] transition-transform duration-500 ease-in-out m-2 ' onClick={()=>navigate(`/product/${item._id}`)} >
             <div className='h-64 w-full'>
                 <img src={item.image} alt="" className='h-full w-full object-contain' />
             </div>
