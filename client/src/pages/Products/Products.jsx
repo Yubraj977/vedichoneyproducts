@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
-import { Audio } from 'react-loader-spinner'
+import { ColorRing } from 'react-loader-spinner'
 
 
 function Products() {
@@ -8,22 +8,44 @@ function Products() {
   const [sortOption, setSortOption] = useState('');
   const [productFetchError, setproductFetchError] = useState()
   const [productFetching, setproductFetching] = useState(false)
-  console.log(`Products: ${products}`);
-  console.log(productFetchError);
+ console.log(sortOption)
 
   useEffect(() => {
-    setproductFetching(true)
-    fetch(`https://vedicapi.onrender.com/api/product/allproducts`)
-      .then((res) => res.json())
-      .then((data) => { setproducts(data.products), setproductFetching(false) })
-      .catch((err) => setproductFetchError(err))
-  }, [])
+   fetchProducts()
+  }, [sortOption])
 
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
 
     console.log(`Selected sort option: ${e.target.value}`);
   };
+  const fetchProducts=async ()=>{
+  setproductFetching(true);
+  try {
+    let url=`https://vedicapi.onrender.com/api/product/allproducts`
+    if (sortOption) {
+      if (sortOption.includes('price')) {
+        url += `?price=${sortOption}`;
+      } else if (sortOption.includes('date')) {
+        url += `?date=${sortOption}`;
+      }
+    }
+    const res=await fetch(url)
+    const data=await res.json()
+    if(res.ok){
+      setproducts(data.products)
+      setproductFetching(false);
+    }
+    else{
+      setproductFetchError(data.message)
+      setproductFetching(false);
+    }
+    
+  } catch (error) {
+    setproductFetchError(error.message)
+    setproductFetching(false)
+  }
+  }
 
   return (
 
@@ -33,23 +55,23 @@ function Products() {
         <div className="right my-4">
           <select className='  border-slate-600 rounded-md focus:outline-none focus:border-slate-600 focus:ring-0' value={sortOption} onChange={handleSortChange}>
             <option value="" disabled>Sort</option>
-            <option value="priceHighToLow">Price: High to Low</option>
-            <option value="priceLowToHigh">Price: Low to High</option>
-            <option value="newest">Newest</option>
-            <option value="bestSelling">Best Selling</option>
+            <option value="price-dsc">Price: High to Low</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="date-dsc">Newest</option>
+            <option value="date-asc">Oldest</option>
           </select>
         </div>
       </div>
       {productFetching ?
-      <div className='h-screen w-full flex  justify-center'>
-         <Audio
-          height="100"
-          width="100"
-          radius="9"
-          color="green"
-          ariaLabel="loading"
-          wrapperStyle
-          wrapperClass
+      <div className='h-screen w-full flex  justify-center my-20'>
+          <ColorRing
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="color-ring-loading"
+          wrapperStyle={{}}
+          wrapperClass="color-ring-wrapper"
+          colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
         />
         </div>
         : <div className=' w-full   px-mb_side  flex flex-wrap '>

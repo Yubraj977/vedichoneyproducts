@@ -1,34 +1,39 @@
 import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useParams } from 'react-router-dom';
 import {
   getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
 } from 'firebase/storage';
-import toast, { Toaster } from 'react-hot-toast';
 import app from '../../../../../configs/firebase';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { ColorRing } from 'react-loader-spinner';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
+import { ColorRing } from 'react-loader-spinner'
 
 export default function EditArticle() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
-  const [validationError, setvalidationError] = useState()
-  const [fetchingBlog, setfetchingBlog] = useState(false)
+  const [updatingBlog, setupdatingBlog] = useState(false);
   const { postId } = useParams();
   const searchParams = new URLSearchParams(location.search);
   const tab = searchParams.get('tab');
   const id = searchParams.get('id');
+console.log(id);
+console.log(`Formdata :${formData}`);
+ 
+const editSucess = (value) => toast.success(`Sucess:${value}`);
+
   useEffect(() => {
     try {
       const fetchPost = async () => {
@@ -53,13 +58,7 @@ export default function EditArticle() {
       console.log(error.message);
     }
   }, [postId]);
-  console.log(id)
 
-  const BlogAddSucess = (value) => toast.success(`Sucess:${value}`);
-  const BlogAddFaliure = (value) => toast.error(`Error:${value}`);
-
-  const navigate = useNavigate();
-  console.log(formData);
   const handleUpdloadImage = async () => {
     try {
       if (!file) {
@@ -86,7 +85,7 @@ export default function EditArticle() {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImageUploadProgress(null);
             setImageUploadError(null);
-            setFormData({ ...formData, image: downloadURL });
+            setFormData({ ...formData, thumbnail_url: downloadURL });
           });
         }
       );
@@ -98,9 +97,8 @@ export default function EditArticle() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('handle submit clicked');
     try {
-      setfetchingBlog(true)
+      setupdatingBlog(true)
       const res = await fetch(`https://vedicapi.onrender.com/api/blog/update/${id}/`, {
         method: 'PUT',
         headers: {
@@ -109,30 +107,30 @@ export default function EditArticle() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(res);
-      console.log(data);
       if (!res.ok) {
-        BlogAddFaliure(data.message)
-        setfetchingBlog(false)
+        setupdatingBlog(false)
+        setPublishError(data.message);
+        return;
       }
 
       if (res.ok) {
-        setfetchingBlog(false)
+        setupdatingBlog(false)
         setPublishError(null);
-        BlogAddSucess(data.message)
+        editSucess('Post Updated Sucessfully')
         navigate(`/admin?tab=articles`);
+       
       }
     } catch (error) {
-      BlogAddFaliure(error)
+      setPublishError('Something went wrong');
     }
   };
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
+      <h1 className='text-center text-3xl my-7 font-semibold'>Update post</h1>
       <Toaster />
-      <h1 className='text-center text-3xl my-7 font-semibold '>Create a post</h1>
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-        <div className=' border-l-2  py-3 flex flex-col gap-4 sm:flex-row justify-between'>
-          <input
+        <div className='flex flex-col gap-4 sm:flex-row justify-between text-black'>
+        <input
             type='text'
             value={formData.title}
             placeholder='Title'
@@ -144,22 +142,23 @@ export default function EditArticle() {
             }
 
           />
-
+    
+        
         </div>
-        <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3 text-black'>
+        <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
           <FileInput
             type='file'
             accept='image/*'
             onChange={(e) => setFile(e.target.files[0])}
-            className='text-black'
           />
-          <button
-
+          <Button
+            type='button'
+            gradientDuoTone='purpleToBlue'
+            size='sm'
+            outline
             onClick={handleUpdloadImage}
             disabled={imageUploadProgress}
-            className='text-white bg-secondary rounded-lg px-4'
           >
-
             {imageUploadProgress ? (
               <div className='w-16 h-16'>
                 <CircularProgressbar
@@ -170,7 +169,7 @@ export default function EditArticle() {
             ) : (
               'Upload Image'
             )}
-          </button>
+          </Button>
         </div>
         {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
         {formData.image && (
@@ -182,37 +181,31 @@ export default function EditArticle() {
         )}
         <ReactQuill
           theme='snow'
+          value={formData.content}
           placeholder='Write something...'
           className='h-72 mb-12'
           required
-          value={formData.content}
           onChange={(value) => {
             setFormData({ ...formData, content: value });
           }}
         />
 
-        {
-          fetchingBlog ?
-            <Button type='submit' gradientDuoTone='purpleToPink' className='border text-black bg-secondary_shade hover:bg-secondary' disabled>
-              <ColorRing
-                visible={true}
-                height="40"
-                width="40"
-                ariaLabel="color-ring-loading"
-                wrapperStyle={{}}
-                wrapperClass="color-ring-wrapper"
-                colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-              />
-            </Button>
-            :
-            <Button type='submit' gradientDuoTone='purpleToPink' className='border text-black bg-secondary_shade hover:bg-secondary'>
-              Publish
-            </Button>
-        }
+        {updatingBlog ? <Button type='submit' disabled gradientDuoTone='purpleToPink' className='bg-secondary text-black'>
+        <ColorRing
+                    visible={true}
+                    height="40"
+                    width="40"
+                    ariaLabel="blocks-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="blocks-wrapper"
+                    colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+                />
+        </Button>: <Button type='submit' gradientDuoTone='purpleToPink' className='bg-secondary text-black'>
+          Update post
+        </Button>}
        
-
         {publishError && (
-          <Alert className='mt-5 text-red-600' color='failure' >
+          <Alert className='mt-5 text-red-500 font-inter' color='failure' >
             {publishError}
           </Alert>
         )}

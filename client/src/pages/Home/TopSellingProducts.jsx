@@ -15,7 +15,7 @@ function Me({ product }) {
   };
   return (
     <>
-      <div className='bg-gray-200 rounded-md '>
+      <div className='bg-gray-200 rounded-md w-1/3'>
         <div className='w-full h-60 '>
           <img className='w-full h-full object-contain' src={product.image} alt="" />
         </div>

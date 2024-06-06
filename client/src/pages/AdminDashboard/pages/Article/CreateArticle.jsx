@@ -7,12 +7,14 @@ import {
   ref,
   uploadBytesResumable,
 } from 'firebase/storage';
+import toast, { Toaster } from 'react-hot-toast';
 import app from '../../../../../configs/firebase';
 import { useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { ColorRing } from 'react-loader-spinner';
 
 export default function CreateArticle() {
   const [file, setFile] = useState(null);
@@ -20,11 +22,14 @@ export default function CreateArticle() {
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
-  const [validationError,setvalidationError]=useState()
+  const [validationError, setvalidationError] = useState()
+  const [fetchingBlog, setfetchingBlog] = useState(false)
 
+  const BlogAddSucess = (value) => toast.success(`Sucess:${value}`);
+  const BlogAddFaliure = (value) => toast.error(`Error:${value}`);
 
   const navigate = useNavigate();
-console.log(formData);
+  console.log(formData);
   const handleUpdloadImage = async () => {
     try {
       if (!file) {
@@ -51,7 +56,7 @@ console.log(formData);
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImageUploadProgress(null);
             setImageUploadError(null);
-            setFormData({ ...formData, thumbnail_url: downloadURL });
+            setFormData({ ...formData, image: downloadURL });
           });
         }
       );
@@ -65,7 +70,8 @@ console.log(formData);
     e.preventDefault();
     console.log('handle submit clicked');
     try {
-      const res = await fetch('/api/blogs/', {
+      setfetchingBlog(true)
+      const res = await fetch('https://vedicapi.onrender.com/api/blog/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -76,30 +82,30 @@ console.log(formData);
       console.log(res);
       console.log(data);
       if (!res.ok) {
-        console.log();
-        if(data.errors[0].code.includes('token')){
-          setvalidationError('User Validation fails please do check again')
-        }
-        setPublishError(data.message);
-        return;
+        BlogAddFaliure(data.message)
+        setfetchingBlog(false)
       }
 
       if (res.ok) {
+        setfetchingBlog(false)
         setPublishError(null);
-        navigate(`/blog`);
+        BlogAddSucess(data.message)
+        setFormData({});
+        formData.image = null
       }
     } catch (error) {
-      setPublishError('Something went wrong');
+      BlogAddFaliure(error)
     }
   };
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
+      <Toaster />
       <h1 className='text-center text-3xl my-7 font-semibold '>Create a post</h1>
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
         <div className=' border-l-2  py-3 flex flex-col gap-4 sm:flex-row justify-between'>
           <input
             type='text'
-            
+            value={formData.title}
             placeholder='Title'
             required
             id='title'
@@ -107,9 +113,9 @@ console.log(formData);
             onChange={(e) =>
               setFormData({ ...formData, title: e.target.value })
             }
-            
+
           />
-       
+
         </div>
         <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3 text-black'>
           <FileInput
@@ -119,12 +125,12 @@ console.log(formData);
             className='text-black'
           />
           <button
-          
+
             onClick={handleUpdloadImage}
             disabled={imageUploadProgress}
             className='text-white bg-secondary rounded-lg px-4'
           >
-              
+
             {imageUploadProgress ? (
               <div className='w-16 h-16'>
                 <CircularProgressbar
@@ -138,9 +144,9 @@ console.log(formData);
           </button>
         </div>
         {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
-        {formData.thumbnail_url && (
+        {formData.image && (
           <img
-            src={formData.thumbnail_url}
+            src={formData.image}
             alt='upload'
             className='w-full h-72 object-cover'
           />
@@ -150,13 +156,35 @@ console.log(formData);
           placeholder='Write something...'
           className='h-72 mb-12'
           required
+          value={formData.content}
           onChange={(value) => {
             setFormData({ ...formData, content: value });
           }}
         />
-        <Button type='submit' gradientDuoTone='purpleToPink' className='border text-black bg-secondary_shade hover:bg-secondary'>
+
+        {
+          fetchingBlog ?
+            <Button type='submit' gradientDuoTone='purpleToPink' className='border text-black bg-secondary_shade hover:bg-secondary' disabled>
+              <ColorRing
+                visible={true}
+                height="40"
+                width="40"
+                ariaLabel="color-ring-loading"
+                wrapperStyle={{}}
+                wrapperClass="color-ring-wrapper"
+                colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+              />
+            </Button>
+            :
+            <Button type='submit' gradientDuoTone='purpleToPink' className='border text-black bg-secondary_shade hover:bg-secondary'>
+              Publish
+            </Button>
+        }
+        {/* <Button type='submit' gradientDuoTone='purpleToPink' className='border text-black bg-secondary_shade hover:bg-secondary'>
           Publish
-        </Button>
+        </Button> */}
+
+
         {publishError && (
           <Alert className='mt-5 text-red-600' color='failure' >
             {publishError}
