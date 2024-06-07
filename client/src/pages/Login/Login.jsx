@@ -1,6 +1,5 @@
 import honey from '/honey3.png'
 import googleLogo from '/google-logo.png'
-import fbLogo from '/facebook-logo.png'
 import { FiEye } from "react-icons/fi";
 import { useNavigate, Navigate } from 'react-router-dom';
 import { useState,useEffect } from 'react';
@@ -15,74 +14,56 @@ import toast, { Toaster } from 'react-hot-toast';
 
 
 const googleProvider = new GoogleAuthProvider();
-const facebookProvider = new FacebookAuthProvider();
-import cookie from 'js-cookie'
 const auth = getAuth(app);
 function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [email, setemail] = useState()
   const [password, setpassword] = useState('')
-  const [accessToken, setAccessToken] = useState(null);
-  console.log(accessToken);
-  useEffect(() => {
-    const fetchToken = () => {
-        const value = Cookies.get('sessionid');
-        if (value) {
-            setToken(value);
-            console.log("Access Token:", value);
-        } else {
-            console.log("Access token not found");
-        }
-    };
 
-    fetchToken();
-}, []);
-  
   const notify = (value) => toast.success(`Sucess:${value}`);
   const loginError = (value) => toast.error(`Error:${value}`);
 
 
   async function handleGoogleSignin() {
     const result = await signInWithPopup(auth, googleProvider)
-
     const credential = await GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
     const user = result.user;
     const authenticGoogleUser = {
       name: user.displayName,
       email: user.email,
-      profile_url: user.photoURL,
+      profileImage: user.photoURL,
+      emailVerified: user.emailVerified,
     }
     console.log(authenticGoogleUser);
 
     dispatch(signInStart())
     try {
-      const res = await fetch('/api/account/register/google/', {
+      const res = await fetch('http://localhost:5000/api/auth/googlelogin', {
         method: 'POST',
+        credentials:'include',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(authenticGoogleUser)
       });
       const data = await res.json();
-      console.log(res);
       console.log(data);
-
-
+      if(res.ok){
+        dispatch(signInSucess({ currentUser: data.user }))
+        console.log(data);
+        setTimeout(() => {
+          navigate('/products');
+        }, 1000);
+  
+        notify('Login sucess');
+  
+  
+      }
       if (!res.ok) {
         dispatch(signInFaliure(res.message))
       }
-      dispatch(signInSucess({ currentUser: data.data, accessToken: data.tokens.access }))
-      setToken(data.tokens.access)
-      console.log(data);
-      setTimeout(() => {
-        navigate('/products');
-      }, 1000);
-
-      notify('Login sucess');
-
-
+    
 
     } catch (error) {
       dispatch(signInFaliure(error.message))
@@ -92,31 +73,13 @@ function Login() {
 
   }
 
-  function handleFacebookSignin() {
-    signInWithPopup(auth, facebookProvider)
-      .then((result) => {
-        const user = result.user;
-        const credential = FacebookAuthProvider.credentialFromResult(result);
-        const accessToken = credential.accessToken;
-        console.log(credential);
-
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.customData.email;
-        const credential = FacebookAuthProvider.credentialFromError(error);
-      });
-    console.log('ok');
-
-  }
 
 
   async function handleLoginSubmit(e) {
     e.preventDefault();
 
     try {
-      const res = await fetch('/api/account/login/', {
+      const res = await fetch('http://localhost:5000/api/auth/login', {
         method: "post",
         credentials:'include',
         headers: {
@@ -133,7 +96,7 @@ function Login() {
         loginError(data.errors.detail)
       }
 
-      dispatch(signInSucess({ currentUser: data.data, accessToken: data.tokens.access }))
+      dispatch(signInSucess({ currentUser: data.user }))
       notify('Sign in sucess')
       navigate('/products')
 
@@ -153,10 +116,10 @@ function Login() {
           <img src={googleLogo} alt="" />
           <p className='font-medium'>Log In with Google</p>
         </div>
-        <div className="facebook cursor-pointer mt-5 items-center  justify-center flex gap-4 px-10 py-3 border-2 bg-slate-200 rounded-md" onClick={handleFacebookSignin}>
+        {/* <div className="facebook cursor-pointer mt-5 items-center  justify-center flex gap-4 px-10 py-3 border-2 bg-slate-200 rounded-md" onClick={handleFacebookSignin}>
           <img src={fbLogo} alt="" />
           <p className='font-medium'>Log In with Facebook</p>
-        </div>
+        </div> */}
         <p className='text-center mt-8 text-xl font-medium '>----or----</p>
         <form className='mt-8 flex flex-col ' onSubmit={handleLoginSubmit}>
 

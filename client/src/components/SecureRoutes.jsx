@@ -4,46 +4,44 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signOutSucess } from '../../configs/redux/user/userSlice';
 
 function SecureRoutes() {
+
   const dispatch = useDispatch();
-  const [isValidateUser, setIsValidateUser] = useState(null); // null indicates loading
   const user = useSelector((state) => state.user.currentUser);
-  console.log(`The is valid User: ${isValidateUser}`);
-console.log(user);
-  useEffect(() => {
-    const verifyToken = async () => {
-      try {
-        const response = await fetch('/api/account/verify-token/');
-        const data = await response.json();
-        console.log(data);
-        console.log(`Token verification response: ${data.success}`);
-        if (data.success) {
-          setIsValidateUser(true);
-        } else {
-          setIsValidateUser(false);
-          dispatch(signOutSuccess());
-        }
-      } catch (err) {
-        console.error(`Error verifying token: ${err}`);
-        setIsValidateUser(false);
-        dispatch(signOutSuccess());
-      }
-    };
+  
 
-    verifyToken();
-  }, [dispatch]);
+  const checkStillLogin=async()=>{
+    const res=await fetch(`http://localhost:5000/api/auth/stillogin`,{
+      method:'POST',
 
 
+      credentials:'include',
+    })
+    const data=await res.json();
+    if(res.ok){
+     console.log(res)
+    }
+    if(!res.ok){
+      
+      setstillValidUser(false)
+      dispatch(signOutSucess())
 
-
-  if (isValidateUser === null) {
-    return <div>Loading...</div>; // Loading state while validation is in progress
+     
+    }
   }
 
-  if (user && isValidateUser) {
-    return <Outlet />;
-  }
-  dispatch(signOutSucess())
+useEffect(()=>{
+  
 
+
+  checkStillLogin()
+},[])
+
+
+if(user){
+  return (
+    <Outlet/>
+  )
+}
   return <Navigate to='/login' />;
 }
 

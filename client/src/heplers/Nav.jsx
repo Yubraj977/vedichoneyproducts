@@ -9,18 +9,44 @@ import { useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signInSucess, signOutSucess } from '../../configs/redux/user/userSlice';
 
 function Nav() {
+  const dispatch=useDispatch()
   const navigate = useNavigate()
   const [visable, setvisable] = useState(false)
   const [mobileVisable, setmobileVisable] = useState(false)
   const [searchTerm, setsearchTerm] = useState('')
+  const [stillValidUser,setstillValidUser]=useState()
   const subMenuRef = useRef()
   const mobileNavRef = useRef()
   const user = useSelector((state) => state.user.currentUser)
   const cart = useSelector((state) => state.cart)
  
+  const checkStillLogin=async()=>{
+    const res=await fetch(`http://localhost:5000/api/auth/stillogin`,{
+      method:'POST',
+      credentials:'include',
+    })
+    const data=await res.json();
+    if(res.ok){
+     setstillValidUser(true)
+    }
+    if(!res.ok){
+      
+      setstillValidUser(false)
+      dispatch(signOutSucess())
 
+     
+    }
+  }
+
+useEffect(()=>{
+  
+
+  checkStillLogin()
+},[])
 
   useEffect(() => {
     if (visable && subMenuRef.current) {

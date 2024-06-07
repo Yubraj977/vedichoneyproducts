@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FaGoogle, FaFacebookF } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, } from "firebase/auth";
 import app from '../../../configs/firebase';
 import { useForm } from 'react-hook-form';
 import { Oval } from 'react-loader-spinner';
 import toast, { Toaster } from 'react-hot-toast';
 
 const googleProvider = new GoogleAuthProvider();
-const facebookProvider = new FacebookAuthProvider();
 const auth = getAuth(app);
 
 function Signup() {
@@ -20,11 +19,11 @@ function Signup() {
     password.current = watch('password', '');
     const notify = (value) => toast.error(`Error:${value}`);
     const signUpSucess = (value) => toast.success(`Sucess: ${value}`);
-
+    
 
     const onSubmit = async (data) => {
         console.log(data);
-        const res = await fetch('api/account/register/', {
+        const res = await fetch('http://localhost:5000/api/auth/signup', {
             method: "POST",
             headers: {
                 'Content-Type': "application/json"
@@ -35,7 +34,7 @@ function Signup() {
         console.log(res);
         console.log(backend);
         if (!res.ok) {
-            notify(backend.errors.email[0])
+            notify(backend.message)
         }
         console.log('singup sucess');
         if (res.ok) {
@@ -52,42 +51,61 @@ function Signup() {
 
 
 
-    function handleGoogleSignUp() {
-        signInWithPopup(auth, googleProvider)
-            .then((result) => {
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-                const user = result.user;
-                const authenticGoogleUser = {
-                    name: user.displayName,
-                    email: user.email,
-                    profile_url: user.photoURL,
-                }
-                console.log(authenticGoogleUser);
-
-                //   setgoogleUser({...authenticGoogleUser})
-            }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // The email of the user's account used.
-                const email = error.customData.email;
-                // The AuthCredential type that was used.
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                // ...
-            });
-    }
-    function facebookSignUp() {
-        // Implement Facebook sign-up logic
-    }
-
+    async function handleGoogleSignUp() {
+        const result = await signInWithPopup(auth, googleProvider)
+        const credential = await GoogleAuthProvider.credentialFromResult(result);
+        const user = result.user;
+        const authenticGoogleUser = {
+          name: user.displayName,
+          email: user.email,
+          profileImage: user.photoURL,
+          emailVerified: user.emailVerified,
+        }
+        console.log(authenticGoogleUser);
+    
+        dispatch(signInStart())
+        try {
+          const res = await fetch('http://localhost:5000/api/auth/googlelogin', {
+            method: 'POST',
+            credentials:'include',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(authenticGoogleUser)
+          });
+          const data = await res.json();
+          console.log(data);
+          if(res.ok){
+            dispatch(signInSucess({ currentUser: data.user }))
+            console.log(data);
+            setTimeout(() => {
+              navigate('/products');
+            }, 1000);
+      
+            notify('Login sucess');
+      
+      
+          }
+          if (!res.ok) {
+            dispatch(signInFaliure(res.message))
+          }
+        
+    
+        } catch (error) {
+          dispatch(signInFaliure(error.message))
+        }
+    
+    
+    
+      }
     return (
         <div className='flex  gap-10'>
             <div className="w-full mt-20 mr-0 mb-0 ml-0 relative z-10 max-w-2xl lg:mt-0 lg:w-5/12 ">
                 <div className="flex flex-col items-start justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl relative z-10">
                     <p className="w-full text-4xl font-medium text-center leading-snug font-serif">Sign up for an account</p>
                     <div className='w-full flex justify-between lg:flex-row flex-col gap-4'>
-                        <h1 className='font-inter flex gap-2 py-2 px-4 rounded-lg border-2 border-neutral-800 items-center opacity-90 hover:bg-slate-200 hover:opacity-100 text-sm font-semibold justify-center' onClick={handleGoogleSignUp}> <FaGoogle /> SignUp with Google</h1>
-                        <h1 className='font-inter flex gap-2 py-2 px-4 rounded-lg border-2 border-neutral-800 items-center opacity-90 hover:bg-slate-200 hover:opacity-100 text-sm font-semibold justify-center'> <FaFacebookF /> SignUp with Facebook</h1>
+                        <h1 className='font-inter flex gap-2  px-4 rounded-lg border-2 border-neutral-800 items-center opacity-90 hover:bg-slate-200 hover:opacity-100 text-sm font-semibold justify-center w-full py-4' onClick={handleGoogleSignUp}> <FaGoogle /> SignUp with Google</h1>
+                      
                     </div>
 
                     <Toaster />
