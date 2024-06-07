@@ -10,7 +10,7 @@ function SecureRoutes() {
   
 
   const checkStillLogin=async()=>{
-    const res=await fetch(`http://localhost:5000/api/auth/stillogin`,{
+    const res=await fetch(` https://vedicapi.onrender.com/api/auth/stillogin`,{
       method:'POST',
 
 
