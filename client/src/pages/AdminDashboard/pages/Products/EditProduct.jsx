@@ -77,6 +77,7 @@ function EditProduct() {
       });
       const data = await res.json();
       setsendingProduct(false)
+      console.log(data)
       if (!res.ok) {
         console.log(data)
         ProductAddFaliure(data.message)
@@ -148,10 +149,17 @@ function EditProduct() {
             <label className='font-semibold font-inter text-sm'> Category </label>
 
             <select name="category" id="" className='text-black' onChange={(e) => setcategory(e.target.value)} value={category}>
-              <option value="Raw honey">Raw Honey</option>
+              <option value="Raw honey">Raw-Honey</option>
               <option value="Shoap">Shoap</option>
-              <option value="Shampoo">Shampoo</option>
-              <option value="incense Sticks">incense Sticks</option>
+              <option value="food">Food</option>
+              <option value="health">Health</option>
+              <option value="cosmetics">Cosmetics</option>
+              <option value="education">Education</option>
+              <option value="medicine">Medicine</option>
+              <option value="therapy">Therapy</option>
+              <option value="agriculture">Agriculture</option>
+              <option value="honeybee">HoneyBee</option>
+             
             </select>
           </div>
 

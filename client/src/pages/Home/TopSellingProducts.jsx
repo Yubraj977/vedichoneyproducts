@@ -15,7 +15,7 @@ function Me({ product }) {
   };
   return (
     <>
-      <div className='bg-gray-200 rounded-md w-1/3'>
+      <div className='bg-gray-200 rounded-md w-full lg:w-1/3'>
         <div className='w-full h-60 '>
           <img className='w-full h-full object-contain' src={product.image} alt="" />
         </div>
@@ -54,7 +54,7 @@ function TopSellingProducts() {
   return (
     <div className='lg:px-side px-mb_side py-[100px]'>
       <h1 className='relative block-title font-semibold text-3xl text-center w-fit mx-auto'>Our Top Selling Product's</h1>
-      <div className='flex gap-5 w-full mt-10 lg:flex-nowrap flex-wrap'>
+      <div className='flex gap-5 w-full mt-10 lg:flex-nowrap flex-wrap flex-col lg:flex-row'>
 
 
 

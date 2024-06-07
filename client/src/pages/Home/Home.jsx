@@ -62,7 +62,7 @@ function Home() {
         </CustomSlider>
       </div>
       {/* Top selling products */}
-      <div className='w-full'>
+      <div className='w-full flex-col '>
         <TopSellingProducts />
       </div>
       {/* Become our partner */}

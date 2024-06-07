@@ -16,7 +16,7 @@ function ProductCard({item}) {
                  {item.name}
                 </h1>
                 <div className="actual text-secondary font-bold  "> RS. {item.price}</div>
-                <div className="discounted stroke-">  <strike> Rs .1025</strike></div>
+                <div className="discounted stroke-">  <strike> Rs .{item.price+250}</strike></div>
             </div>
 
         </div>

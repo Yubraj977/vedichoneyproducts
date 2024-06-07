@@ -117,7 +117,7 @@ function AdminCreateProducts() {
             <label className='font-semibold font-inter text-sm'> Category </label>
 
             <select name="category" id="" className='text-black' onChange={(e) => setcategory(e.target.value)} value={category}>
-              <option value="Raw honey">Raw Honey</option>
+              <option value="Raw honey">Raw-Honey</option>
               <option value="Shoap">Shoap</option>
               <option value="food">Food</option>
               <option value="health">Health</option>

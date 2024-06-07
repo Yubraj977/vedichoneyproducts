@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
 import { ColorRing } from 'react-loader-spinner'
-
+import { useLocation } from 'react-router-dom';
 
 function Products() {
   const [products, setproducts] = useState([])
   const [sortOption, setSortOption] = useState('');
   const [productFetchError, setproductFetchError] = useState()
   const [productFetching, setproductFetching] = useState(false)
- console.log(sortOption)
-
+  const location=useLocation()
+const searchParams=new URLSearchParams(location.search)
+const searchTerm=searchParams.get('searchTerm')
+const category=searchParams.get('category')
+console.log(searchTerm)
   useEffect(() => {
    fetchProducts()
-  }, [sortOption])
+  }, [sortOption,searchTerm,category])
 
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
@@ -28,7 +31,16 @@ function Products() {
         url += `?price=${sortOption}`;
       } else if (sortOption.includes('date')) {
         url += `?date=${sortOption}`;
+      
       }
+    }
+    if(searchTerm){
+     
+      url+=`?searchTerm=${searchTerm}`
+      console.log(url)
+    }
+    if(category){
+      url+=`?category=${category}`
     }
     const res=await fetch(url)
     const data=await res.json()
