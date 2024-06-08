@@ -21,7 +21,7 @@ import SecureRoutes from './components/SecureRoutes'
 import BlogDetials from './pages/Blog/BlogDetials'
 import NoPage from './pages/404/NoPage'
 import Learn from './pages/AdminDashboard/pages/learn/Learn'
-
+import OnlyAdminRoute from './components/OnlyAdminRoute'
 function App() {
   const [count, setCount] = useState(0)
   const router = createBrowserRouter(
@@ -38,19 +38,25 @@ function App() {
         <Route path='blog/:id' element={<BlogDetials />} />
         <Route path='privacy' element={<Privacy />} />
         <Route path='returnpolicy' element={<Return />} />
-        <Route path='admin' element={<Admin />} />
+
         <Route path='checkout' element={<Checkout />} />
 
-        
-        <Route element={<SecureRoutes/>}>
-       
-        <Route path='cart' element={<Cart />} />
+
+
+        <Route element={<OnlyAdminRoute />}>
+          <Route path='admin' element={<Admin />} />
+        </Route>
+        <Route element={<SecureRoutes />}>
+
+          <Route path='cart' element={<Cart />} />
           <Route path='dashboard' element={<UserDash />} />
         </Route>
-        <Route path='learn' element={<Learn/>}/>
-        <Route path='*' element={<NoPage/>}/>
-       
+        <Route path='learn' element={<Learn />} />
+        <Route path='*' element={<NoPage />} />
+
       </Route>
+
+
     )
   )
 

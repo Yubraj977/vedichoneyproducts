@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { CiLogout } from "react-icons/ci";
 import { useDispatch,useSelector } from 'react-redux';
 import { signOutSucess } from '../../../configs/redux/user/userSlice';
+import toast, { Toaster } from 'react-hot-toast';
+
+const notify = (value) => toast.success(`Sucess:${value}`);
 function LeftPannel() {
     const dispatch=useDispatch()
     const [tab, settab] = useState()
@@ -21,14 +24,21 @@ function LeftPannel() {
 
     const tabActive = ' text-secondary '
     async function handleUserLogOut(){
-        const res=await fetch(`api/account/logout/`)
+        const res=await fetch(`api/auth/logout`)
         const data=await res.json()
         console.log(data);
-
+        if(res.ok){
+            notify(data.message)
             dispatch(signOutSucess())
+        }
+        if(!res.ok){
+            console.log(data.message);
+        }
+            
     }
     return (
         <div className=' flex flex-col h-screen  mt-top relative'>
+              <Toaster />
             <h1 className='text-lg font-inter'>Manage Account</h1>
             <div className=' ml-10 flex flex-col gap-4 mt-2'>
                 <Link to={'/dashboard?tab=myprofile'}> <div className={` ${tab == 'myprofile' ? tabActive : ''} text-sm font-inter font-semibold mt-2`}>  My Profile</div></Link>

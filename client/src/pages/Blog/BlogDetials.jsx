@@ -12,7 +12,7 @@ function BlogDetials() {
   console.log(id);
   useEffect(() => {
     setfetchingBlog(true)
-    fetch(`https://vedicapi.onrender.com/api/blog/${id}`).then((res) => {
+    fetch(`api/blog/${id}`).then((res) => {
       return res.json()
     }).then((data) => {
       setfetchingBlog(false)

@@ -32,7 +32,7 @@ export default function EditArticle() {
   useEffect(() => {
     try {
       const fetchPost = async () => {
-        const res = await fetch(`https://vedicapi.onrender.com/api/blog/${id}`);
+        const res = await fetch(`api/blog/${id}`);
         const data = await res.json();
        
         if (!res.ok) {
@@ -101,7 +101,7 @@ export default function EditArticle() {
     console.log('handle submit clicked');
     try {
       setfetchingBlog(true)
-      const res = await fetch(`https://vedicapi.onrender.com/api/blog/update/${id}/`, {
+      const res = await fetch(`api/blog/update/${id}/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

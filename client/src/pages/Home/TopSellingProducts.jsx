@@ -37,8 +37,8 @@ function Me({ product }) {
 function TopSellingProducts() {
   const [products, setproducts] = useState([])
   useEffect(() => {
-    // setproductFetching(true)
-    fetch(`https://vedicapi.onrender.com/api/product/allproducts?limit=3`)
+    
+    fetch(`api/product/allproducts?limit=3`)
       .then((res) => res.json())
       .then((data) => {
         setproducts(data.products)

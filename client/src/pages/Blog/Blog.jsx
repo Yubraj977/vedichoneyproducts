@@ -11,7 +11,7 @@ function Blog() {
   console.log(blog);
   useEffect(() => {
     setfetchingBlog(true)
-    fetch('https://vedicapi.onrender.com/api/blog/allblogs')
+    fetch('api/blog/allblogs')
       .then((res) => res.json())
       .then((data) => {
         setfetchingBlog(false)

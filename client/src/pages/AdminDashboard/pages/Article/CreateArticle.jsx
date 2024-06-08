@@ -71,7 +71,7 @@ export default function CreateArticle() {
     console.log('handle submit clicked');
     try {
       setfetchingBlog(true)
-      const res = await fetch('https://vedicapi.onrender.com/api/blog/create', {
+      const res = await fetch('api/blog/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -16,7 +16,7 @@ function Articlelist() {
     console.log(postIdToDelete);
     useEffect(() => {
         setfetchingBlog(true)
-        fetch('https://vedicapi.onrender.com/api/blog/allblogs')
+        fetch('api/blog/allblogs')
             .then((res) => res.json())
             .then((data) => {
                 setfetchingBlog(false)
@@ -32,7 +32,7 @@ function Articlelist() {
 
     async function handlePostDelete() {
         setdeletingBlog(true)
-        const res = await fetch(`https://vedicapi.onrender.com/api/blog/delete/${postIdToDelete}/`, {
+        const res = await fetch(`api/blog/delete/${postIdToDelete}/`, {
             method: "DELETE"
         })
         const data = await res.json()

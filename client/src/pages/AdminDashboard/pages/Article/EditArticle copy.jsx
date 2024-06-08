@@ -37,7 +37,7 @@ const editSucess = (value) => toast.success(`Sucess:${value}`);
   useEffect(() => {
     try {
       const fetchPost = async () => {
-        const res = await fetch(`https://vedicapi.onrender.com/api/blog/${id}`);
+        const res = await fetch(`api/blog/${id}`);
         const data = await res.json();
        
         if (!res.ok) {
@@ -99,7 +99,7 @@ const editSucess = (value) => toast.success(`Sucess:${value}`);
     e.preventDefault();
     try {
       setupdatingBlog(true)
-      const res = await fetch(`https://vedicapi.onrender.com/api/blog/update/${id}/`, {
+      const res = await fetch(`api/blog/update/${id}/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

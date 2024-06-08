@@ -3,7 +3,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOutSucess } from '../../configs/redux/user/userSlice';
 
-function SecureRoutes() {
+function OnlyAdminRoute() {
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
@@ -37,12 +37,12 @@ useEffect(()=>{
 },[])
 
 
-if(user){
+if(user && user.userType === 'admin'){
   return (
     <Outlet/>
   )
 }
-  return <Navigate to='/login' />;
+  return <Navigate to='/' />;
 }
 
-export default SecureRoutes;
+export default OnlyAdminRoute;

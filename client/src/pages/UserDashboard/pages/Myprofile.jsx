@@ -1,7 +1,23 @@
-import React from 'react'
+import React, {
+   useEffect,
+  useState
+ } from 'react'
 import { Link } from 'react-router-dom'
 
+
+
 function Myprofile() {
+  const [user,setUser]=useState({})
+  useEffect(() => {
+    fetch('http://localhost:5000/api/user/me', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  }).then((res)=>{console.log(res)
+     return res.json()}).then((data)=>setUser(data.user)) 
+  },[])
   return (
     <div className='flex flex-col px-20 mt-top'>
       <h1 className='font-inter text-xl font-bold'>My Profile</h1>

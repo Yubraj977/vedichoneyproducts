@@ -65,7 +65,7 @@ function Signup() {
     
         dispatch(signInStart())
         try {
-          const res = await fetch(' https://vedicapi.onrender.com/api/auth/googlelogin', {
+          const res = await fetch(' http://localhost:5000/api/auth/googlelogin', {
             method: 'POST',
             credentials:'include',
             headers: {
