@@ -1,9 +1,12 @@
 {
-    "rewrites":  [
-         {
-            "source": "/api/(.*)",
-            "destination": "https://vedicapi.onrender.com/"
-        },
-      {"source": "/(.*)", "destination": "/"}
-    ]
-  }
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://vedicapi.onrender.com/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}
