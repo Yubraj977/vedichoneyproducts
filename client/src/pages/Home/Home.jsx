@@ -16,6 +16,7 @@ import BecomePartner from './BecomePartner';
 import TopSellingProducts from './TopSellingProducts';
 import Testimonials from './Testimonials/Testimonials';
 import Faq from './Faq';
+import { Helmet } from 'react-helmet-async';
 function Home() {
 
   useEffect(() => {
@@ -53,6 +54,12 @@ function Home() {
   return (
 
     <div className=' mt-top flex items-center border flex-col z-0'>
+     
+      <Helmet>
+        <title>Vedic Honey Products - Pure, Natural, and Organic Honey</title>
+        <meta name="description" content="Discover the purest honey products at Vedic Honey Products. Our organic and natural honey is perfect for your health and wellness needs." />
+        <link rel="canonical" href="https://www.vedichoneyproducts.com/" />
+      </Helmet>
       {/* slider */}
       <div className="slider lg:px-side px-mb_side w-full">
         <CustomSlider>
