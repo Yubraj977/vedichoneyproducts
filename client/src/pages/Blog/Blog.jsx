@@ -3,10 +3,12 @@ import { ColorRing } from 'react-loader-spinner'
 import { RiSafariFill } from 'react-icons/ri';
 import DOMPurify from 'dompurify';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 function Blog() {
   const [blog, setBlog] = useState([]);
   const [blogErr, setblogErr] = useState()
   const [fetchingBlog, setfetchingBlog] = useState(false)
+
   const navigate = useNavigate()
   console.log(blog);
   useEffect(() => {
@@ -35,7 +37,11 @@ function Blog() {
 
   return (
     <>
-
+  <Helmet>
+        <title>Blog - Vedic Honey Products</title>
+        <meta name="description" content="Read our latest articles and news about honey products, beekeeping, and natural wellness." />
+        <link rel="canonical" href="https://www.vedichoneyproduct.com/blog" />
+      </Helmet>
 
       {fetchingBlog ? (<div className='flex justify-center items-center my-20'>
         <ColorRing

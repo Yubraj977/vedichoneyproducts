@@ -4,6 +4,7 @@ import madhu from '/chars/madhu.jpg'
 import lal from '/chars/lal.jpg'
 import mahesh from '/chars/mahesh.jpg'
 import bimala from '/chars/bimala.jpg'
+import { Helmet } from 'react-helmet-async';
 function About() {
 
   // useEffect(() => {
@@ -12,6 +13,11 @@ function About() {
 
   return (
     <div className='lg:px-side px-mb_side mt-10 lg:mt-0 '>
+       <Helmet>
+        <title>About Us - Vedic Honey Products</title>
+        <meta name="description" content="Learn more about Vedic Honey Products, our mission, and our commitment to providing the purest honey." />
+        <link rel="canonical" href="https://www.vedichoneyproduct.com/about" />
+      </Helmet>
       <div className="one w-full flex  items-center gap-10  flex-col lg:flex-row">
         <div className="left lg:w-1/2 w-full ">
           <h1 className='text-black text-5xl font-inter font-bold '>We’re changing the way people Purchase.</h1>
