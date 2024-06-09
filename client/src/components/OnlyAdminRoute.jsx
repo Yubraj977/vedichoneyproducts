@@ -37,7 +37,7 @@ useEffect(()=>{
 },[])
 
 
-if(user && user.userType === 'admin'){
+if(user && (user.userType === 'admin'||user.userType === 'moderator')){
   return (
     <Outlet/>
   )

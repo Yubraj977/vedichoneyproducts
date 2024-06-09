@@ -91,23 +91,23 @@ function Nav() {
 
 
 
-         
-            <div className="searchbox flex justify-center items-center w-full lg:w-fit  border-2 overflow-hidden rounded-md">
-              <input type="text"
-                onChange={(e) => setsearchTerm(e.target.value)}
-                value={searchTerm}
-                className="border-none outline-none w-full py-2 pl-3 pr-0 text-slate-700" placeholder='Search Products..'
-              />
-              <Link
-                to={'/products?searchTerm=' + searchTerm}
-                className="  search-icon flex justify-center items-center h-full  p-3 overflow-hidden">
-                <IoSearch className='text-slate-600 font-normal'
-                />
-              </Link>
-            </div>
-         
 
-        
+          <div className="searchbox flex justify-center items-center w-full lg:w-fit  border-2 overflow-hidden rounded-md">
+            <input type="text"
+              onChange={(e) => setsearchTerm(e.target.value)}
+              value={searchTerm}
+              className="border-none outline-none w-full py-2 pl-3 pr-0 text-slate-700" placeholder='Search Products..'
+            />
+            <Link
+              to={'/products?searchTerm=' + searchTerm}
+              className="  search-icon flex justify-center items-center h-full  p-3 overflow-hidden">
+              <IoSearch className='text-slate-600 font-normal'
+              />
+            </Link>
+          </div>
+
+
+
 
 
 
@@ -167,12 +167,15 @@ function Nav() {
               <NavLink className="py-4 px-6 font-medium    hover:text-tertiary cursor-pointer" to='/contact'>Contact</NavLink>
               <NavLink className="py-4 px-6  font-medium    hover:text-tertiary cursor-pointer" to='/blog'>Blogs</NavLink>
               <NavLink className="py-4 px-6  font-medium    hover:text-tertiary cursor-pointer" to='/learn'>Learn</NavLink>
+
               {user && user.userType === 'admin' && (
-            <NavLink to={'/admin?tab=product'} className="cart flex justify-center items-center">
-              <button className='bg-secondary font-bold px-3 py-2 text-white'>Manage</button>
-            </NavLink>
-          )}
-              
+                <NavLink to={'/admin?tab=product'} className="cart flex justify-center items-center">
+                  <button className='bg-secondary font-bold px-3 py-2 text-white'>Manage</button>
+                </NavLink>
+              )}
+
+          
+
             </div> : <></>}
           </div>
           <div className={`${nav_item_style} relative `} onMouseEnter={(e) => setvisable(true)} onMouseLeave={(e) => setvisable(false)}>
@@ -198,9 +201,8 @@ function Nav() {
           <NavLink to='/contact'>  <div className={`${nav_item_style}`}>Contact</div></NavLink>
           <NavLink to='about'>  <div className={`${nav_item_style}`}>About</div></NavLink>
           <NavLink to='/learn'>  <div className={`${nav_item_style}`}>Learn</div></NavLink>
-          {user && user.userType === 'admin' && (
+          {user && (user.userType === 'admin'||user.userType === 'moderator') && (
             <NavLink to={'/admin?tab=product'} >  <div className={`${nav_item_style}`}>Manage Admin Pannel</div></NavLink>
-           
           )}
         </div>
       </div>
