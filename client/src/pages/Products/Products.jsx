@@ -3,7 +3,7 @@ import ProductCard from './ProductCard';
 import { ColorRing } from 'react-loader-spinner';
 import { useLocation } from 'react-router-dom';
 import CustomPagination from '../../heplers/costum-hooks/CustomPagination';
-
+import { Helmet } from 'react-helmet-async';
 function Products() {
   const [products, setProducts] = useState([]);
   const [sortOption, setSortOption] = useState('');
@@ -75,6 +75,11 @@ function Products() {
 
   return (
     <div>
+      <Helmet>
+        <title>Products</title>
+        <meta name="description" content="Buy our honey related products " />
+        <link rel="canonical" href="/products" />
+      </Helmet>
       <div className="flex justify-between px-20 border bg-slate-200">
         <div className="font-bold flex justify-center items-center">
           Filter Choose Buy
