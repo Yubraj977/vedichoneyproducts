@@ -72,15 +72,15 @@ function ProductDetials() {
                                     <FaShareAlt />
                                     <AiOutlineLike />
                                 </div>
-                                <h1>Free Shipping</h1>
+                                <h3>Free Shipping</h3>
                             </div>
                         </div>
                         <div className='mt-top'>
-                            <h1 className='text-secondary_shade hover:text-secondary text-xl font-serif font-semibold'> RS. {product.price}</h1>
+                            <p className='text-secondary_shade hover:text-secondary text-xl font-serif font-semibold'> RS. {product.price}</p>
                             <strike className='opacity-60'> Rs 2000</strike>
                         </div>
                         <div className='mt-top flex gap-4 items-center text-sm'>
-                            <h1 className='mr-8'>Quantity : </h1>
+                            <h3 className='mr-8'>Quantity : </h3>
                             <button className='bg-slate-200 text-neutral-600 hover:bg-slate-300 p-2'>
                                 <FaMinus />
                             </button>
@@ -108,7 +108,7 @@ function ProductDetials() {
 
                         <div className="adding"></div>
                         <div className="discription mt-top">
-                            <h1>Description</h1>
+                            <h3>Description</h3>
                             <p className='mt-1 border border-gray-300 rounded-lg p-4 bg-gray-100' dangerouslySetInnerHTML={{ __html: product && product.description }}></p>
                         </div>
         
