@@ -1,7 +1,7 @@
 .container__slider {
     position: relative;
     width: 100%;
-    height: 230px;
+    height: 435px;
     padding: 0;
     overflow: hidden;
     display: flex;
@@ -9,19 +9,30 @@
     align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
-    background-color: black;
+    /* background-color: black; */
+    
+   
   }
   
   .container__slider > button {
-    background-color: transparent;
-    outline: none;
+   /* background: white; */
+   opacity: 40%; 
+   outline: none;
+    padding: 0 10px;
     border: 0;
-    color: whitesmoke;
-    font-size: 24px;
+    color: transparent;
+    font-size: 20px;
+    font-weight: bolder;
+    /* border: 2px solid red; */
+    border-radius: 50% ;
+    color: black;
+    background: white;
+   
   }
   
   .container__slider > button:active {
     color: black;
+    opacity: 100%;
   }
   
   .slider__btn-next {
@@ -108,7 +119,7 @@
     .container__slider {
       position: relative;
       width: 100%;
-      height: 80px;
+      height: 125px;
       padding: 0;
       overflow: hidden;
       display: flex;

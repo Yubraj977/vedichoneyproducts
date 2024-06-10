@@ -8,14 +8,14 @@ function Footer() {
   return (
     <div className='  w-full bg-tertiary flex justify-center  items-center gap-4 flex-col text-primary  lg:px-side px-4   text-xl lg:text-sm'>
 
-      <h1 className='text-2xl font-bold mt-20 text-center'>Suscribe To Get Our Updates</h1>
+      <h1 className='text-xl lg:text-2xl font-bold mt-20 text-center'>Suscribe To Get Our Updates</h1>
 
       <div className='flex gap-2  w-full  flex-warp   lg:justify-center flex-col  lg:flex-row'>
         <input type="text" className='lg:w-96 w-full text-black px-4 rounded-md h-12  ' />
         <button className='bg-secondary rounded-md px-4 py-2 font-bold'>Suscribe</button>
       </div>
 
-      <div className="things flex lg:gap-2 justify-between mt-6 lg:flex-row lg:items-start   flex-col w-full flex-wrap  lg:pl-0">
+      <div className=" text-sm  things flex lg:gap-2 justify-between mt-6 lg:flex-row lg:items-start   flex-col w-full flex-wrap  lg:pl-0">
         {/* Contact Us */}
         <div className='flex flex-col '>
           <h1 className='font-bold mb-4'> Contat Us</h1>

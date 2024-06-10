@@ -2,14 +2,11 @@ import React, { useState,useEffect } from 'react';
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
 
 
-import honey3 from '/honey3.jpeg'
-import honey1 from '/honey1.jpeg'
-import honey2 from '/honey2.jpeg'
-import honey4 from '/honey4.jpeg'
-import honey8 from '/honey8.png'
-import slider1 from '/slider1.jpeg'
-import slider2 from '/slider2.jpeg'
-import slider3 from '/slider3.jpeg'
+import slide3 from '/slide3.jpg'
+import slide4 from '/slide4.jpg'
+import slide5 from '/slide3.png'
+import slide6 from '/slide4.png'
+import slide7 from '/slide6.jpg'
 
 import CustomSlider from '../../heplers/swiper/CustomCarousel'
 import BecomePartner from './BecomePartner';
@@ -29,21 +26,26 @@ function Home() {
 
   const images = [
     {
-      imgURL:honey1,
+      imgURL:slide3,
       imgAlt: "img-1"
     },
     {
-      imgURL:honey2,
+      imgURL:slide4,
       imgAlt: "img-2"
     },
     {
-      imgURL:honey3,
-      imgAlt: "img-3"
+      imgURL:slide5,
+      imgAlt: "img-2"
     },
     {
-      imgURL:honey4,
-      imgAlt: "img-4"
+      imgURL:slide6,
+      imgAlt: "img-2"
     },
+    {
+      imgURL:slide7,
+      imgAlt: "img-2"
+    },
+  
    
   ];
 
@@ -53,7 +55,7 @@ function Home() {
 
   return (
 
-    <div className=' mt-top flex items-center border flex-col z-0'>
+    <div className='  flex items-center  flex-col z-0'>
      
       <Helmet>
         <title>Vedic Honey Products - Pure, Natural, and Organic Honey</title>
@@ -61,7 +63,8 @@ function Home() {
         <link rel="canonical" href="https://www.vedichoneyproducts.com/" />
       </Helmet>
       {/* slider */}
-      <div className="slider lg:px-side px-mb_side w-full">
+     
+      <div className="slider   w-full">
         <CustomSlider>
           {images.map((image, index) => {
             return <img key={index} src={image.imgURL} alt={image.imgAlt} />;

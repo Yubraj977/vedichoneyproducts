@@ -131,7 +131,7 @@ function Nav() {
              <NavLink to={'/'} className='lg:block hidden'> Home</NavLink>
             {mobileVisable && (
               <div className="w-screen for-mobile lg:hidden overflow-hidden z-50 flex flex-col absolute top-full -left-6 bg-secondary rounded-sm" ref={mobileNavRef}>
-                <NavLink className="py-4 px-6 border font-medium hover:text-tertiary cursor-pointer" to='/products' onClick={() => setMobileVisable(false)}>Products</NavLink>
+                <NavLink className="py-4 px-6  font-medium hover:text-tertiary cursor-pointer" to='/products' onClick={() => setMobileVisable(false)}>Products</NavLink>
                 <NavLink className="py-4 px-6 font-medium hover:text-tertiary cursor-pointer" to='/about' onClick={() => setMobileVisable(false)}>About</NavLink>
                 <NavLink className="py-4 px-6 font-medium hover:text-tertiary cursor-pointer" to='/contact' onClick={() => setMobileVisable(false)}>Contact</NavLink>
                 <NavLink className="py-4 px-6 font-medium hover:text-tertiary cursor-pointer" to='/blog' onClick={() => setMobileVisable(false)}>Blogs</NavLink>
