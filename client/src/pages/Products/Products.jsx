@@ -74,7 +74,7 @@ function Products() {
   };
 
   return (
-    <div>
+    <div className='bg-neutral-200 bg-opacity-60'>
       <Helmet>
         <title>Products</title>
         <meta name="description" content="Buy our honey related products " />

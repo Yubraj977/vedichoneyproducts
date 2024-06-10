@@ -7,8 +7,8 @@ function ProductCard({item}) {
 
         <>
         
-          <div className=' relative bg-gray-200 hover:shadow-2xl hover:bg-slate-200 h-100 w-[45%] lg:w-[18.5%] transition-transform duration-500 ease-in-out m-2 ' onClick={()=>navigate(`/product/${item._id}`)} >
-            <div className='h-64 w-full'>
+          <div className=' relative  rounded-lg bg-slate-200 hover:shadow-2xl hover:bg-neutral-200 h-100 w-[45%] lg:w-[18.5%] transition-transform duration-500 ease-in-out m-2 ' onClick={()=>navigate(`/product/${item._id}`)} >
+            <div className='h-64 w-full  bg-white border-red-500 ' >
                 <img src={item.image} alt="" className='h-full w-full object-contain' />
             </div>
             <div className='px-4 py-1'>
