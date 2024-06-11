@@ -39,7 +39,7 @@ function Myprofile() {
 
           <div className="mobile flex flex-col gap-2 w-1/3">
             <h1 className='font-inter text-md font-semibold'>Mobile number</h1>
-            <p className='font-inter text-md'>+977 ...</p>
+            <p className='font-inter text-md'>{user.mobile}</p>
           </div></div>
 
 

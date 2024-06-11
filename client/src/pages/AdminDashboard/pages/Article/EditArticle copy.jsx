@@ -15,6 +15,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { ColorRing } from 'react-loader-spinner'
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function EditArticle() {
   const location = useLocation();
