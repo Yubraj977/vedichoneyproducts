@@ -1,4 +1,4 @@
-import honey from '/honey3.png'
+// import honey from '/honey3.png'
 import googleLogo from '/google-logo.png'
 import { FiEye } from "react-icons/fi";
 import { useNavigate, Navigate } from 'react-router-dom';

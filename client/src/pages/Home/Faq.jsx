@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { useRef } from 'react';
 import { FaPlus, FaMinus } from "react-icons/fa";
 import gsap from 'gsap';
-import honey3 from '/honey3.png'
+// import honey3 from '/honey3.png'
 const honeyFAQ = [
     {
         id: 1,

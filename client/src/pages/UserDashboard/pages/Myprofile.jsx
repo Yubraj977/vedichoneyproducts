@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom'
 
 function Myprofile() {
   const [user,setUser]=useState({})
+  console.log(user)
+
   useEffect(() => {
     fetch('http://localhost:5000/api/user/me', {
       method: 'POST',
@@ -27,36 +29,35 @@ function Myprofile() {
       <div className="top flex w-full  justify-between ">
           <div className="full_name flex flex-col gap-2 w-1/3">
             <h1 className='font-inter text-md font-semibold'> Full Name</h1>
-            <p className='font-inter text-sm'>Yubraj Khatri</p>
+            <p className='font-inter text-sm'>{user.name}</p>
           </div>
 
           <div className="email flex flex-col gap-2 w-1/3 ">
             <h1 className='font-inter text-md font-semibold'>Email Adress</h1>
-            <p className='font-inter text-sm'>Yubraj Kahtri005@gmail.com</p>
+            <p className='font-inter text-sm'>{user.email}</p>
           </div>
 
           <div className="mobile flex flex-col gap-2 w-1/3">
             <h1 className='font-inter text-md font-semibold'>Mobile number</h1>
-            <p className='font-inter text-md'>+977 9809724781</p>
+            <p className='font-inter text-md'>+977 ...</p>
           </div></div>
 
 
 
-        <div className="but flex w-full  justify-between ">
+        <div className="but flex w-full   ">
           <div className="full_name flex flex-col gap-2 w-1/3">
-            <h1 className='font-inter text-md font-semibold'> Birthday</h1>
-            <p className='font-inter text-sm'>19 feb 2020</p>
+            <h1 className='font-inter text-md font-semibold'>Verefied User</h1>
+            <p className='font-inter text-sm'>{user&&user.isverified?'Yes':'No'} </p>
           </div>
 
           <div className="email flex flex-col gap-2 w-1/3 ">
-            <h1 className='font-inter text-md font-semibold'>Gender</h1>
-            <p className='font-inter text-sm'>Male</p>
+            <h1 className='font-inter text-md font-semibold'>ProfileType</h1>
+            <p className='font-inter text-sm'>{user.userType}</p>
           </div>
 
-          <div className="mobile flex flex-col gap-2 w-1/3">
-            <h1 className='font-inter text-md font-semibold'>Admin</h1>
-            <p className='font-inter text-md'>+None</p>
-          </div></div>
+          
+          
+          </div>
        
          
           <Link to={'/dashboard?tab=profileedit'} className='text-center font-bold text-white bg-secondary rounded-sm w-64  py-3 mt-12'>Edit Profile</Link>
