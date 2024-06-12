@@ -24,7 +24,7 @@ function Nav() {
   const cart = useSelector((state) => state.cart)
 
   const checkStillLogin = async () => {
-    const res = await fetch('api/auth/stillogin', {
+    const res = await fetch('/api/auth/stillogin', {
       method: 'POST',
       credentials: 'include',
     })

@@ -5,29 +5,87 @@ import { FaPlus } from "react-icons/fa";
 import { FaShareAlt } from "react-icons/fa";
 import { AiOutlineLike } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
+import RatingPage from './RatingPage';
+import { Rating } from "flowbite-react";
+import toast, { Toaster } from 'react-hot-toast';
+import { useSelector,useDispatch } from 'react-redux';
 function ProductDetials() {
     const navigate = useNavigate()
     const { id } = useParams();
     console.log(id)
     const [product, setproduct] = useState(null)
-    console.log(`MY product ${product}`);
-    console.log(product);
+    const [ratings, setratings] = useState([]);
+    const [averageRating, setaverageRating] = useState(0)
+    const [reviewFetchError, setreviewFetchError] = useState(null)
+    const [comment,setcomment]=useState('')
+    const [rating,setrating]=useState(1)
+    console.log(comment)
+    console.log(rating)
     useEffect(() => {
-        async function fetchSoloProduct(){
-        const res=await fetch(`https://vedicapi.onrender.com/api/product/${id}`)
-        const data=await res.json()
-        setproduct(data.product)
+        async function fetchSoloProduct() {
+            const res = await fetch(`/api/product/${id}`)
+            const data = await res.json()
+            setproduct(data.product)
         }
         fetchSoloProduct()
-        
+
     }, [])
+      useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
 
+    useEffect(() => {
+        async function fetchRatings() {
+            const res = await fetch(`/api/review/singleproduct?productId=${id}`)
+            const data = await res.json()
+            if (res.ok) {
+                setratings(data.productReviews)
+                setaverageRating(data.averageRating)
+                window.scrollTo(0, 0);
+            }
+            if (!res.ok) {
+            
+                setreviewFetchError(data.message)
+            }
+
+        }
+        fetchRatings()
+    }, [])
+    const user = useSelector((state) => state.user.currentUser)
+    console.log(user)
 
 
+async function submitReview(){
+    const res=await fetch(`/api/review/create?productId=${id}`,{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'include',
+        body:JSON.stringify({comment,rating})
+    })
+    const data=await res.json()
+    if(!res.ok){
+        loginError(data.message)
+    }
+    if(res.ok){
+        notify(data.message)
+        setcomment('')
+        setrating(1)
+        setTimeout(() => {
+            navigate(`/products`)
+        }, 2000);
+       
+    }
+    console.log(data)
+}
 
+const notify = (value) => toast.success(`Sucess:${value}`);
+const loginError = (value) => toast.error(`Error:${value}`);
     return (
         <div className=''>
+              <Toaster />
             {product &&
                 <div className="top w-full flex-col lg:items-start items-center lg:flex-row  flex  mt-top gap-16   px-mb_side" >
                     <div className="left lg:w-1/3  w-full  ">
@@ -111,12 +169,62 @@ function ProductDetials() {
                             <h3>Description</h3>
                             <p className='mt-1 border border-gray-300 rounded-lg p-4 bg-gray-100' dangerouslySetInnerHTML={{ __html: product && product.description }}></p>
                         </div>
-        
+
                     </div>
                 </div>
             }
-            <div className="rating">
+            <div className="rating lg:px-side px-4 ">
+                <div>
+                    <h1 className='text-xl font-inter font-bold text-secondary mb-2'>Ratings & Reviews</h1>
+                    <Rating>
+                        <Rating.Star />
+                        <p className="ml-2 text-sm font-bold text-gray-900">{averageRating}</p>
+                        <span className="mx-1.5 h-1 w-1 rounded-full bg-gray-500 " />
+                        <a href="#" className="text-sm font-medium text-gray-900 underline hover:no-underline">
+                            {ratings.length} reviews
+                        </a>
+                    </Rating>
+                </div>
+                <h1 className='mt-2 font-bold text-sm font-inter'>Write your Review here</h1>
+{user?(
+     <div className='flex gap-2 items-center flex-col lg:flex-row  '>
+     <div className='flex lg:flex-row flex-col w-full' >
 
+     <input type="text" placeholder='I love thsi product' className=" py-6 lg:py-4 rounded-sm w-full  lg:w-[40rem] outline-none border-slate-400 focus:ring-0   focus:border-slate-500 focus:outline-none  text-sm font-inter" 
+         value={comment}
+         onChange={(e) => setcomment(e.target.value)}
+     />
+     <select name="category" id="" className='text-black lg:py-[0.9rem]' 
+         value={rating}
+         onChange={(e) => setrating(e.target.value)}
+     >
+         <option value="" disabled >
+             How many Stars
+         </option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+         <option value="4">4</option>
+         <option value="5">5</option>
+
+     </select>
+     </div>
+
+    
+     <button className="bg-secondary_shade py-[0.9rem] px-6 font-bold text-white font-sm " onClick={submitReview}>Submit</button>
+ </div> 
+)
+:(
+    <button className="bg-secondary_shade py-[0.9rem] px-6 font-bold text-white font-sm " onClick={() => navigate('/login')}>Login to Write Review</button>
+)}
+
+               
+
+                <div>
+                    {reviewFetchError && <p className='text-red-500'>{reviewFetchError}</p>}
+                    {ratings && ratings.map((rating) => <RatingPage key={rating._id} rating={rating} />)}
+
+                </div>
             </div>
         </div>
     )
