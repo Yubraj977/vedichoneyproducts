@@ -9,6 +9,7 @@ import RatingPage from './RatingPage';
 import { Rating } from "flowbite-react";
 import toast, { Toaster } from 'react-hot-toast';
 import { useSelector,useDispatch } from 'react-redux';
+import { addToCart } from '../../../configs/redux/cart/CartSlice';
 function ProductDetials() {
     const navigate = useNavigate()
     const { id } = useParams();
@@ -20,6 +21,7 @@ function ProductDetials() {
     const [comment,setcomment]=useState('')
     const [rating,setrating]=useState(1)
     const [submitting,setsumitting]=useState(false)
+    const dispatch=useDispatch();
     console.log(comment)
     console.log(rating)
     useEffect(() => {
@@ -27,6 +29,7 @@ function ProductDetials() {
             const res = await fetch(`/api/product/${id}`)
             const data = await res.json()
             setproduct(data.product)
+            
         }
         fetchSoloProduct()
 
@@ -88,6 +91,11 @@ async function submitReview(){
 
 const notify = (value) => toast.success(`Sucess:${value}`);
 const loginError = (value) => toast.error(`Error:${value}`);
+
+function handleAddToCart(){
+dispatch(addToCart({name:product.name,price:product.price,image:product.image,_id:product._id,category:product.category}));
+notify(`${product.name} Added To Cart`)
+}
     return (
         <div className=''>
               <Toaster />
@@ -162,9 +170,9 @@ const loginError = (value) => toast.error(`Error:${value}`);
                                     <button className='bg-[#2475B0] rounded-sm border py-4 text-white w-full font-semibold' >Buy Now</button>
                                 </Link>
 
-                                <Link to={'/cart'} className='w-full'>
-                                    <button className='bg-secondary_shade hover:bg-secondary rounded-sm py-4 font-semibold w-full'  >Add to Cart</button>
-                                </Link>
+                                <div className='w-full'>
+                                    <button className='bg-secondary_shade hover:bg-secondary rounded-sm py-4 font-semibold w-full' onClick={handleAddToCart}  >Add to Cart</button>
+                                </div>
 
                             </div>
                         </div>
