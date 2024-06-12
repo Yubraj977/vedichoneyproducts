@@ -10,7 +10,7 @@ import { NavLink, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signOutSucess } from '../../configs/redux/user/userSlice';
-
+import { getTotal } from '../../configs/redux/cart/CartSlice';
 function Nav() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -37,6 +37,9 @@ function Nav() {
     }
   }
 
+  useEffect(() => {
+ dispatch(getTotal())
+  }, [cart])
   useEffect(() => {
     checkStillLogin()
   }, [])
@@ -87,11 +90,11 @@ function Nav() {
           <NavLink to={'/cart'} className="cart flex justify-center items-center">
             <div className="icon p-3 relative">
               <IoCartOutline className="text-3xl font-medium text-slate-600" />
-              <span className='absolute top-1 right-1 h-4 w-4 flex justify-center items-center animate-pulse text-white bg-secondary rounded-full'>{cart.TotalItems == null ? 0 : cart.TotalItems}</span>
+              <span className='absolute top-1 right-1 h-4 w-4 flex justify-center items-center animate-pulse text-white bg-secondary rounded-full'>{cart.cartTotalQuantity}</span>
             </div>
             <div className="cart-detail">
               <h3 className='text-sm font-normal text-slate-500'>cart</h3>
-              <p><strong className='text-sm text-slate-700'> Rs {cart.TotalPrice == null ? 0 : cart.TotalPrice}</strong></p>
+              <p><strong className='text-sm text-slate-700'> Rs {cart.cartTotalAmount}</strong></p>
             </div>
           </NavLink>
           {user ?

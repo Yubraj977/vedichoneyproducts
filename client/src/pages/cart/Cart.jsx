@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Items from './Items'
 import { GiSelfLove } from "react-icons/gi";
 import { MdDelete } from "react-icons/md";
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart, decreaseCart, addToCart, increaseCart, clearCart } from '../../../configs/redux/cart/CartSlice';
+import { removeFromCart, decreaseCart, addToCart, increaseCart, clearCart, getTotal } from '../../../configs/redux/cart/CartSlice';
 import toast, { Toaster } from 'react-hot-toast';
 import { NavLink, useNavigate } from 'react-router-dom';
 function Cart() {
@@ -13,6 +13,9 @@ function Cart() {
 
   const notify = (value) => toast.success(`Sucess:${value}`);
   const loginError = (value) => toast.error(`Error:${value}`);
+  useEffect(() => {
+    dispatch(getTotal())
+  },[myCart])
 
   return (
 
@@ -102,7 +105,7 @@ function Cart() {
                           </div>
 
                         </td>
-                        <td>2000</td>
+                        <td>{item.price*item.cartQuantity}</td>
                       </tr>
                     )
                   })}
@@ -126,7 +129,7 @@ function Cart() {
           <div className="right w-2/7  font-inter text-sm px-10 mb-10">
             <h1 className='font-semibold text-xl'>Order Summary</h1>
             <div className='mt-top flex justify-between  w-full  gap-20 items-center'>
-              <h1 className='font-inter'>SubTotal({myCart.cartTotalAmount} items )</h1>
+              <h1 className='font-inter'>SubTotal({myCart.cartTotalQuantity} items )</h1>
               <h1 className='text-md  text-secondary font-semibold '>Rs. {myCart.cartTotalAmount}</h1>
             </div>
             <div className='mt-2 flex  justify-between'>
@@ -137,7 +140,7 @@ function Cart() {
               <h1 className='font-inter'>Total</h1>
               <h1 className='text-secondary font-semibold'>Rs. {myCart.cartTotalAmount}</h1>
             </div>
-            <button className='mt-8 bg-secondary_shade w-full py-2 rounded-sm hover:bg-secondary text-white'>Proceed to Checkout ( {myCart.cartTotalQuantity}) </button>
+            <button className='mt-8 bg-secondary_shade w-full py-2 rounded-sm hover:bg-secondary text-white ' onClick={() => navigate('/checkout')}>Proceed to Checkout ( {myCart.cartTotalQuantity}) </button>
           </div>
         </div>
       )}
