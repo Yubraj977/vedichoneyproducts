@@ -19,6 +19,7 @@ function ProductDetials() {
     const [reviewFetchError, setreviewFetchError] = useState(null)
     const [comment,setcomment]=useState('')
     const [rating,setrating]=useState(1)
+    const [submitting,setsumitting]=useState(false)
     console.log(comment)
     console.log(rating)
     useEffect(() => {
@@ -57,6 +58,7 @@ function ProductDetials() {
 
 
 async function submitReview(){
+    setsumitting(true)
     const res=await fetch(`/api/review/create?productId=${id}`,{
         method:'POST',
         headers:{
@@ -68,14 +70,17 @@ async function submitReview(){
     const data=await res.json()
     if(!res.ok){
         loginError(data.message)
+        setsumitting(false)
     }
     if(res.ok){
+        setsumitting(false)
         notify(data.message)
         setcomment('')
         setrating(1)
         setTimeout(() => {
             navigate(`/products`)
         }, 2000);
+        
        
     }
     console.log(data)
@@ -211,7 +216,7 @@ const loginError = (value) => toast.error(`Error:${value}`);
      </div>
 
     
-     <button className="bg-secondary_shade py-[0.9rem] px-6 font-bold text-white font-sm " onClick={submitReview}>Submit</button>
+     <button className="bg-secondary_shade py-[0.9rem] px-6 font-bold text-white font-sm " onClick={submitReview} disabled={submitting}>Submit</button>
  </div> 
 )
 :(
