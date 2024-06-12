@@ -9,6 +9,7 @@ import slide6 from '/slide4.png'
 import slide7 from '/slide6.jpg'
 import slidea from '/slidea.jpeg'
 import slideb from '/slideb.jpeg'
+import slidec from '/slidec.jpeg'
 
 import CustomSlider from '../../heplers/swiper/CustomCarousel'
 import BecomePartner from './BecomePartner';
@@ -40,7 +41,7 @@ function Home() {
       imgAlt: "img-2"
     },
     {
-      imgURL:slide6,
+      imgURL:slidec,
       imgAlt: "img-2"
     },
     {
