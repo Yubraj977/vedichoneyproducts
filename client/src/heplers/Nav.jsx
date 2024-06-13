@@ -10,7 +10,7 @@ import { NavLink, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signOutSucess } from '../../configs/redux/user/userSlice';
-import { getTotal } from '../../configs/redux/cart/CartSlice';
+import { getTotal,clearCart } from '../../configs/redux/cart/CartSlice';
 function Nav() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -34,6 +34,7 @@ function Nav() {
     } else {
       setStillValidUser(false)
       dispatch(signOutSucess())
+      dispatch(clearCart())
     }
   }
 

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { CiLogout } from "react-icons/ci";
 import { useDispatch,useSelector } from 'react-redux';
 import { signOutSucess } from '../../../configs/redux/user/userSlice';
+import { clearCart } from '../../../configs/redux/cart/CartSlice';
 import toast, { Toaster } from 'react-hot-toast';
 
 const notify = (value) => toast.success(`Sucess:${value}`);
@@ -30,6 +31,7 @@ function LeftPannel() {
         if(res.ok){
             notify(data.message)
             dispatch(signOutSucess())
+            dispatch(clearCart())
         }
         if(!res.ok){
             console.log(data.message);
