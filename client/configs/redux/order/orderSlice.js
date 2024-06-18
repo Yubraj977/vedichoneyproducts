@@ -62,6 +62,9 @@ const CartSlice = createSlice({
         )
         state.cartTotalAmount=total
         state.cartTotalQuantity=state.cartItems.length
+       },
+       createOrder(state,action){
+        
        }
 
     }

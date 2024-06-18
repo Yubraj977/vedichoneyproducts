@@ -21,13 +21,14 @@ function ProductDetials() {
     const [comment,setcomment]=useState('')
     const [rating,setrating]=useState(1)
     const [submitting,setsumitting]=useState(false)
+    const [itemsQuantity,setitemsQuantity]=useState(1)
     const dispatch=useDispatch();
-    console.log(comment)
-    console.log(rating)
+   console.log(product)
     useEffect(() => {
         async function fetchSoloProduct() {
             const res = await fetch(`/api/product/${id}`)
             const data = await res.json()
+          
             setproduct(data.product)
             
         }
@@ -93,7 +94,7 @@ const notify = (value) => toast.success(`Sucess:${value}`);
 const loginError = (value) => toast.error(`Error:${value}`);
 
 function handleAddToCart(){
-dispatch(addToCart({name:product.name,price:product.price,image:product.image,_id:product._id,category:product.category}));
+dispatch(addToCart({name:product.name,price:product.price,image:product.image,_id:product._id,category:product.category,cartQuantity:itemsQuantity,stock:product.quantity}));
 notify(`${product.name} Added To Cart`)
 }
     return (
@@ -152,11 +153,27 @@ notify(`${product.name} Added To Cart`)
                         </div>
                         <div className='mt-top flex gap-4 items-center text-sm'>
                             <h3 className='mr-8'>Quantity : </h3>
-                            <button className='bg-slate-200 text-neutral-600 hover:bg-slate-300 p-2'>
+                            <button className='bg-slate-200 text-neutral-600 hover:bg-slate-300 p-2' onClick={(e)=>{
+                                if(itemsQuantity>1){
+                                    setitemsQuantity(itemsQuantity-1)
+                                }
+                                else{
+                                    setitemsQuantity(1)
+                                }
+                               
+                                }}>
                                 <FaMinus />
                             </button>
-                            1
-                            <button className='bg-slate-200 text-neutral-600 p-2 hover:bg-slate-300'>
+                            {itemsQuantity}
+                            <button className='bg-slate-200 text-neutral-600 p-2 hover:bg-slate-300' onClick={(e)=>{
+                              
+                                if(itemsQuantity<10){
+                                    setitemsQuantity(itemsQuantity+1)
+                                }
+                                else{
+                                    return;
+                                }
+                                }}>
                                 <FaPlus />
                             </button>
 
