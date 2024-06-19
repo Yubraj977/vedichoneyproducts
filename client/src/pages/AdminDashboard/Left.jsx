@@ -42,6 +42,7 @@ function Left() {
                     <Link to={'/admin?tab=payments'}>  <div className={`leftSide ${leftStyle} ${tab == 'payments' ? tabActive : ''}`}> <MdPayments />Payments</div></Link>
                     <Link to={'/admin?tab=articles'}>  <div className={`leftSide ${leftStyle} ${tab == 'articles' ? tabActive : ''}`}> <MdPayments />articles</div></Link>
                     <Link to={'/admin?tab=write'}>  <div className={`leftSide ${leftStyle} ${tab == 'write' ? tabActive : ''}`}> <MdPayments />write</div></Link>
+                    <Link to={'/admin?tab=orders'}>  <div className={`leftSide ${leftStyle} ${tab == 'orders' ? tabActive : ''}`}> <MdPayments />Orders</div></Link>
 
                 </div>
             </div>

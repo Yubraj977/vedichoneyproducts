@@ -25,7 +25,7 @@ function Testimonials() {
     }
   ];
   return (
-    <div className='flex flex-col lg:flex-row justify-between  items-between  w-full'>
+    <div className='flex flex-col lg:flex-row justify-center  items-between   '>
 
 
       <div className="min-w-screen min-h-screen bg-gray-50 flex items-center justify-center py-5">

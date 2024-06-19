@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-import { useOutletContext,useNavigate } from 'react-router-dom'
-
+import { useOutletContext, useNavigate } from 'react-router-dom'
 import {
   CitySelect,
   CountrySelect,
@@ -13,19 +12,38 @@ import {
 } from "react-country-state-city";
 import "react-country-state-city/dist/react-country-state-city.css";
 import toast, { Toaster } from 'react-hot-toast';
+import { updatePreOrderInfo } from '../../../configs/redux/cart/CartSlice'
+import { Button, Modal } from "flowbite-react";
+
 function Checkout() {
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cart)
-  const [countryId, setCountryId] = useState('');
-  const [stateId, setStateId] = useState('');
+  const preOrderInfo = useSelector(state => state.cart.preOrderInfo)
+  const preOrderShippingInfo = useSelector(state => state.cart.preOrderInfo.shippingInfo)
+
   const [phoneNumber, setPhoneNumber] = useState('');
   const [shippingInfo, setshippingInfo] = useState({
-
   })
   const [paymentMethod, setPaymentMethod] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState('');
-  const [checkoutData,setcheckoutData]=useOutletContext();
-  const navigate=useNavigate();
+  const [checkoutData, setcheckoutData] = useOutletContext();
+  const navigate = useNavigate();
+ 
+
+  useEffect(() => {
+
+    if (preOrderShippingInfo) {
+      setshippingInfo(preOrderShippingInfo)
+      setPhoneNumber(preOrderShippingInfo.phoneNumber)
+    }
+    if (preOrderInfo.paymentMethod) {
+      setPaymentMethod(preOrderInfo.paymentMethod)
+    }
+    if (preOrderInfo.deliveryMethod) {
+      setDeliveryMethod(preOrderInfo.deliveryMethod)
+    }
+
+  }, [])
 
 
 
@@ -37,19 +55,22 @@ function Checkout() {
     if (!shippingInfo.country || !shippingInfo.state || !shippingInfo.city ||
       !shippingInfo.phoneNumber || !shippingInfo.pincode || !shippingInfo.adress ||
       !paymentMethod || !deliveryMethod) {
-    toast.error("Please fill out all required fields");
-    return;
-  }
-    
-    const data={tax,stroePickup,totalPrice,paymentMethod,deliveryMethod,shippingInfo}
-    setcheckoutData(data)
-    navigate('/confirm')
+      toast.error("Please fill out all required fields");
+      return;
+    }
+
+    const data = { tax, stroePickup, totalPrice, paymentMethod, deliveryMethod, shippingInfo }
+    setcheckoutData(data);
+    dispatch(updatePreOrderInfo(data))
+
+
+    navigate('/preconfirm')
   }
   const tax = cart.cartTotalAmount * 0.18
   const stroePickup = cart.cartTotalQuantity > 100 ? 0 : 200;
   const totalPrice = tax + stroePickup + cart.cartTotalAmount + (paymentMethod == 'cash-on-delivery' ? 100 : 0)
-  +(deliveryMethod=="fast-delivery"?200:0)+(deliveryMethod=="fastest-express-delivery"?300:0)
-  
+    + (deliveryMethod == "fast-delivery" ? 200 : 0) + (deliveryMethod == "fastest-express-delivery" ? 300 : 0)
+
   const handlePaymentChange = (event) => {
     setPaymentMethod(event.target.value);
   };
@@ -61,6 +82,7 @@ function Checkout() {
 
   return (
     <div className='flex items-center  flex-col w-full'>
+      
       <section className=" py-8 e bg-slate-200 md:py-16 w-full border border-green-600">
         {/* Steps */}
 
@@ -69,7 +91,7 @@ function Checkout() {
         <Toaster />
         <form action="#" className=" mx-auto max-w-screen-xl px-8 2xl:px-0" autoComplete='off' onSubmit={handleFormSubmit} >
 
-          <ol className="items-center flex  justify-center max-w-2xl text-center text-sm font-medium text-gray-500  sm:text-base  border-red-500 w-[100rem]">
+          {/* <ol className="items-center flex  justify-center max-w-2xl text-center text-sm font-medium text-gray-500  sm:text-base  border-red-500 w-[100rem]">
             <li className="after:border-1 flex items-center text-primary-700 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
               <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/']  sm:after:hidden">
                 <svg
@@ -134,7 +156,7 @@ function Checkout() {
               </svg>
               Order summary
             </li>
-          </ol>
+          </ol> */}
 
 
           <div className="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12 xl:gap-16">
@@ -162,13 +184,21 @@ function Checkout() {
                     </div>
 
                     <div className=' w-full'>
-                      <CountrySelect
+                      {/* <CountrySelect
+                       
                         className='  block w-full rounded-lg  bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500'
                         onChange={(e) => {
                           setCountryId(e.id);
                           setshippingInfo({ ...shippingInfo, country: e.name })
                         }}
+                        
                         placeHolder="Select Country"
+                      /> */}
+                      <input type="text"
+                        value={shippingInfo.country}
+                        onChange={(e) => setshippingInfo({ ...shippingInfo, country: e.target.value })}
+
+                        className='block w-full rounded-lg  bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500'
                       />
                     </div>
                   </div>
@@ -187,13 +217,19 @@ function Checkout() {
                     </div>
 
                     <div className=' w-full'>
-                      <StateSelect
+                      {/* <StateSelect
                         countryid={countryId}
                         onChange={(e) => {
                           setStateId(e.id);
                           setshippingInfo({ ...shippingInfo, state: e.name })
                         }}
                         placeHolder="Select State"
+                      /> */}
+                      <input type="text"
+                        value={shippingInfo.state}
+                        onChange={(e) => setshippingInfo({ ...shippingInfo, state: e.target.value })}
+
+                        className='block w-full rounded-lg  bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500'
                       />
                     </div>
                   </div>
@@ -250,8 +286,6 @@ function Checkout() {
                           country={'np'}
                           regions={["asia",]}
                           value={phoneNumber}
-                          // onChange={phone =>
-                          //    {setPhoneNumber( phone )}}
                           onChange={(e) => { setPhoneNumber(e), setshippingInfo({ ...shippingInfo, phoneNumber: e }) }}
                         />
                       </div>
@@ -289,7 +323,7 @@ function Checkout() {
                       className="mb-2 block text-sm font-medium text-gray-900 "
                     >
                       {" "}
-                      Adress{" "}
+                      Complete Full Adress{" "}
                     </label>
                     <input
                       type="text"
@@ -338,7 +372,7 @@ function Checkout() {
 
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                   {/* Credit Card payment */}
-                  <div className="rounded-lg border border-gray-200 bg-[rgba(243,97,75,0.20)] p-4 ps-4 ">
+                  <div className="rounded-lg border border-gray-600  p-4 ps-4 ">
                     <div className="flex items-start">
                       <div className="flex h-5 items-center">
                         <input
@@ -347,7 +381,7 @@ function Checkout() {
                           aria-describedby="credit-card-text"
                           type="radio"
                           name="payment-method"
-                          className="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600"
+                          className="h-4 w-4 border-gray-800 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600"
                           checked={paymentMethod === "credit-card"}
                           onChange={handlePaymentChange}
                         />
@@ -371,7 +405,7 @@ function Checkout() {
 
 
                   {/* Payment on delivery */}
-                  <div className="rounded-lg border border-gray-300 bg-slate-0 p-4 ps-4 bg-[rgba(243,97,75,0.25)]">
+                  <div className="rounded-lg border border-gray-600 bg-slate-0 p-4 ps-4 ]">
                     <div className="flex items-start">
                       <div className="flex h-5 items-center">
                         <input
@@ -380,7 +414,7 @@ function Checkout() {
                           aria-describedby="cash-on-delivery-text"
                           type="radio"
                           name="payment-method"
-                          className="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600"
+                          className="h-4 w-4 border-gray-800 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600"
                           checked={paymentMethod === "cash-on-delivery"}
                           onChange={handlePaymentChange}
                         />
@@ -403,7 +437,7 @@ function Checkout() {
                   </div>
 
                   {/* Pay with the esewa */}
-                  <div className="rounded-lg border border-gray-200 p-4 ps-4 bg-[rgba(243,97,75,0.25)]">
+                  <div className="rounded-lg border border-gray-600 p-4 ps-4 ]">
                     <div className="flex items-start">
                       <div className="flex h-5 items-center">
                         <input
@@ -434,6 +468,37 @@ function Checkout() {
                     </div>
                   </div>
 
+                  {/* Pay with the QrCode */}
+                  <div className="rounded-lg border border-gray-600 p-4 ps-4 ">
+                    <div className="flex items-start">
+                      <div className="flex h-5 items-center">
+                        <input
+                          id="qrcode"
+                          value="qrcode"
+                          aria-describedby="qrcode-text"
+                          type="radio"
+                          name="payment-method"
+                          className="h-4 w-4 border-gray-900 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600"
+                          checked={paymentMethod === "qrcode"}
+                          onChange={handlePaymentChange}
+                        />
+                      </div>
+                      <div className="ms-4 text-sm">
+                        <label
+                          htmlFor="esewa"
+                          className="font-medium leading-none text-gray-900"
+                        >
+                          Qr Code
+                        </label>
+                        <p
+                          id="esewa-text"
+                          className="mt-1 text-xs font-normal text-gray-500"
+                        >
+                          Pay Directly in qr we will call you back
+                        </p>
+                      </div>
+                    </div>
+                  </div>
 
 
                 </div>

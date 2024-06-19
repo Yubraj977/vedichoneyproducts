@@ -13,7 +13,8 @@ import CreateArticle from './pages/Article/CreateArticle';
 import EditArticle from './pages/Article/EditArticle';
 import AdminCreateProducts from './pages/Products/AdminCreateProducts'
 import EditProduct from './pages/Products/EditProduct';
-
+import AllOrders from './pages/orders/AllOrders';
+import OrdresDetialViewPage from './pages/orders/OrdresDetialViewPage';
 function Admin() {
   const [tab, settab] = useState()
   const location = useLocation();
@@ -45,6 +46,8 @@ function Admin() {
         {tab == "write" && <CreateArticle />}
         {tab == "editarticle" && <EditArticle />}
         {tab == "editproduct" && <EditProduct />}
+        {tab == "orders" && <AllOrders />}
+        {tab == "vieworder" && <OrdresDetialViewPage />}
       </div>
     </div>
   )

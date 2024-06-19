@@ -25,6 +25,9 @@ import Learn from './pages/AdminDashboard/pages/learn/Learn';
 import OnlyAdminRoute from './components/OnlyAdminRoute';
 import Conform from './pages/Checkout/Conform';
 import CheckoutWrapper from './pages/Checkout/CheckoutWrapper';
+import PreConfirm from './pages/Checkout/PreConfirm';
+import Done from './pages/Checkout/Done';
+
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState('');
@@ -65,6 +68,9 @@ function App() {
           <Route element={<CheckoutWrapper />}>
             <Route path='cart' element={<Cart />} />
             <Route path='checkout' element={<Checkout />} />
+            <Route path='preconfirm' element={<PreConfirm />} />
+            <Route path='orderplaced' element={<Done />} />
+
             <Route path='confirm' element={
               stripePromise ? (
                 <Elements stripe={stripePromise}>

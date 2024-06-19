@@ -79,11 +79,12 @@ function Home() {
         <TopSellingProducts />
       </div>
       {/* Become our partner */}
-      <div className='w-full'>
+      <div className='w-full '>
         <BecomePartner />
       </div>
+
       {/* Testimonals */}
-      <div className='w-full lg:px-side'>
+      <div className='w-full flex justify-center lg:px-side '>
         <Testimonials />
       </div>
       {/* faq */}
