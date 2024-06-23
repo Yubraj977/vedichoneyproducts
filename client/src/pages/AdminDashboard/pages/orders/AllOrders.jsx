@@ -3,7 +3,7 @@ import { ColorRing } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
 function AllOrders() {
     const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const navigate=useNavigate()
 
     useEffect(() => {
@@ -32,12 +32,15 @@ function AllOrders() {
     return (
         <div>
             {loading ? (
+                <div className='flex justify-center items-center'>
+                    
                 <ColorRing
                     visible={true}
                     height="80"
                     width="80"
                     ariaLabel="loading"
                 />
+                </div>
             ) : (
                 <div>
                     <table className="min-w-full bg-white  rounded-md ">
