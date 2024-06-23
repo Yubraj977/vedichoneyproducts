@@ -28,7 +28,7 @@ function Checkout() {
   const [deliveryMethod, setDeliveryMethod] = useState('');
   const [checkoutData, setcheckoutData] = useOutletContext();
   const navigate = useNavigate();
- 
+
 
   useEffect(() => {
 
@@ -53,22 +53,22 @@ function Checkout() {
   function handleFormSubmit(e) {
     e.preventDefault();
     if (!shippingInfo.country || !shippingInfo.state || !shippingInfo.city ||
-      !shippingInfo.phoneNumber || !shippingInfo.pincode || !shippingInfo.adress ||
+      !shippingInfo.phoneNumber ||  !shippingInfo.adress ||
       !paymentMethod || !deliveryMethod) {
       toast.error("Please fill out all required fields");
       return;
     }
 
-    const data = { tax, stroePickup, totalPrice, paymentMethod, deliveryMethod, shippingInfo }
+    const data = { tax, storePickup, totalPrice, paymentMethod, deliveryMethod, shippingInfo }
     setcheckoutData(data);
     dispatch(updatePreOrderInfo(data))
 
 
     navigate('/preconfirm')
   }
-  const tax = cart.cartTotalAmount * 0.18
-  const stroePickup = cart.cartTotalQuantity > 100 ? 0 : 200;
-  const totalPrice = tax + stroePickup + cart.cartTotalAmount + (paymentMethod == 'cash-on-delivery' ? 100 : 0)
+  const tax = 0
+  const storePickup = 0
+  const totalPrice = tax + storePickup + cart.cartTotalAmount + (paymentMethod == 'cash-on-delivery' ? 100 : 0)
     + (deliveryMethod == "fast-delivery" ? 200 : 0) + (deliveryMethod == "fastest-express-delivery" ? 300 : 0)
 
   const handlePaymentChange = (event) => {
@@ -82,8 +82,8 @@ function Checkout() {
 
   return (
     <div className='flex items-center  flex-col w-full'>
-      
-      <section className=" py-8 e bg-slate-200 md:py-16 w-full border border-green-600">
+
+      <section className=" py-8 e bg-slate-200 md:py-16 w-full  border-green-600">
         {/* Steps */}
 
 
@@ -194,12 +194,29 @@ function Checkout() {
                         
                         placeHolder="Select Country"
                       /> */}
-                      <input type="text"
+                      {/* <input type="text"
                         value={shippingInfo.country}
                         onChange={(e) => setshippingInfo({ ...shippingInfo, country: e.target.value })}
 
                         className='block w-full rounded-lg  bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500'
-                      />
+                      /> */}
+
+                      <select
+                        value={shippingInfo.country}
+                        onChange={(e) => setshippingInfo({ ...shippingInfo, country: e.target.value })}
+                        className='block w-full rounded-lg bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500'
+                      >
+                        <option value="" disabled>Select a state</option>
+                        <option value="Nepal">Nepal</option>
+                        <option value="India">India</option>
+                        <option value="Pakistan">Pakisatn</option>
+                        <option value="Afganstan">Afganstan</option>
+                        <option value="Bangladesh">Bangladesh</option>
+                        <option value="bhutan">Bhutan</option>
+                        <option value="Srilanka">Srilanka</option>
+                        
+
+                      </select>
                     </div>
                   </div>
 
@@ -217,20 +234,34 @@ function Checkout() {
                     </div>
 
                     <div className=' w-full'>
-                      {/* <StateSelect
-                        countryid={countryId}
-                        onChange={(e) => {
-                          setStateId(e.id);
-                          setshippingInfo({ ...shippingInfo, state: e.name })
-                        }}
-                        placeHolder="Select State"
-                      /> */}
-                      <input type="text"
+                      {/* 
+                    Bagmati
+
+                    */}
+
+                      {/* <input type="text"
                         value={shippingInfo.state}
                         onChange={(e) => setshippingInfo({ ...shippingInfo, state: e.target.value })}
 
                         className='block w-full rounded-lg  bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500'
-                      />
+                      /> */}
+
+                      <select
+                        value={shippingInfo.state}
+                        onChange={(e) => setshippingInfo({ ...shippingInfo, state: e.target.value })}
+                        className='block w-full rounded-lg bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500'
+                      >
+                        <option value="" disabled>Select a state</option>
+                        <option value="1">Provience no 1</option>
+                        <option value="madesh">Provience no 2(Madhesh )</option>
+                        <option value="bagmati">provience no 3 (Bagmati )</option>
+                        <option value="gandaki">provience no 4 (Gandaki )</option>
+                        <option value="lumbini">provience no 5 (Lumbini )</option>
+                        <option value="karnali">provience no 6 (Karnali )</option>
+                        <option value="sudurpashim">provience no 7 (Sudurpashim )</option>
+
+                      </select>
+
                     </div>
                   </div>
 
@@ -323,7 +354,7 @@ function Checkout() {
                       className="mb-2 block text-sm font-medium text-gray-900 "
                     >
                       {" "}
-                      Complete Full Adress{" "}
+                      Complete Full Adress *{" "}
                     </label>
                     <input
                       type="text"
@@ -430,7 +461,7 @@ function Checkout() {
                           id="cash-on-delivery-text"
                           className="mt-1 text-xs font-normal text-gray-500"
                         >
-                          +Rs.200 payment processing fee
+                          +Rs.100 payment processing fee
                         </p>
                       </div>
                     </div>
@@ -667,7 +698,7 @@ function Checkout() {
                       Store Pickup
                     </dt>
                     <dd className="text-base font-medium text-gray-900  ">
-                      Rs.{cart.cartTotalQuantity > 100 ? 0 : 200}
+                      Rs.{storePickup}
                     </dd>
                   </dl>
                   <dl className="flex items-center justify-between gap-4 py-3">

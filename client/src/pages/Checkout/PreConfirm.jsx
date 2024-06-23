@@ -40,14 +40,26 @@ function PreConfirm() {
       </div>
 
       <div className="mb-8">
-        <h3 className="text-xl font-semibold mb-2">Order Summary:</h3>
-        <p>Total Quantity: {cart.cartTotalQuantity}</p>
+        <h3 className="text-xl font-bold mb-2 ">Order Summary:</h3>
+        <p className='font-semibold'>Total Quantity: {cart.cartTotalQuantity}</p>
         <p>Cart Total Amount: Rs{cart.cartTotalAmount}</p>
         <p>Tax: Rs{preOrderInfo.tax}</p>
-        <p>Store Pickup Charge: Rs{preOrderInfo.stroePickup}</p>
-        <p>Total Price: Rs{preOrderInfo.totalPrice}</p>
-        <p>Payment Method: {preOrderInfo.paymentMethod}</p>
-        <p>Delivery Method: {preOrderInfo.deliveryMethod}</p>
+        <p>Store Pickup Charge: Rs{preOrderInfo.storePickup}</p>
+        <p>Payment Method: {preOrderInfo.paymentMethod} {preOrderInfo.paymentMethod=='cash-on-delivery'?' (Rs 100)':'(Rs 0)'}    </p>
+        <p>Delivery Method: {preOrderInfo.deliveryMethod} 
+        {
+          preOrderInfo.deliveryMethod=='fast-delivery' && '(Rs 200)'
+        }
+        {
+          preOrderInfo.deliveryMethod=='free-delivery' && '(Rs 0)'
+        }
+
+{
+          preOrderInfo.deliveryMethod=='fastest-express-delivery' && '(Rs 300)'
+        }
+         
+        </p>
+        <p className='font-semibold text-secondary '>Total Price To pay: Rs{preOrderInfo.totalPrice}</p>
       </div>
 
       <div className="flex justify-between">
