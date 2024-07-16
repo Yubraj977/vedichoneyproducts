@@ -48,6 +48,9 @@ const CartSlice = createSlice({
        },
        clearCart(state){
         state.cartItems=[]
+        state.preOrderInfo={}
+        state.cartTotalQuantity=0
+        state.cartTotalAmount=0
        },
        getTotal(state,action){
       let{total,quantity}=  state.cartItems.reduce((cartTotal,cartItem)=>{

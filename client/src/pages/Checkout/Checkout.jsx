@@ -23,6 +23,9 @@ function Checkout() {
 
   const [phoneNumber, setPhoneNumber] = useState('');
   const [shippingInfo, setshippingInfo] = useState({
+    country:'Nepal',
+    state:'lumbini',
+
   })
   const [paymentMethod, setPaymentMethod] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState('');
@@ -31,7 +34,6 @@ function Checkout() {
 
 
   useEffect(() => {
-
     if (preOrderShippingInfo) {
       setshippingInfo(preOrderShippingInfo)
       setPhoneNumber(preOrderShippingInfo.phoneNumber)
@@ -68,8 +70,9 @@ function Checkout() {
   }
   const tax = 0
   const storePickup = 0
-  const totalPrice = tax + storePickup + cart.cartTotalAmount + (paymentMethod == 'cash-on-delivery' ? 100 : 0)
-    + (deliveryMethod == "fast-delivery" ? 200 : 0) + (deliveryMethod == "fastest-express-delivery" ? 300 : 0)
+  const totalPrice = tax + storePickup + cart.cartTotalAmount +
+  // + (paymentMethod == 'cash-on-delivery' ? 100 : 0)
+    + (deliveryMethod == "fast-delivery" ? 200 : 0) 
 
   const handlePaymentChange = (event) => {
     setPaymentMethod(event.target.value);
@@ -569,7 +572,7 @@ function Checkout() {
                           id="fast-delivery-text"
                           className="mt-1 text-xs font-normal text-gray-500"
                         >
-                          Get it by Tomorrow
+                          Get it 24 hrs
                         </p>
                       </div>
                     </div>
@@ -601,14 +604,14 @@ function Checkout() {
                           id="free-delivery-text"
                           className="mt-1 text-xs font-normal text-gray-500"
                         >
-                          Get it in the next 5 days
+                          Get it in the next 3 to 5 days
                         </p>
                       </div>
                     </div>
                   </div>
 
                   {/* Fast delivery */}
-                  <div className="rounded-lg border border-gray-500 bg-gray-50 p-4 ps-4">
+                  {/* <div className="rounded-lg border border-gray-500 bg-gray-50 p-4 ps-4">
                     <div className="flex items-start">
                       <div className="flex h-5 items-center">
                         <input
@@ -637,7 +640,7 @@ function Checkout() {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
 
 
                 </div>

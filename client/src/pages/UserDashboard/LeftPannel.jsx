@@ -7,6 +7,7 @@ import { signOutSucess } from '../../../configs/redux/user/userSlice';
 import { clearCart } from '../../../configs/redux/cart/CartSlice';
 import toast, { Toaster } from 'react-hot-toast';
 
+
 const notify = (value) => toast.success(`Sucess:${value}`);
 function LeftPannel() {
     const dispatch=useDispatch()

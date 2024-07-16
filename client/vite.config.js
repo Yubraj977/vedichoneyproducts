@@ -9,6 +9,7 @@ export default defineConfig({
       '/api':{
         // target:'http://localhost:5000/',
         target:'https://vedicapi.onrender.com/',
+        // target:'https://vedichoneyproduct.xyz/',
         changeOrigin:true
       }
     }
