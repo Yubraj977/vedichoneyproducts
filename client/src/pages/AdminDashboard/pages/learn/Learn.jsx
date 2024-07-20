@@ -68,14 +68,14 @@ function Learn() {
                 </div>
               </div>
               <div className='h-[32rem] '>
-                <img src={learn} alt=" teacher" className=" h-full w-full object-contain" />
+                {/* <img src={learn} alt=" teacher" className=" h-full w-full object-contain" /> */}
               </div>
 
             </div>
           </div>
         </div>
       </div>
-      <div className="second ml-8">
+      {/* <div className="second ml-8">
 
         <button type="button" onClick={toggleModal} data-modal-target="timepicker-modal" data-modal-toggle="timepicker-modal" className="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
           <svg className="w4 h-4 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -202,7 +202,7 @@ function Learn() {
           </div>
         </div>
 
-      </div>
+      </div> */}
     </div>
   )
 }
