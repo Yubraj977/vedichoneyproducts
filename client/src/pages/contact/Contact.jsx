@@ -23,7 +23,7 @@ function Contact() {
               </svg>
               Email</h2>
             <p class="mt-2 text-sm text-gray-700 ">Your can email us directly</p>
-            <p class="mt-2 text-sm text-secondary">dangmadhukc@gmail.com</p>
+            <p class="mt-2 text-sm text-secondary">office@vedichoneyproduct.com</p>
           </div>
           {/* Office Section */}
           <div className='mt-8'>

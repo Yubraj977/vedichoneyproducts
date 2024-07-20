@@ -75,6 +75,7 @@ function Footer() {
       <div className='border-t-[0.1px] border-opacity-10 w-full flex  flex-col items-center opacity-90 py-4'>
         <p className='text-sm opacity-60' >Privacy Policy | Terms & Conditions | Sitemap</p>
         <p className='text-sm opacity-90'>Copyright © 2024 ,Vedic Honey Product | All rights Reserved</p>
+        <p className='text-sm opacity-90'>Developed by ,<a href="https://www.yubrajkhatri.com.np/">yurbaj khatri</a></p>
 
       </div>
 
